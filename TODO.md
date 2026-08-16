@@ -23,6 +23,8 @@
 - [x] Button, TextField, selection, list와 feedback anatomy를 제품 값 없이 구현한다.
 - [x] React/React Native를 peer dependency로 고정한다.
 - [x] 100%·160%·235% typography scaling fixture를 제공한다.
+- [x] generic icon geometry·usage·action runtime을 제공한다.
+- [x] motion/elevation recipe와 interaction helper를 framework-neutral core에서 제공한다.
 
 ## 4. deslint integration
 

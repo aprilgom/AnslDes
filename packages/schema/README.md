@@ -8,6 +8,7 @@ Definition v1은 다음을 분리한다.
 - 제품 identity와 독립 version
 - theme axis
 - foundation token
+- optional icon geometry, usage와 action recipe
 - component anatomy와 recipe
 
 제품은 [`design-system-definition.schema.json`](./design-system-definition.schema.json)을 참조하는 JSON을
@@ -15,6 +16,9 @@ Definition v1은 다음을 분리한다.
 
 현재 schema는 구조와 값 종류를 검증한다. Reference 존재, cycle, theme exact-set과 layer compatibility는
 compiler 및 `deslint`가 추가 검증한다.
+
+`foundations.icon`은 definition v1의 선택 그룹이다. size, stroke, optical alignment, geometry, usage와
+action을 제품 저장소가 정의하며, schema에는 특정 glyph path나 제품별 consumer가 들어가지 않는다.
 
 ## Inputs
 

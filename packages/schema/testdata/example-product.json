@@ -137,7 +137,10 @@
         "control.press": {
           "duration": "{motion.duration.fast}",
           "easing": "{motion.easing.standard}",
-          "reduceMotionDuration": "{motion.duration.instant}"
+          "reducedMotion": {
+            "duration": "{motion.duration.instant}",
+            "fallback": "instant"
+          }
         }
       }
     },
@@ -148,6 +151,42 @@
     "layer": {
       "semantic": { "content": 0, "overlay": 100 },
       "component": { "modal": 100 }
+    },
+    "icon": {
+      "sizes": { "small": 16, "medium": 20 },
+      "strokes": { "regular": 2 },
+      "opticalAlignments": { "center": { "x": 0, "y": 0 } },
+      "icons": {
+        "arrow-right": {
+          "viewBox": [0, 0, 24, 24],
+          "geometry": [
+            {
+              "kind": "path",
+              "d": "M5 12h14M13 6l6 6-6 6",
+              "fill": "none",
+              "stroke": "current",
+              "strokeWidth": "regular"
+            }
+          ],
+          "defaultSize": "medium",
+          "allowedSizes": ["small", "medium"],
+          "opticalAlignment": "center"
+        }
+      },
+      "usages": {
+        "navigation.next": {
+          "icon": "arrow-right",
+          "size": "medium",
+          "purpose": "disclosure"
+        }
+      },
+      "actions": {
+        "navigation.forward": {
+          "icon": "arrow-right",
+          "size": "medium",
+          "label": "Continue"
+        }
+      }
     }
   },
   "components": {

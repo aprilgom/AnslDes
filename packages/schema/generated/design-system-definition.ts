@@ -1,9 +1,9 @@
 // Code generated from https://ansldes.dev/schema/design-system-definition.v1.json; DO NOT EDIT.
-// definition schema SHA-256: 944c5b2ee33ae7e502509000bcd83bc7daa64009d71c8c99d52feebb43622708
+// definition schema SHA-256: 307ea7d484ff09fa3235c5bb56531af5765731e6f8bdee09cf5b09c7a17f9024
 
 export const definitionSchemaVersion = 1 as const;
 export const definitionSchemaSha256 =
-  "944c5b2ee33ae7e502509000bcd83bc7daa64009d71c8c99d52feebb43622708" as const;
+  "307ea7d484ff09fa3235c5bb56531af5765731e6f8bdee09cf5b09c7a17f9024" as const;
 
 export type RecipeValue =
   | string

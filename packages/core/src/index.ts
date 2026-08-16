@@ -21,6 +21,31 @@ export interface ComponentDefinition {
   semantics: Readonly<Record<string, unknown>>;
 }
 
+export interface ResolvedMotionTransition {
+  duration: number;
+  easing: readonly [number, number, number, number];
+  fallback: string | null;
+}
+
+export interface IconGeometryPart {
+  readonly kind: string;
+  readonly [name: string]: unknown;
+}
+
+export interface IconDefinition {
+  viewBox: readonly [number, number, number, number];
+  geometry: readonly IconGeometryPart[];
+  defaultSize: string;
+  allowedSizes: readonly string[];
+  opticalAlignment: string;
+  pathFingerprint?: string;
+}
+
+export interface TextSelection {
+  start: number;
+  end: number;
+}
+
 export interface DesignSystemRuntime {
   readonly id: string;
   readonly version: string;
@@ -34,6 +59,16 @@ export interface DesignSystemRuntime {
     name: string,
   ): number;
   typography(role: string): ResolvedTypographyRole;
+  elevation(name: string): Readonly<Record<string, unknown>>;
+  motionTransition(
+    name: string,
+    reduceMotion: boolean,
+  ): ResolvedMotionTransition;
+  icon(name: string): IconDefinition;
+  iconSize(name: string): number;
+  iconStroke(name: string): number;
+  iconUsage(name: string): Readonly<Record<string, unknown>>;
+  iconAction(name: string): Readonly<Record<string, unknown>>;
   component(name: string): ComponentDefinition;
   withTheme(theme: ThemeName): DesignSystemRuntime;
 }
@@ -115,6 +150,59 @@ export function createDesignSystem(
         return value;
       },
       typography,
+      elevation(name: string): Readonly<Record<string, unknown>> {
+        const elevation = requireRecord(
+          foundations.elevation,
+          "foundations.elevation",
+        );
+        return requireRecord(elevation[name], `elevation.${name}`);
+      },
+      motionTransition(
+        name: string,
+        reduceMotion: boolean,
+      ): ResolvedMotionTransition {
+        const motion = requireRecord(foundations.motion, "foundations.motion");
+        const transitions = requireRecord(
+          motion.transitions,
+          "motion.transitions",
+        );
+        return requireMotionTransition(transitions[name], name, reduceMotion);
+      },
+      icon(name: string): IconDefinition {
+        const icon = requireIconGroup(foundations);
+        return requireIconDefinition(
+          requireRecord(icon.icons, "icon.icons")[name],
+          name,
+        );
+      },
+      iconSize(name: string): number {
+        const icon = requireIconGroup(foundations);
+        return requireNumber(
+          requireRecord(icon.sizes, "icon.sizes")[name],
+          `icon.sizes.${name}`,
+        );
+      },
+      iconStroke(name: string): number {
+        const icon = requireIconGroup(foundations);
+        return requireNumber(
+          requireRecord(icon.strokes, "icon.strokes")[name],
+          `icon.strokes.${name}`,
+        );
+      },
+      iconUsage(name: string): Readonly<Record<string, unknown>> {
+        const icon = requireIconGroup(foundations);
+        return requireRecord(
+          requireRecord(icon.usages, "icon.usages")[name],
+          `icon.usages.${name}`,
+        );
+      },
+      iconAction(name: string): Readonly<Record<string, unknown>> {
+        const icon = requireIconGroup(foundations);
+        return requireRecord(
+          requireRecord(icon.actions, "icon.actions")[name],
+          `icon.actions.${name}`,
+        );
+      },
       component(name: string): ComponentDefinition {
         return requireComponent(components[name], name);
       },
@@ -127,6 +215,62 @@ export function createDesignSystem(
   }
 
   return runtimeFor(theme);
+}
+
+export function resolveToggleThumbTravel({
+  inset,
+  thumbSize,
+  trackWidth,
+}: {
+  inset: number;
+  thumbSize: number;
+  trackWidth: number;
+}): number {
+  return Math.max(0, trackWidth - thumbSize - Math.max(0, inset) * 2);
+}
+
+export function mapSelectionThroughFormat(
+  editedText: string,
+  formattedText: string,
+  selection: TextSelection,
+  isSemanticCharacter: (character: string) => boolean,
+): TextSelection {
+  const editedSelection = clampTextSelection(editedText, selection);
+  const startCount = semanticCharacterCount(
+    editedText,
+    editedSelection.start,
+    isSemanticCharacter,
+  );
+  const endCount = semanticCharacterCount(
+    editedText,
+    editedSelection.end,
+    isSemanticCharacter,
+  );
+  return clampTextSelection(formattedText, {
+    start: boundaryAfterSemanticCharacters(
+      formattedText,
+      startCount,
+      isSemanticCharacter,
+    ),
+    end: boundaryAfterSemanticCharacters(
+      formattedText,
+      endCount,
+      isSemanticCharacter,
+    ),
+  });
+}
+
+export function mapDigitSelectionThroughFormat(
+  editedText: string,
+  formattedText: string,
+  selection: TextSelection,
+): TextSelection {
+  return mapSelectionThroughFormat(
+    editedText,
+    formattedText,
+    selection,
+    (character) => /[0-9]/u.test(character),
+  );
 }
 
 export function resolveScaledControlMinHeight({
@@ -191,6 +335,111 @@ function requireNumber(value: unknown, label: string): number {
   if (typeof value !== "number" || !Number.isFinite(value))
     throw new Error(`${label} must be numeric`);
   return value;
+}
+
+function requireNumberTuple(
+  value: unknown,
+  label: string,
+): readonly [number, number, number, number] {
+  if (
+    !Array.isArray(value) ||
+    value.length !== 4 ||
+    !value.every((item) => typeof item === "number" && Number.isFinite(item))
+  ) {
+    throw new Error(`${label} must contain four numbers`);
+  }
+  return [value[0], value[1], value[2], value[3]];
+}
+
+function requireIconGroup(foundations: Record<string, unknown>) {
+  return requireRecord(foundations.icon, "foundations.icon");
+}
+
+function requireIconDefinition(value: unknown, name: string): IconDefinition {
+  const record = requireRecord(value, `icon ${name}`);
+  if (
+    !Array.isArray(record.geometry) ||
+    !record.geometry.every(
+      (part) =>
+        typeof part === "object" &&
+        part !== null &&
+        !Array.isArray(part) &&
+        typeof (part as Record<string, unknown>).kind === "string",
+    )
+  ) {
+    throw new Error(`icon ${name}.geometry must contain named parts`);
+  }
+  if (
+    !Array.isArray(record.allowedSizes) ||
+    !record.allowedSizes.every((item) => typeof item === "string")
+  ) {
+    throw new Error(`icon ${name}.allowedSizes must be a string array`);
+  }
+  return {
+    viewBox: requireNumberTuple(record.viewBox, `${name}.viewBox`),
+    geometry: record.geometry as IconGeometryPart[],
+    defaultSize: requireString(record.defaultSize, `${name}.defaultSize`),
+    allowedSizes: record.allowedSizes,
+    opticalAlignment: requireString(
+      record.opticalAlignment,
+      `${name}.opticalAlignment`,
+    ),
+    ...(typeof record.pathFingerprint === "string"
+      ? { pathFingerprint: record.pathFingerprint }
+      : {}),
+  };
+}
+
+function requireMotionTransition(
+  value: unknown,
+  name: string,
+  reduceMotion: boolean,
+): ResolvedMotionTransition {
+  const recipe = requireRecord(value, `motion transition ${name}`);
+  const reduced = requireRecord(
+    recipe.reducedMotion,
+    `${name}.reducedMotion`,
+  );
+  return {
+    duration: requireNumber(
+      reduceMotion ? reduced.duration : recipe.duration,
+      `${name}.duration`,
+    ),
+    easing: requireNumberTuple(recipe.easing, `${name}.easing`),
+    fallback: reduceMotion
+      ? requireString(reduced.fallback, `${name}.reducedMotion.fallback`)
+      : null,
+  };
+}
+
+function clampTextSelection(
+  text: string,
+  selection: TextSelection,
+): TextSelection {
+  const start = Math.max(0, Math.min(selection.start, text.length));
+  return { start, end: Math.max(start, Math.min(selection.end, text.length)) };
+}
+
+function semanticCharacterCount(
+  text: string,
+  boundary: number,
+  isSemanticCharacter: (character: string) => boolean,
+): number {
+  return [...text.slice(0, boundary)].filter(isSemanticCharacter).length;
+}
+
+function boundaryAfterSemanticCharacters(
+  text: string,
+  count: number,
+  isSemanticCharacter: (character: string) => boolean,
+): number {
+  if (count <= 0) return 0;
+  let matched = 0;
+  for (let index = 0; index < text.length; index += 1) {
+    if (isSemanticCharacter(text[index] ?? "")) matched += 1;
+    if (matched === count) return index + 1;
+  }
+  return text.length;
 }
 
 function requireTypographyRole(
