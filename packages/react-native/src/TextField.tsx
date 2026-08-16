@@ -6,15 +6,16 @@ import { DesignText } from "./DesignText";
 import { number, recipe, string } from "./recipe";
 import { resolveNativeTextRecipe } from "./textRecipe";
 
-export interface TextFieldProps extends Omit<
-  TextInputProps,
-  | "accessibilityLabel"
-  | "allowFontScaling"
-  | "editable"
-  | "maxFontSizeMultiplier"
-  | "placeholderTextColor"
-  | "style"
-> {
+export interface TextFieldProps
+  extends Omit<
+    TextInputProps,
+    | "accessibilityLabel"
+    | "allowFontScaling"
+    | "editable"
+    | "maxFontSizeMultiplier"
+    | "placeholderTextColor"
+    | "style"
+  > {
   disabled?: boolean;
   error?: string;
   helperText?: string;

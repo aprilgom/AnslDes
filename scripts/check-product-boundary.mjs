@@ -40,10 +40,7 @@ async function collectFiles(root) {
 
 const violations = [];
 for (const entry of await readdir(".", { withFileTypes: true })) {
-  if (
-    entry.isDirectory() &&
-    !allowedTopLevelDirectories.has(entry.name)
-  ) {
+  if (entry.isDirectory() && !allowedTopLevelDirectories.has(entry.name)) {
     violations.push(`${entry.name}: unapproved top-level source tree`);
   }
 }

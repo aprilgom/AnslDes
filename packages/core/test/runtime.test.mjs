@@ -61,7 +61,10 @@ test("keeps interaction geometry and formatted selection framework-neutral", () 
   );
   assert.deepEqual(
     mapDigitSelectionThroughFormat("1234", "1,234", { start: 2, end: 4 }),
-    { start: 3, end: 5 },
+    {
+      start: 3,
+      end: 5,
+    },
   );
 });
 

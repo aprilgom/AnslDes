@@ -1,8 +1,8 @@
 import {
-  resolveScaledControlMinHeight,
   type ComponentDefinition,
   type DesignSystemRuntime,
   type ResolvedTypographyRole,
+  resolveScaledControlMinHeight,
 } from "@ansldes/core";
 
 export interface ButtonPresentation {

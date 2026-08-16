@@ -132,9 +132,7 @@ function compileTheme(definition, theme) {
       },
       elevation: resolver.resolve(foundations.elevation),
       layer: canonicalize(foundations.layer),
-      ...(foundations.icon
-        ? { icon: resolver.resolve(foundations.icon) }
-        : {}),
+      ...(foundations.icon ? { icon: resolver.resolve(foundations.icon) } : {}),
     },
     components: resolver.resolve(definition.components),
   };
@@ -301,7 +299,9 @@ function validateIcons(definition, diagnostics) {
 
   for (const [name, recipe] of Object.entries(icons)) {
     if (!(recipe.defaultSize in sizes)) {
-      diagnostics.push(`icon ${name} has unknown default size ${recipe.defaultSize}`);
+      diagnostics.push(
+        `icon ${name} has unknown default size ${recipe.defaultSize}`,
+      );
     }
     if (!recipe.allowedSizes?.includes(recipe.defaultSize)) {
       diagnostics.push(`icon ${name} default size must be allowed`);
@@ -321,9 +321,7 @@ function validateIcons(definition, diagnostics) {
         typeof part.strokeWidth === "string" &&
         !(part.strokeWidth in strokes)
       ) {
-        diagnostics.push(
-          `icon ${name} has unknown stroke ${part.strokeWidth}`,
-        );
+        diagnostics.push(`icon ${name} has unknown stroke ${part.strokeWidth}`);
       }
     }
   }

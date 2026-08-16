@@ -52,10 +52,12 @@ Impeccable 2026 detector와 Hallmark의 eight tells를 제품 중립 `deslint` e
 ```bash
 npm install
 npm run check
+npm run fix:biome
 ```
 
-`npm run check`는 generic schema fixture, 제품 결합 방지 검사와 `deslint` go fix/golangci-lint/test/vet을
-실행한다.
+`npm run check`는 Biome format/lint/import 검사, generic schema fixture, 제품 결합 방지 검사와 `deslint`
+go fix/golangci-lint/test/vet을 실행한다. Biome의 안전한 format/lint/import 수정을 적용하려면
+`npm run fix:biome`을 사용한다.
 
 릴리스 후보는 `npm run release:check`로
 [`release/ansldes-release.json`](./release/ansldes-release.json)의 package version과 source artifact

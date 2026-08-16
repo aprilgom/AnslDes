@@ -27,7 +27,7 @@ export function ListItem(props: ListItemProps) {
 
 function InteractiveListItem(props: ListItemProps & { onPress: () => void }) {
   const [focused, setFocused] = useState(false);
-  const resolved = resolveListItem(props, focused);
+  const resolved = useResolvedListItem(props, focused);
   return (
     <Pressable
       accessibilityHint={props.accessibilityHint}
@@ -50,7 +50,7 @@ function InteractiveListItem(props: ListItemProps & { onPress: () => void }) {
 }
 
 function ListContent(props: ListItemProps) {
-  const resolved = resolveListItem(props, false);
+  const resolved = useResolvedListItem(props, false);
   return (
     <View style={resolved.container} testID={props.testID}>
       <ListCopy {...props} resolved={resolved} />
@@ -63,7 +63,7 @@ function ListCopy({
   label,
   resolved,
   supportingText,
-}: ListItemProps & { resolved: ReturnType<typeof resolveListItem> }) {
+}: ListItemProps & { resolved: ReturnType<typeof useResolvedListItem> }) {
   return (
     <>
       <View style={styles.copy}>
@@ -94,7 +94,7 @@ function ListCopy({
   );
 }
 
-function resolveListItem(props: ListItemProps, focused: boolean) {
+function useResolvedListItem(props: ListItemProps, focused: boolean) {
   const runtime = useDesignSystem();
   const component = runtime.component("listItem");
   const sizeRecipe = recipe(
