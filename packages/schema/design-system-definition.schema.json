@@ -69,7 +69,8 @@
         "typography": { "$ref": "#/$defs/typographyTokens" },
         "motion": { "$ref": "#/$defs/motionTokens" },
         "elevation": { "$ref": "#/$defs/recipeTokens" },
-        "layer": { "$ref": "#/$defs/integerTokens" }
+        "layer": { "$ref": "#/$defs/integerTokens" },
+        "icon": { "$ref": "#/$defs/iconTokens" }
       }
     },
     "colorTokens": {
@@ -255,9 +256,110 @@
         "transitions": {
           "type": "object",
           "minProperties": 1,
+          "additionalProperties": { "$ref": "#/$defs/motionTransition" }
+        }
+      }
+    },
+    "motionTransition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["duration", "easing", "reducedMotion"],
+      "properties": {
+        "duration": { "$ref": "#/$defs/reference" },
+        "easing": { "$ref": "#/$defs/reference" },
+        "reducedMotion": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["duration", "fallback"],
+          "properties": {
+            "duration": { "$ref": "#/$defs/reference" },
+            "fallback": { "$ref": "#/$defs/name" }
+          }
+        }
+      }
+    },
+    "iconTokens": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sizes",
+        "strokes",
+        "opticalAlignments",
+        "icons",
+        "usages",
+        "actions"
+      ],
+      "properties": {
+        "sizes": { "$ref": "#/$defs/nonNegativeNumberMap" },
+        "strokes": { "$ref": "#/$defs/nonNegativeNumberMap" },
+        "opticalAlignments": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["x", "y"],
+            "properties": {
+              "x": { "type": "number" },
+              "y": { "type": "number" }
+            }
+          }
+        },
+        "icons": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": { "$ref": "#/$defs/iconDefinition" }
+        },
+        "usages": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/recipeObject" }
+        },
+        "actions": {
+          "type": "object",
           "additionalProperties": { "$ref": "#/$defs/recipeObject" }
         }
       }
+    },
+    "iconDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "viewBox",
+        "geometry",
+        "defaultSize",
+        "allowedSizes",
+        "opticalAlignment"
+      ],
+      "properties": {
+        "viewBox": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": { "type": "number" }
+        },
+        "geometry": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/iconGeometryPart" }
+        },
+        "defaultSize": { "$ref": "#/$defs/name" },
+        "allowedSizes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/name" }
+        },
+        "opticalAlignment": { "$ref": "#/$defs/name" },
+        "pathFingerprint": { "type": "string", "minLength": 1 }
+      }
+    },
+    "iconGeometryPart": {
+      "type": "object",
+      "required": ["kind"],
+      "properties": {
+        "kind": { "$ref": "#/$defs/name" }
+      },
+      "additionalProperties": { "$ref": "#/$defs/recipeValue" }
     },
     "recipeTokens": {
       "type": "object",

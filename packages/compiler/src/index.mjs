@@ -82,6 +82,7 @@ export function validateDefinition(definition) {
 
   validateThemes(definition, diagnostics);
   validateTypography(definition, diagnostics);
+  validateIcons(definition, diagnostics);
   validateFoundationReferenceKinds(definition, diagnostics);
   throwCompile(diagnostics);
 }
@@ -131,6 +132,9 @@ function compileTheme(definition, theme) {
       },
       elevation: resolver.resolve(foundations.elevation),
       layer: canonicalize(foundations.layer),
+      ...(foundations.icon
+        ? { icon: resolver.resolve(foundations.icon) }
+        : {}),
     },
     components: resolver.resolve(definition.components),
   };
@@ -283,6 +287,58 @@ function validateTypography(definition, diagnostics) {
       diagnostics.push(
         `typography role ${roleName} disallows weight ${role.weight}`,
       );
+    }
+  }
+}
+
+function validateIcons(definition, diagnostics) {
+  const icon = definition.foundations?.icon;
+  if (!icon) return;
+  const sizes = icon.sizes ?? {};
+  const strokes = icon.strokes ?? {};
+  const alignments = icon.opticalAlignments ?? {};
+  const icons = icon.icons ?? {};
+
+  for (const [name, recipe] of Object.entries(icons)) {
+    if (!(recipe.defaultSize in sizes)) {
+      diagnostics.push(`icon ${name} has unknown default size ${recipe.defaultSize}`);
+    }
+    if (!recipe.allowedSizes?.includes(recipe.defaultSize)) {
+      diagnostics.push(`icon ${name} default size must be allowed`);
+    }
+    for (const size of recipe.allowedSizes ?? []) {
+      if (!(size in sizes)) {
+        diagnostics.push(`icon ${name} has unknown allowed size ${size}`);
+      }
+    }
+    if (!(recipe.opticalAlignment in alignments)) {
+      diagnostics.push(
+        `icon ${name} has unknown optical alignment ${recipe.opticalAlignment}`,
+      );
+    }
+    for (const part of recipe.geometry ?? []) {
+      if (
+        typeof part.strokeWidth === "string" &&
+        !(part.strokeWidth in strokes)
+      ) {
+        diagnostics.push(
+          `icon ${name} has unknown stroke ${part.strokeWidth}`,
+        );
+      }
+    }
+  }
+
+  for (const [kind, recipes] of [
+    ["usage", icon.usages ?? {}],
+    ["action", icon.actions ?? {}],
+  ]) {
+    for (const [name, recipe] of Object.entries(recipes)) {
+      if (typeof recipe.icon !== "string" || !(recipe.icon in icons)) {
+        diagnostics.push(`${kind} ${name} has unknown icon ${recipe.icon}`);
+      }
+      if (typeof recipe.size !== "string" || !(recipe.size in sizes)) {
+        diagnostics.push(`${kind} ${name} has unknown size ${recipe.size}`);
+      }
     }
   }
 }

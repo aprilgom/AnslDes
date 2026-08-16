@@ -39,6 +39,15 @@ test("compiles exact light and dark bundles with a stable fingerprint", () => {
     first.themes.light.foundations.typography.roles["button.label"].fontWeight,
     700,
   );
+  assert.equal(
+    first.themes.light.foundations.icon.icons["arrow-right"].geometry[0].d,
+    "M5 12h14M13 6l6 6-6 6",
+  );
+  assert.equal(
+    first.themes.light.foundations.motion.transitions["control.press"]
+      .reducedMotion.duration,
+    0,
+  );
 });
 
 test("rejects an unknown reference", () => {
@@ -83,6 +92,23 @@ test("rejects typography roles that use a disallowed weight", () => {
     (error) =>
       error instanceof DesignSystemCompileError &&
       /disallows weight/u.test(error.message),
+  );
+});
+
+test("rejects icons that reference unknown sizes, strokes, or glyphs", () => {
+  const invalid = structuredClone(example);
+  invalid.foundations.icon.icons["arrow-right"].defaultSize = "missing";
+  invalid.foundations.icon.icons["arrow-right"].geometry[0].strokeWidth =
+    "missing";
+  invalid.foundations.icon.usages["navigation.next"].icon = "missing";
+
+  assert.throws(
+    () => compileDesignSystem(invalid),
+    (error) =>
+      error instanceof DesignSystemCompileError &&
+      /unknown default size/u.test(error.message) &&
+      /unknown stroke/u.test(error.message) &&
+      /unknown icon/u.test(error.message),
   );
 });
 

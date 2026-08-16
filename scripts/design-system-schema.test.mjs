@@ -75,6 +75,28 @@ test("continues to reject negative radius values", () => {
   assert.ok(validate.errors?.some((error) => error.keyword === "minimum"));
 });
 
+test("accepts generic icon geometry and rejects unknown icon keys", () => {
+  assert.equal(validate(example), true, JSON.stringify(validate.errors));
+
+  const invalid = structuredClone(example);
+  invalid.foundations.icon.icons["arrow-right"].consumerCount = 3;
+  assert.equal(validate(invalid), false);
+  assert.ok(
+    validate.errors?.some(
+      (error) =>
+        error.keyword === "additionalProperties" &&
+        error.params.additionalProperty === "consumerCount",
+    ),
+  );
+});
+
+test("keeps the icon foundation optional for definition v1 consumers", () => {
+  const compatible = structuredClone(example);
+  delete compatible.foundations.icon;
+
+  assert.equal(validate(compatible), true, JSON.stringify(validate.errors));
+});
+
 test("accepts a product policy as a separate versioned input", () => {
   assert.equal(
     validatePolicy(examplePolicy),
