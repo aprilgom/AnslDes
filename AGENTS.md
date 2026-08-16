@@ -1,5 +1,7 @@
 # Repository Guidelines
 
+> [Repository TODO](./TODO.md)
+
 ## Purpose
 
 AnslDes는 제품 중립 디자인 시스템 toolkit이다. 특정 제품의 token 값이나 source 경로를 이 저장소의

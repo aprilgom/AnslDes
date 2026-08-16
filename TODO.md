@@ -1,5 +1,7 @@
 # AnslDes TODO
 
+> [Repository rules](./AGENTS.md)
+
 ## 1. Product-neutral schema
 
 - [x] 제품 정의와 generic toolkit의 소유권 경계를 문서화한다.
