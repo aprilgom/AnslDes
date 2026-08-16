@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "release": {
-    "version": "0.1.1",
-    "tag": "v0.1.1"
+    "version": "0.2.0",
+    "tag": "v0.2.0"
   },
   "compatibility": {
     "definitionSchemaVersion": 1,
@@ -16,46 +16,46 @@
   "packages": {
     "schema": {
       "name": "@ansldes/schema",
-      "version": "0.1.1"
+      "version": "0.2.0"
     },
     "compiler": {
       "name": "@ansldes/compiler",
-      "version": "0.1.1"
+      "version": "0.2.0"
     },
     "core": {
       "name": "@ansldes/core",
-      "version": "0.1.1"
+      "version": "0.2.0"
     },
     "reactNative": {
       "name": "@ansldes/react-native",
-      "version": "0.1.1"
+      "version": "0.2.0"
     }
   },
   "deslint": {
     "module": "github.com/aprilgom/AnslDes/deslint",
-    "version": "0.1.1",
-    "releaseVersionLinkerFlag": "-X main.version=0.1.1"
+    "version": "0.2.0",
+    "releaseVersionLinkerFlag": "-X main.version=0.2.0"
   },
   "artifacts": {
     "schema": {
       "fileCount": 8,
-      "sha256": "4222dcea0f3a624fa1531af795063bac05a02e2f2b4e1f276ba71b5d9448099d"
+      "sha256": "d45ccd52616d5de027984a7880c249e1e64d73acdf1b66bebda3b7948cd71b6e"
     },
     "compiler": {
       "fileCount": 5,
-      "sha256": "4b73a04bc37187b848f500b0986d6530629a60606ed68a82bd8c890046b5c1ea"
+      "sha256": "f65d6f630b0791e05b15c18958084939a88628c61298bae06385d16552742f67"
     },
     "core": {
       "fileCount": 5,
-      "sha256": "4552c24b06af82dfb245c082d8479a2413e4e90a579e9b860f60dd5374750164"
+      "sha256": "bd8c6aa5c3141b93350c1655d1df6823942dc60109fe9a4476e1432f1ea03098"
     },
     "reactNative": {
       "fileCount": 19,
-      "sha256": "6e664ad18e982781b9f99c91610c09bee5896c4ea23e040f1a93648e522b3fa6"
+      "sha256": "5aa99dfda468876fc4437e084a066635d488c595c0ca539e957e06f3e2fdb7a3"
     },
     "deslint": {
       "fileCount": 23,
-      "sha256": "caacef912145957824b39195ea62fc00aa32894cda646ed6e00a770c98254cfb"
+      "sha256": "f62e5afa5c852ec75ab28aa598b3cbfec86b424c97963a2da062458a9f1472a4"
     }
   }
 }
