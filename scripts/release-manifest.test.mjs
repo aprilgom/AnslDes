@@ -35,12 +35,12 @@ test("accepts only the exact release tag from the manifest", () => {
   const script = fileURLToPath(
     new URL("./check-release-tag.mjs", import.meta.url),
   );
-  const accepted = spawnSync(process.execPath, [script, "v0.2.1"], {
+  const accepted = spawnSync(process.execPath, [script, "v1.0.0"], {
     encoding: "utf8",
   });
   assert.equal(accepted.status, 0, accepted.stderr);
 
-  const rejected = spawnSync(process.execPath, [script, "v0.2.0"], {
+  const rejected = spawnSync(process.execPath, [script, "v0.2.1"], {
     encoding: "utf8",
   });
   assert.notEqual(rejected.status, 0);

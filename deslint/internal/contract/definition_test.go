@@ -91,13 +91,42 @@ func TestAnalyzeDefinitionRejectsDuplicateAndVersionDrift(t *testing.T) {
 		t.Fatalf("duplicate diagnostics = %#v", analysis.Diagnostics)
 	}
 
-	drift := []byte(strings.Replace(valid, `"schemaVersion": 1`, `"schemaVersion": 2`, 1))
+	drift := []byte(strings.Replace(valid, `"schemaVersion": 2`, `"schemaVersion": 1`, 1))
 	analysis, err = contract.Analyze("definition.json", drift, severity)
 	if err != nil {
 		t.Fatalf("Analyze(drift) error = %v", err)
 	}
 	if !hasRule(analysis.Diagnostics, rules.RuleDefinitionSchemaVersion) {
 		t.Fatalf("version diagnostics = %#v", analysis.Diagnostics)
+	}
+}
+
+func TestAnalyzeDefinitionRejectsLayerBypasses(t *testing.T) {
+	t.Parallel()
+	valid := string(readDefinition(t))
+	severity := func(string) diagnostic.Severity { return diagnostic.SeverityError }
+
+	for _, mutation := range []struct {
+		name string
+		old  string
+		new  string
+	}{
+		{"semantic same-layer", `"{spacing.primitive.2}"`, `"{spacing.semantic.control.vertical}"`},
+		{"component skips semantic", `"{radius.semantic.control}"`, `"{radius.primitive.medium}"`},
+		{"recipe skips component", `"{color.component.button.primary.container}"`, `"{color.semantic.action.primary}"`},
+		{"recipe uses asset", `"{color.component.button.primary.container}"`, `"{color.asset.brand.sample}"`},
+		{"primitive uses reference", `"medium": 12`, `"medium": "{radius.primitive.medium}"`},
+		{"component uses literal", `"button": "{radius.semantic.control}"`, `"button": 12`},
+	} {
+		t.Run(mutation.name, func(t *testing.T) {
+			analysis, err := contract.Analyze("definition.json", []byte(strings.Replace(valid, mutation.old, mutation.new, 1)), severity)
+			if err != nil {
+				t.Fatalf("Analyze(layer bypass) error = %v", err)
+			}
+			if !hasRule(analysis.Diagnostics, rules.RuleDefinitionInvalidRef) {
+				t.Fatalf("layer bypass diagnostics = %#v", analysis.Diagnostics)
+			}
+		})
 	}
 }
 

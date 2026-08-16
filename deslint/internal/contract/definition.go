@@ -73,9 +73,116 @@ func Analyze(path string, contents []byte, severity func(string) diagnostic.Seve
 	}
 
 	registry := referenceRegistry(foundations)
+	validateStrictTokenLayers(foundations, root["components"], path, severity, &diagnostics)
 	walkReferences(root, "$", registry, path, severity, &diagnostics)
 	diagnostic.Sort(diagnostics)
 	return Analysis{DefinitionID: typed.ID, Diagnostics: diagnostics}, nil
+}
+
+func validateStrictTokenLayers(foundations map[string]any, componentsValue any, path string, severity func(string) diagnostic.Severity, diagnostics *[]diagnostic.Diagnostic) {
+	for _, collection := range []string{"color", "spacing", "radius", "size"} {
+		group, _ := object(foundations[collection])
+		primitive, _ := object(group["primitive"])
+		for _, name := range sortedKeys(primitive) {
+			value := primitive[name]
+			if collection == "color" {
+				literal, ok := value.(string)
+				if !ok || strings.HasPrefix(literal, "{") {
+					appendLayerDiagnostic(path, severity, fmt.Sprintf("foundations.%s.primitive.%s must be a raw color", collection, name), diagnostics)
+				}
+				continue
+			}
+			number, ok := value.(json.Number)
+			if !ok {
+				appendLayerDiagnostic(path, severity, fmt.Sprintf("foundations.%s.primitive.%s must be a raw number", collection, name), diagnostics)
+				continue
+			}
+			if collection != "spacing" {
+				numeric, numberErr := number.Float64()
+				if numberErr != nil || numeric < 0 {
+					appendLayerDiagnostic(path, severity, fmt.Sprintf("foundations.%s.primitive.%s must be non-negative", collection, name), diagnostics)
+				}
+			}
+		}
+		semantic, _ := object(group["semantic"])
+		for _, name := range sortedKeys(semantic) {
+			if collection == "color" {
+				themes, ok := object(semantic[name])
+				if !ok {
+					appendLayerDiagnostic(path, severity, fmt.Sprintf("%s.semantic.%s must map themes to %s.primitive references", collection, name, collection), diagnostics)
+					continue
+				}
+				for _, theme := range sortedKeys(themes) {
+					validateLayerReference(themes[theme], collection, "primitive", fmt.Sprintf("foundations.%s.semantic.%s.%s", collection, name, theme), path, severity, diagnostics)
+				}
+				continue
+			}
+			validateLayerReference(semantic[name], collection, "primitive", fmt.Sprintf("foundations.%s.semantic.%s", collection, name), path, severity, diagnostics)
+		}
+
+		component, _ := object(group["component"])
+		for _, name := range sortedKeys(component) {
+			validateLayerReference(component[name], collection, "semantic", fmt.Sprintf("foundations.%s.component.%s", collection, name), path, severity, diagnostics)
+		}
+	}
+
+	walkComponentLayerReferences(componentsValue, "components", path, severity, diagnostics)
+}
+
+func validateLayerReference(value any, collection string, expectedLayer string, jsonPath string, path string, severity func(string) diagnostic.Severity, diagnostics *[]diagnostic.Diagnostic) {
+	reference, ok := value.(string)
+	if !ok {
+		appendLayerDiagnostic(path, severity, fmt.Sprintf("%s must reference %s.%s", jsonPath, collection, expectedLayer), diagnostics)
+		return
+	}
+	match := referencePattern.FindStringSubmatch(reference)
+	if match == nil || match[1] != collection || match[2] != expectedLayer {
+		appendLayerDiagnostic(path, severity, fmt.Sprintf("%s must reference %s.%s", jsonPath, collection, expectedLayer), diagnostics)
+	}
+}
+
+func walkComponentLayerReferences(value any, jsonPath string, path string, severity func(string) diagnostic.Severity, diagnostics *[]diagnostic.Diagnostic) {
+	switch typed := value.(type) {
+	case map[string]any:
+		for _, key := range sortedKeys(typed) {
+			walkComponentLayerReferences(typed[key], jsonPath+"."+key, path, severity, diagnostics)
+		}
+	case []any:
+		for index, item := range typed {
+			walkComponentLayerReferences(item, fmt.Sprintf("%s[%d]", jsonPath, index), path, severity, diagnostics)
+		}
+	case string:
+		match := referencePattern.FindStringSubmatch(typed)
+		if match == nil {
+			return
+		}
+		if (match[1] == "color" || match[1] == "spacing" || match[1] == "radius" || match[1] == "size") && match[2] != "component" {
+			appendLayerDiagnostic(path, severity, fmt.Sprintf("%s must reference %s.component instead of %s.%s", jsonPath, match[1], match[1], match[2]), diagnostics)
+		}
+	}
+}
+
+func appendLayerDiagnostic(path string, severity func(string) diagnostic.Severity, message string, diagnostics *[]diagnostic.Diagnostic) {
+	*diagnostics = append(*diagnostics, diagnostic.New(
+		rules.RuleDefinitionInvalidRef,
+		severity(rules.RuleDefinitionInvalidRef),
+		message,
+		path,
+		nil,
+		diagnostic.EvidenceDefinition,
+		"all",
+		"ansldes/contract",
+		"token-layer",
+	))
+}
+
+func sortedKeys(value map[string]any) []string {
+	keys := make([]string, 0, len(value))
+	for key := range value {
+		keys = append(keys, key)
+	}
+	sort.Strings(keys)
+	return keys
 }
 
 func walkReferences(value any, jsonPath string, registry map[string]struct{}, path string, severity func(string) diagnostic.Severity, diagnostics *[]diagnostic.Diagnostic) {

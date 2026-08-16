@@ -82,7 +82,7 @@ export function createDesignSystem(
   options: CreateDesignSystemOptions = {},
 ): DesignSystemRuntime {
   const root = requireRecord(bundle, "compiled bundle");
-  if (root.version !== 1)
+  if (root.version !== 2)
     throw new Error("unsupported compiled bundle version");
   const definition = requireRecord(root.definition, "bundle.definition");
   const themes = requireRecord(root.themes, "bundle.themes");

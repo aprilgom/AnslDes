@@ -1,6 +1,6 @@
 {
-  "$schema": "../design-system-definition.schema.json",
-  "schemaVersion": 1,
+  "$schema": "https://ansldes.dev/schema/design-system-definition.v2.json",
+  "schemaVersion": 2,
   "id": "example-product",
   "version": "1.0.0",
   "themes": {
@@ -68,24 +68,49 @@
         "button.primary.container": "{color.semantic.action.primary}",
         "button.primary.label": "{color.semantic.text.primary}",
         "button.disabled.container": "{color.semantic.surface.disabled}",
-        "button.disabled.label": "{color.semantic.text.disabled}"
+        "button.disabled.label": "{color.semantic.text.disabled}",
+        "recipe.border.focus": "{color.semantic.border.focus}",
+        "recipe.border.transparent": "{color.semantic.border.transparent}",
+        "recipe.action.primary-pressed": "{color.semantic.action.primary-pressed}",
+        "recipe.surface.disabled": "{color.semantic.surface.disabled}",
+        "recipe.text.disabled": "{color.semantic.text.disabled}",
+        "recipe.status.danger": "{color.semantic.status.danger}",
+        "recipe.border.default": "{color.semantic.border.default}",
+        "recipe.text.secondary": "{color.semantic.text.secondary}",
+        "recipe.surface.field": "{color.semantic.surface.field}",
+        "recipe.text.primary": "{color.semantic.text.primary}",
+        "recipe.action.primary": "{color.semantic.action.primary}",
+        "recipe.surface.subtle": "{color.semantic.surface.subtle}"
       },
       "asset": {}
     },
     "spacing": {
-      "primitive": { "0": 0, "2": 8, "4": 16 },
+      "primitive": {
+        "0": 0,
+        "2": 8,
+        "4": 16
+      },
       "semantic": {
         "control.gap": "{spacing.primitive.2}",
-        "control.vertical": "{spacing.primitive.2}"
+        "control.vertical": "{spacing.primitive.2}",
+        "component.button.horizontal": "{spacing.primitive.4}",
+        "component.control.horizontal": "{spacing.primitive.4}"
       },
       "component": {
-        "button.horizontal": "{spacing.primitive.4}",
-        "control.horizontal": "{spacing.primitive.4}"
+        "button.horizontal": "{spacing.semantic.component.button.horizontal}",
+        "control.horizontal": "{spacing.semantic.component.control.horizontal}",
+        "recipe.control.gap": "{spacing.semantic.control.gap}",
+        "recipe.control.vertical": "{spacing.semantic.control.vertical}"
       }
     },
     "radius": {
-      "primitive": { "none": 0, "medium": 12 },
-      "semantic": { "control": "{radius.primitive.medium}" },
+      "primitive": {
+        "none": 0,
+        "medium": 12
+      },
+      "semantic": {
+        "control": "{radius.primitive.medium}"
+      },
       "component": {
         "button": "{radius.semantic.control}",
         "control": "{radius.semantic.control}",
@@ -93,19 +118,34 @@
       }
     },
     "size": {
-      "primitive": { "touch-target": 44, "control": 52 },
-      "semantic": { "control.minimum": "{size.primitive.touch-target}" },
+      "primitive": {
+        "touch-target": 44,
+        "control": 52
+      },
+      "semantic": {
+        "control.minimum": "{size.primitive.touch-target}",
+        "component.button.medium": "{size.primitive.control}",
+        "component.control.medium": "{size.primitive.control}",
+        "component.list.two-line": "{size.primitive.control}"
+      },
       "component": {
-        "button.medium": "{size.primitive.control}",
-        "control.medium": "{size.primitive.control}",
-        "list.two-line": "{size.primitive.control}"
+        "button.medium": "{size.semantic.component.button.medium}",
+        "control.medium": "{size.semantic.component.control.medium}",
+        "list.two-line": "{size.semantic.component.list.two-line}",
+        "recipe.control.minimum": "{size.semantic.control.minimum}"
       }
     },
     "typography": {
       "familyName": "Example Sans",
       "weights": {
-        "regular": { "fontFamily": "ExampleSans-Regular", "fontWeight": 400 },
-        "bold": { "fontFamily": "ExampleSans-Bold", "fontWeight": 700 }
+        "regular": {
+          "fontFamily": "ExampleSans-Regular",
+          "fontWeight": 400
+        },
+        "bold": {
+          "fontFamily": "ExampleSans-Bold",
+          "fontWeight": 700
+        }
       },
       "tokens": {
         "body.medium": {
@@ -118,21 +158,44 @@
         }
       },
       "roles": {
-        "button.label": { "visualToken": "body.medium", "weight": "bold" },
-        "field.label": { "visualToken": "body.medium", "weight": "bold" },
-        "field.input": { "visualToken": "body.medium", "weight": "regular" },
+        "button.label": {
+          "visualToken": "body.medium",
+          "weight": "bold"
+        },
+        "field.label": {
+          "visualToken": "body.medium",
+          "weight": "bold"
+        },
+        "field.input": {
+          "visualToken": "body.medium",
+          "weight": "regular"
+        },
         "supporting.text": {
           "visualToken": "body.medium",
           "weight": "regular"
         },
-        "selection.label": { "visualToken": "body.medium", "weight": "bold" },
-        "list.label": { "visualToken": "body.medium", "weight": "bold" },
-        "feedback.title": { "visualToken": "body.medium", "weight": "bold" }
+        "selection.label": {
+          "visualToken": "body.medium",
+          "weight": "bold"
+        },
+        "list.label": {
+          "visualToken": "body.medium",
+          "weight": "bold"
+        },
+        "feedback.title": {
+          "visualToken": "body.medium",
+          "weight": "bold"
+        }
       }
     },
     "motion": {
-      "durations": { "instant": 0, "fast": 160 },
-      "easings": { "standard": [0.2, 0, 0, 1] },
+      "durations": {
+        "instant": 0,
+        "fast": 160
+      },
+      "easings": {
+        "standard": [0.2, 0, 0, 1]
+      },
       "transitions": {
         "control.press": {
           "duration": "{motion.duration.fast}",
@@ -145,17 +208,36 @@
       }
     },
     "elevation": {
-      "flat": { "level": 0 },
-      "raised": { "level": 1 }
+      "flat": {
+        "level": 0
+      },
+      "raised": {
+        "level": 1
+      }
     },
     "layer": {
-      "semantic": { "content": 0, "overlay": 100 },
-      "component": { "modal": 100 }
+      "semantic": {
+        "content": 0,
+        "overlay": 100
+      },
+      "component": {
+        "modal": 100
+      }
     },
     "icon": {
-      "sizes": { "small": 16, "medium": 20 },
-      "strokes": { "regular": 2 },
-      "opticalAlignments": { "center": { "x": 0, "y": 0 } },
+      "sizes": {
+        "small": 16,
+        "medium": 20
+      },
+      "strokes": {
+        "regular": 2
+      },
+      "opticalAlignments": {
+        "center": {
+          "x": 0,
+          "y": 0
+        }
+      },
       "icons": {
         "arrow-right": {
           "viewBox": [0, 0, 24, 24],
@@ -193,18 +275,18 @@
     "button": {
       "anatomy": ["root", "label", "leading-icon", "trailing-icon"],
       "slots": {
-        "contentGap": "{spacing.semantic.control.gap}",
+        "contentGap": "{spacing.component.recipe.control.gap}",
         "disabledContainer": "{color.component.button.disabled.container}",
         "disabledLabel": "{color.component.button.disabled.label}",
-        "focusBorder": "{color.semantic.border.focus}",
+        "focusBorder": "{color.component.recipe.border.focus}",
         "focusBorderWidth": 2,
-        "idleBorder": "{color.semantic.border.transparent}"
+        "idleBorder": "{color.component.recipe.border.transparent}"
       },
       "variants": {
         "primary": {
           "container": "{color.component.button.primary.container}",
           "label": "{color.component.button.primary.label}",
-          "pressedContainer": "{color.semantic.action.primary-pressed}",
+          "pressedContainer": "{color.component.recipe.action.primary-pressed}",
           "pressedOpacity": 1,
           "radius": "{radius.component.button}"
         }
@@ -213,149 +295,159 @@
         "medium": {
           "minHeight": "{size.component.button.medium}",
           "horizontalPadding": "{spacing.component.button.horizontal}",
-          "verticalPadding": "{spacing.semantic.control.vertical}",
+          "verticalPadding": "{spacing.component.recipe.control.vertical}",
           "typographyRole": "{typography.role.button.label}"
         }
       },
       "states": ["default", "pressed", "disabled", "loading", "focused"],
       "semantics": {
         "role": "button",
-        "minimumTarget": "{size.semantic.control.minimum}"
+        "minimumTarget": "{size.component.recipe.control.minimum}"
       }
     },
     "textField": {
       "anatomy": ["root", "label", "input", "message"],
       "slots": {
-        "disabledContainer": "{color.semantic.surface.disabled}",
-        "disabledText": "{color.semantic.text.disabled}",
-        "errorBorder": "{color.semantic.status.danger}",
-        "errorText": "{color.semantic.status.danger}",
-        "focusBorder": "{color.semantic.border.focus}",
+        "disabledContainer": "{color.component.recipe.surface.disabled}",
+        "disabledText": "{color.component.recipe.text.disabled}",
+        "errorBorder": "{color.component.recipe.status.danger}",
+        "errorText": "{color.component.recipe.status.danger}",
+        "focusBorder": "{color.component.recipe.border.focus}",
         "focusBorderWidth": 2,
-        "idleBorder": "{color.semantic.border.default}",
+        "idleBorder": "{color.component.recipe.border.default}",
         "idleBorderWidth": 1,
-        "placeholder": "{color.semantic.text.secondary}"
+        "placeholder": "{color.component.recipe.text.secondary}"
       },
       "variants": {
         "default": {
-          "container": "{color.semantic.surface.field}",
-          "helper": "{color.semantic.text.secondary}",
-          "label": "{color.semantic.text.primary}",
+          "container": "{color.component.recipe.surface.field}",
+          "helper": "{color.component.recipe.text.secondary}",
+          "label": "{color.component.recipe.text.primary}",
           "radius": "{radius.component.control}",
-          "text": "{color.semantic.text.primary}"
+          "text": "{color.component.recipe.text.primary}"
         }
       },
       "sizes": {
         "medium": {
-          "contentGap": "{spacing.semantic.control.gap}",
+          "contentGap": "{spacing.component.recipe.control.gap}",
           "horizontalPadding": "{spacing.component.control.horizontal}",
           "inputRole": "{typography.role.field.input}",
           "labelRole": "{typography.role.field.label}",
           "messageRole": "{typography.role.supporting.text}",
           "minHeight": "{size.component.control.medium}",
-          "verticalPadding": "{spacing.semantic.control.vertical}"
+          "verticalPadding": "{spacing.component.recipe.control.vertical}"
         }
       },
       "states": ["default", "focused", "disabled", "error"],
-      "semantics": { "role": "input" }
+      "semantics": {
+        "role": "input"
+      }
     },
     "selection": {
       "anatomy": ["root", "indicator", "label", "description"],
       "slots": {
         "disabledOpacity": 0.5,
-        "focusBorder": "{color.semantic.border.focus}",
+        "focusBorder": "{color.component.recipe.border.focus}",
         "focusBorderWidth": 2,
-        "idleIndicator": "{color.semantic.surface.field}",
+        "idleIndicator": "{color.component.recipe.surface.field}",
         "indicatorRadius": 4,
         "indicatorSize": 24,
         "pressedOpacity": 0.8,
-        "selectedIndicator": "{color.semantic.action.primary}"
+        "selectedIndicator": "{color.component.recipe.action.primary}"
       },
       "variants": {
         "default": {
-          "border": "{color.semantic.border.default}",
-          "container": "{color.semantic.surface.field}",
-          "description": "{color.semantic.text.secondary}",
-          "label": "{color.semantic.text.primary}",
+          "border": "{color.component.recipe.border.default}",
+          "container": "{color.component.recipe.surface.field}",
+          "description": "{color.component.recipe.text.secondary}",
+          "label": "{color.component.recipe.text.primary}",
           "radius": "{radius.component.control}",
-          "selectedBorder": "{color.semantic.action.primary}",
-          "selectedContainer": "{color.semantic.surface.field}"
+          "selectedBorder": "{color.component.recipe.action.primary}",
+          "selectedContainer": "{color.component.recipe.surface.field}"
         }
       },
       "sizes": {
         "medium": {
-          "contentGap": "{spacing.semantic.control.gap}",
+          "contentGap": "{spacing.component.recipe.control.gap}",
           "descriptionRole": "{typography.role.supporting.text}",
           "horizontalPadding": "{spacing.component.control.horizontal}",
           "labelRole": "{typography.role.selection.label}",
-          "minHeight": "{size.semantic.control.minimum}",
-          "verticalPadding": "{spacing.semantic.control.vertical}"
+          "minHeight": "{size.component.recipe.control.minimum}",
+          "verticalPadding": "{spacing.component.recipe.control.vertical}"
         }
       },
       "states": ["default", "selected", "focused", "disabled"],
-      "semantics": { "roles": ["checkbox", "radio"] }
+      "semantics": {
+        "roles": ["checkbox", "radio"]
+      }
     },
     "listItem": {
       "anatomy": ["root", "copy", "label", "supporting", "accessory"],
       "slots": {
-        "focusBorder": "{color.semantic.border.focus}",
+        "focusBorder": "{color.component.recipe.border.focus}",
         "focusBorderWidth": 2,
         "pressedOpacity": 0.8
       },
       "variants": {
         "default": {
-          "border": "{color.semantic.border.transparent}",
-          "container": "{color.semantic.surface.field}",
-          "label": "{color.semantic.text.primary}",
+          "border": "{color.component.recipe.border.transparent}",
+          "container": "{color.component.recipe.surface.field}",
+          "label": "{color.component.recipe.text.primary}",
           "radius": "{radius.component.surface}",
-          "supporting": "{color.semantic.text.secondary}"
+          "supporting": "{color.component.recipe.text.secondary}"
         }
       },
       "sizes": {
         "twoLine": {
-          "contentGap": "{spacing.semantic.control.gap}",
+          "contentGap": "{spacing.component.recipe.control.gap}",
           "horizontalPadding": "{spacing.component.control.horizontal}",
           "labelRole": "{typography.role.list.label}",
           "minHeight": "{size.component.list.two-line}",
           "supportingRole": "{typography.role.supporting.text}",
-          "verticalPadding": "{spacing.semantic.control.vertical}"
+          "verticalPadding": "{spacing.component.recipe.control.vertical}"
         }
       },
       "states": ["default", "pressed", "focused", "disabled"],
-      "semantics": { "interactiveRole": "button" }
+      "semantics": {
+        "interactiveRole": "button"
+      }
     },
     "feedback": {
       "anatomy": ["root", "title", "description", "action"],
-      "slots": { "borderWidth": 1 },
+      "slots": {
+        "borderWidth": 1
+      },
       "variants": {
         "info": {
-          "border": "{color.semantic.border.default}",
-          "container": "{color.semantic.surface.subtle}",
-          "description": "{color.semantic.text.secondary}",
+          "border": "{color.component.recipe.border.default}",
+          "container": "{color.component.recipe.surface.subtle}",
+          "description": "{color.component.recipe.text.secondary}",
           "liveRegion": "polite",
           "radius": "{radius.component.surface}",
-          "title": "{color.semantic.text.primary}"
+          "title": "{color.component.recipe.text.primary}"
         },
         "danger": {
-          "border": "{color.semantic.status.danger}",
-          "container": "{color.semantic.surface.subtle}",
-          "description": "{color.semantic.text.primary}",
+          "border": "{color.component.recipe.status.danger}",
+          "container": "{color.component.recipe.surface.subtle}",
+          "description": "{color.component.recipe.text.primary}",
           "liveRegion": "assertive",
           "radius": "{radius.component.surface}",
-          "title": "{color.semantic.status.danger}"
+          "title": "{color.component.recipe.status.danger}"
         }
       },
       "sizes": {
         "medium": {
-          "contentGap": "{spacing.semantic.control.gap}",
+          "contentGap": "{spacing.component.recipe.control.gap}",
           "descriptionRole": "{typography.role.supporting.text}",
           "horizontalPadding": "{spacing.component.control.horizontal}",
           "titleRole": "{typography.role.feedback.title}",
-          "verticalPadding": "{spacing.semantic.control.vertical}"
+          "verticalPadding": "{spacing.component.recipe.control.vertical}"
         }
       },
       "states": ["default"],
-      "semantics": { "urgentRole": "alert" }
+      "semantics": {
+        "urgentRole": "alert"
+      }
     }
   }
 }

@@ -5,6 +5,9 @@ AnslDes는 제품별 브랜드 값과 독립된 범용 디자인 시스템 toolk
 AnslDes는 token의 실제 값을 소유하지 않는다. color, typography, spacing, radius, size, motion과
 component recipe의 값은 각 제품 저장소가 AnslDes schema에 맞춰 정의한다.
 
+Definition v2의 layered foundation은 `primitive → semantic → component` 단방향이다. Color, spacing,
+radius, size의 raw 값은 primitive에만 존재하고 component recipe는 component token만 소비한다.
+
 ```text
 AnslDes                          product repository
 ├─ schema      ◀─────────────── product.design-system.json
@@ -66,8 +69,9 @@ checksum을 검증한다. tag와 제품 lock 절차는 [Release process](./docs/
 ## Status
 
 현재 schema, compiler, framework-neutral runtime, React Native 기본 anatomy와 linter bootstrap이 있다.
-제품은 기존 디자인 시스템 구현을 제거하기 전에 versioned AnslDes release를 exact pin하고 dual-run
-migration과 rollback evidence를 유지해야 한다. 첫 정식 release는 `v0.1.0`이다.
+Definition v2와 compiled bundle v2는 v1 호환 경로를 제공하지 않는다. 제품은 `v1.0.0` release를 exact
+pin하고 정의를 한 번에 v2로 이관해야 한다. 구체적인 규칙은
+[Definition v2 migration](./docs/definition-v2-migration.md)에 있다.
 
 - [Repository TODO](./TODO.md)
 - [Anti-slop Gate TODO](./docs/anti-slop/TODO.md)

@@ -102,7 +102,7 @@ test("rejects unknown themes and missing token names", () => {
   );
 });
 
-test("keeps definition v1 bundles without the optional icon group compatible", () => {
+test("keeps definition v2 bundles without the optional icon group compatible", () => {
   const withoutIcon = structuredClone(definition);
   delete withoutIcon.foundations.icon;
   const runtime = createDesignSystem(compileDesignSystem(withoutIcon));

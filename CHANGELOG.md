@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.0 - 2026-08-16
+
+- Definition과 compiled bundle을 v2로 올리고 v1 호환 경로를 제거했다.
+- Color, spacing, radius, size에 `primitive → semantic → component` 단방향 참조를 강제한다.
+- Component recipe가 layered foundation의 primitive·semantic·asset token을 직접 소비하면 schema/compiler/`deslint` gate가 실패한다.
+- Raw spacing·radius·size 값은 primitive에만 선언하도록 generic fixture와 회귀 테스트를 이관했다.
+
 ## 0.2.1 - 2026-08-16
 
 - Go `deslint`가 definition v1의 optional `foundations.icon`을 TypeScript schema와 동일하게 허용하도록 수정했다.

@@ -22,6 +22,7 @@ test("compiles exact light and dark bundles with a stable fingerprint", () => {
   const reordered = JSON.parse(canonicalStringify(example));
   const second = compileDesignSystem(reordered);
 
+  assert.equal(first.version, 2);
   assert.equal(first.fingerprintSha256, second.fingerprintSha256);
   assert.equal(
     first.themes.light.foundations.color.semantic["text.primary"],
@@ -59,7 +60,7 @@ test("rejects an unknown reference", () => {
 
 test("rejects reference cycles", () => {
   const invalid = structuredClone(example);
-  invalid.foundations.radius.semantic.control = "{radius.semantic.control}";
+  invalid.foundations.elevation.raised.level = "{elevation.recipe.raised}";
 
   assert.throws(
     () => compileDesignSystem(invalid),
@@ -67,6 +68,26 @@ test("rejects reference cycles", () => {
       error instanceof DesignSystemCompileError &&
       /reference cycle/u.test(error.message),
   );
+});
+
+test("rejects component recipes that bypass component tokens", () => {
+  for (const [reference, layer] of [
+    ["{color.semantic.action.primary}", "semantic"],
+    ["{color.asset.brand.sample}", "asset"],
+  ]) {
+    const invalid = structuredClone(example);
+    invalid.components.button.variants.primary.container = reference;
+
+    assert.throws(
+      () => compileDesignSystem(invalid),
+      (error) =>
+        error instanceof DesignSystemCompileError &&
+        new RegExp(
+          `must reference color\\.component instead of color\\.${layer}`,
+          "u",
+        ).test(error.message),
+    );
+  }
 });
 
 test("rejects incomplete theme mappings", () => {

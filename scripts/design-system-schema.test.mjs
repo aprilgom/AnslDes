@@ -60,19 +60,52 @@ test("rejects raw component references outside the generic reference grammar", (
   assert.ok(validate.errors?.some((error) => error.keyword === "pattern"));
 });
 
-test("allows signed component spacing for product-owned optical alignment", () => {
-  const valid = structuredClone(example);
-  valid.foundations.spacing.component.overhang = -4;
+test("rejects literals outside the primitive layer", () => {
+  for (const [collection, layer, name, value] of [
+    ["spacing", "semantic", "control.gap", 8],
+    ["spacing", "component", "button.horizontal", -4],
+    ["radius", "semantic", "control", 12],
+    ["size", "component", "button", 52],
+  ]) {
+    const invalid = structuredClone(example);
+    invalid.foundations[collection][layer][name] = value;
 
-  assert.equal(validate(valid), true, JSON.stringify(validate.errors));
+    assert.equal(validate(invalid), false, `${collection}.${layer}.${name}`);
+    assert.ok(validate.errors?.some((error) => error.keyword === "type"));
+  }
 });
 
-test("continues to reject negative radius values", () => {
+test("rejects negative primitive radius values", () => {
   const invalid = structuredClone(example);
-  invalid.foundations.radius.component.button = -4;
+  invalid.foundations.radius.primitive.medium = -4;
 
   assert.equal(validate(invalid), false);
   assert.ok(validate.errors?.some((error) => error.keyword === "minimum"));
+});
+
+test("rejects layer skipping and same-layer aliases", () => {
+  const colorInvalid = structuredClone(example);
+  colorInvalid.foundations.color.semantic["text.primary"].light =
+    "{color.semantic.text.secondary}";
+  assert.equal(validate(colorInvalid), false, "color.semantic.text.primary");
+  assert.ok(validate.errors?.some((error) => error.keyword === "pattern"));
+
+  for (const [collection, layer, name, reference] of [
+    [
+      "spacing",
+      "semantic",
+      "control.gap",
+      "{spacing.semantic.control.vertical}",
+    ],
+    ["radius", "component", "button", "{radius.primitive.medium}"],
+    ["size", "component", "button", "{size.primitive.control}"],
+  ]) {
+    const invalid = structuredClone(example);
+    invalid.foundations[collection][layer][name] = reference;
+
+    assert.equal(validate(invalid), false, `${collection}.${layer}.${name}`);
+    assert.ok(validate.errors?.some((error) => error.keyword === "pattern"));
+  }
 });
 
 test("accepts generic icon geometry and rejects unknown icon keys", () => {
@@ -90,7 +123,7 @@ test("accepts generic icon geometry and rejects unknown icon keys", () => {
   );
 });
 
-test("keeps the icon foundation optional for definition v1 consumers", () => {
+test("keeps the icon foundation optional for definition v2 consumers", () => {
   const compatible = structuredClone(example);
   delete compatible.foundations.icon;
 

@@ -54,7 +54,7 @@ export function compileDesignSystem(definition) {
       .map((theme) => [theme, compileTheme(definition, theme)]),
   );
   const content = {
-    version: 1,
+    version: 2,
     definition: {
       schemaVersion: definition.schemaVersion,
       id: definition.id,
@@ -84,6 +84,7 @@ export function validateDefinition(definition) {
   validateTypography(definition, diagnostics);
   validateIcons(definition, diagnostics);
   validateFoundationReferenceKinds(definition, diagnostics);
+  validateComponentRecipeReferenceKinds(definition, diagnostics);
   throwCompile(diagnostics);
 }
 
@@ -357,18 +358,46 @@ function validateFoundationReferenceKinds(definition, diagnostics) {
   for (const collection of ["spacing", "radius", "size"]) {
     validateReferenceMap(
       foundations[collection]?.semantic,
-      [`${collection}.primitive`, `${collection}.semantic`],
+      [`${collection}.primitive`],
       diagnostics,
     );
     validateReferenceMap(
       foundations[collection]?.component,
-      [
-        `${collection}.primitive`,
-        `${collection}.semantic`,
-        `${collection}.component`,
-      ],
+      [`${collection}.semantic`],
       diagnostics,
     );
+  }
+}
+
+function validateComponentRecipeReferenceKinds(definition, diagnostics) {
+  visitRecipeValues(
+    definition.components ?? {},
+    "components",
+    (value, path) => {
+      if (typeof value !== "string") return;
+      const match = referencePattern.exec(value);
+      if (!match || !["color", "spacing", "radius", "size"].includes(match[1]))
+        return;
+      if (match[2] !== "component") {
+        diagnostics.push(
+          `${path} must reference ${match[1]}.component instead of ${match[1]}.${match[2]}`,
+        );
+      }
+    },
+  );
+}
+
+function visitRecipeValues(value, path, visitor) {
+  visitor(value, path);
+  if (Array.isArray(value)) {
+    value.forEach((item, index) => {
+      visitRecipeValues(item, `${path}[${index}]`, visitor);
+    });
+    return;
+  }
+  if (!isRecord(value)) return;
+  for (const [name, item] of Object.entries(value)) {
+    visitRecipeValues(item, `${path}.${name}`, visitor);
   }
 }
 
@@ -381,7 +410,6 @@ function validateReferenceMap(
   for (const [name, raw] of Object.entries(values ?? {})) {
     const candidates = themed ? Object.values(raw) : [raw];
     for (const value of candidates) {
-      if (typeof value === "number") continue;
       const match = referencePattern.exec(value);
       const prefix = match ? `${match[1]}.${match[2]}` : "";
       if (!match || !allowedPrefixes.includes(prefix)) {
