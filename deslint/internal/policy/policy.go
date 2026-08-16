@@ -1,3 +1,4 @@
+// Package policy parses and evaluates product-owned lint configuration.
 package policy
 
 import (
@@ -5,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"path/filepath"
+	"slices"
 	"sort"
 	"strings"
 	"time"
@@ -73,12 +75,7 @@ func (p Policy) IsExcluded(path string) bool {
 
 // Requires reports whether an independently acquired evidence kind is mandatory.
 func (p Policy) Requires(kind diagnostic.EvidenceKind) bool {
-	for _, required := range p.Evidence.RequiredKinds {
-		if required == string(kind) {
-			return true
-		}
-	}
-	return false
+	return slices.Contains(p.Evidence.RequiredKinds, string(kind))
 }
 
 // ApplyExceptions removes only active, exact rule/path matches.
@@ -188,20 +185,11 @@ func validate(value Policy) error {
 		if _, err := time.Parse("2006-01-02", exception.ExpiresAt); err != nil {
 			return fmt.Errorf("policy exception expiry %q is invalid", exception.ExpiresAt)
 		}
-		if !contains(expectedRules, exception.RuleID) {
+		if !slices.Contains(expectedRules, exception.RuleID) {
 			return fmt.Errorf("policy exception ruleId %q is not configurable", exception.RuleID)
 		}
 	}
 	return nil
-}
-
-func contains(values []string, expected string) bool {
-	for _, value := range values {
-		if value == expected {
-			return true
-		}
-	}
-	return false
 }
 
 func midnightUTC(value time.Time) time.Time {

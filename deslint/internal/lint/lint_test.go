@@ -33,8 +33,8 @@ func TestRunnerReportsRawSyntaxLayoutAndBudgetFailures(t *testing.T) {
 	t.Parallel()
 	request := positiveRequest(t)
 	request.Sources = []lint.Input{input(t, "../../testdata/negative/Raw.tsx")}
-	request.Pencil = pointer(input(t, "../../testdata/negative/raw.pen.json"))
-	request.Layout = pointer(input(t, "../../testdata/negative/layout.json"))
+	request.Pencil = new(input(t, "../../testdata/negative/raw.pen.json"))
+	request.Layout = new(input(t, "../../testdata/negative/layout.json"))
 	result, err := (lint.Runner{SourceAnalyzer: treesitter.NewAnalyzer()}).Run(request)
 	if err != nil {
 		t.Fatalf("Run() error = %v", err)
@@ -87,8 +87,8 @@ func positiveRequest(t *testing.T) lint.Request {
 		Definition: input(t, "../../../packages/schema/testdata/example-product.json"),
 		Policy:     productPolicy,
 		Sources:    []lint.Input{input(t, "../../testdata/positive/Example.tsx")},
-		Pencil:     pointer(input(t, "../../testdata/positive/document.pen.json")),
-		Layout:     pointer(input(t, "../../testdata/positive/layout.json")),
+		Pencil:     new(input(t, "../../testdata/positive/document.pen.json")),
+		Layout:     new(input(t, "../../testdata/positive/layout.json")),
 		Now:        time.Date(2026, 8, 16, 0, 0, 0, 0, time.UTC),
 	}
 }
@@ -98,10 +98,9 @@ func input(t *testing.T, path string) lint.Input {
 	return lint.Input{Path: path, Contents: read(t, path)}
 }
 
-func pointer(value lint.Input) *lint.Input { return &value }
-
 func read(t *testing.T, path string) []byte {
 	t.Helper()
+	// #nosec G304 -- callers provide repository-owned fixture paths.
 	contents, err := os.ReadFile(path)
 	if err != nil {
 		t.Fatal(err)

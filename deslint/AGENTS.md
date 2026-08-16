@@ -50,14 +50,16 @@ Broad ignore, 진단 후처리 삭제, 실행 오류의 pass 변환을 금지한
 Go 1.26 이상을 사용한다. Tree-sitter parser build는 CGO가 필요하다.
 
 ```bash
+go fix -diff ./...
 go fmt ./...
+go tool -modfile=golangci-lint.mod golangci-lint run
 go vet ./...
 go test ./...
 go test -race ./...
 ```
 
-변경 후 최소한 `go test ./...`와 `go vet ./...`를 실행한다. parser나 rule 변경은 관련 중립 golden
-fixture를 함께 실행한다.
+변경 후 최소한 `go fix -diff ./...`, golangci-lint, `go test ./...`와 `go vet ./...`를 실행한다. parser나
+rule 변경은 관련 중립 golden fixture를 함께 실행한다.
 
 ## Coding style
 

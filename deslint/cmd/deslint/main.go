@@ -1,3 +1,4 @@
+// Command deslint validates design-system source and evidence against a policy.
 package main
 
 import (
@@ -82,7 +83,7 @@ func lintFiles(args []string) error {
 	if err != nil {
 		return err
 	}
-	policyContents, err := os.ReadFile(*policyPath)
+	policyContents, err := readFile(*policyPath)
 	if err != nil {
 		return fmt.Errorf("read policy %s: %w", *policyPath, err)
 	}
@@ -92,11 +93,11 @@ func lintFiles(args []string) error {
 	}
 	sources := make([]lint.Input, 0, len(sourcePaths))
 	for _, path := range sourcePaths {
-		input, err := readInput(path)
-		if err != nil {
-			return err
+		sourceInput, readErr := readInput(path)
+		if readErr != nil {
+			return readErr
 		}
-		sources = append(sources, input)
+		sources = append(sources, sourceInput)
 	}
 	pencil, err := optionalInput(*pencilPath)
 	if err != nil {
@@ -133,11 +134,16 @@ func lintFiles(args []string) error {
 }
 
 func readInput(path string) (lint.Input, error) {
-	contents, err := os.ReadFile(path)
+	contents, err := readFile(path)
 	if err != nil {
 		return lint.Input{}, fmt.Errorf("read %s: %w", path, err)
 	}
 	return lint.Input{Path: filepath.ToSlash(filepath.Clean(path)), Contents: contents}, nil
+}
+
+func readFile(path string) ([]byte, error) {
+	// #nosec G304,G703 -- Reading caller-selected input paths is the purpose of this CLI.
+	return os.ReadFile(path)
 }
 
 func optionalInput(path string) (*lint.Input, error) {
@@ -162,9 +168,16 @@ func writeOutput(path string, contents []byte) error {
 		return fmt.Errorf("create report: %w", err)
 	}
 	temporaryPath := temporary.Name()
-	defer os.Remove(temporaryPath)
+	defer func() {
+		_ = os.Remove(temporaryPath)
+	}()
 	if _, err := temporary.Write(contents); err != nil {
-		temporary.Close()
+		if closeErr := temporary.Close(); closeErr != nil {
+			return errors.Join(
+				fmt.Errorf("write report: %w", err),
+				fmt.Errorf("close temporary report: %w", closeErr),
+			)
+		}
 		return fmt.Errorf("write report: %w", err)
 	}
 	if err := temporary.Close(); err != nil {
@@ -177,7 +190,7 @@ func writeOutput(path string, contents []byte) error {
 }
 
 func parseFile(path string) error {
-	contents, err := os.ReadFile(path)
+	contents, err := readFile(path)
 	if err != nil {
 		return fmt.Errorf("read %s: %w", path, err)
 	}
