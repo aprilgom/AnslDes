@@ -1,12 +1,16 @@
 # AnslDes TODO
 
+> [Repository rules](./AGENTS.md)
+
 ## 1. Product-neutral schema
 
 - [x] 제품 정의와 generic toolkit의 소유권 경계를 문서화한다.
-- [x] JSON Schema 2020-12 기반 definition v1 초안을 추가한다.
+- [x] JSON Schema 2020-12 기반 definition v2를 추가한다.
 - [x] generic example과 product-coupling negative 검사를 추가한다.
 - [x] token reference existence와 layer type을 schema/compiler 조합으로 검증한다.
 - [x] theme name과 semantic mapping의 exact-set 일치를 검증한다.
+- [x] color·spacing·radius·size의 `primitive → semantic → component` 단방향 참조를 강제한다.
+- [x] component recipe의 primitive·semantic 직접 소비와 non-primitive raw token을 거부한다.
 
 ## 2. Compiler
 
@@ -42,6 +46,14 @@
 - [ ] 제품 adapter가 versioned AnslDes release를 exact pin하게 한다.
 - [ ] 제품 source owner, consumer와 예외는 product policy에 유지한다.
 - [ ] parity와 rollback release 없이 기존 구현을 제거하지 않는다.
+
+## 6. Anti-slop gate
+
+- [ ] [Impeccable 2026과 Hallmark 기반 제품 중립 Anti-slop Gate](./docs/anti-slop/TODO.md)를 구현한다.
+- [ ] Impeccable 59개와 Hallmark eight tells의 중복 제거 결과인 63개 deterministic rule,
+      5개 LLM-only judgment의 evidence 경계를 고정한다.
+- [ ] Web, React Native와 design-document provider 결과를 서로 다른 evidence kind로 유지한다.
+- [ ] 제품 profile, owner, consumer, exception과 runtime report를 consumer policy에만 둔다.
 
 ## Completion
 

@@ -61,7 +61,10 @@ test("keeps interaction geometry and formatted selection framework-neutral", () 
   );
   assert.deepEqual(
     mapDigitSelectionThroughFormat("1234", "1,234", { start: 2, end: 4 }),
-    { start: 3, end: 5 },
+    {
+      start: 3,
+      end: 5,
+    },
   );
 });
 
@@ -99,7 +102,7 @@ test("rejects unknown themes and missing token names", () => {
   );
 });
 
-test("keeps definition v1 bundles without the optional icon group compatible", () => {
+test("keeps definition v2 bundles without the optional icon group compatible", () => {
   const withoutIcon = structuredClone(definition);
   delete withoutIcon.foundations.icon;
   const runtime = createDesignSystem(compileDesignSystem(withoutIcon));

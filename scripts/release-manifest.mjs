@@ -115,9 +115,9 @@ export async function createManifest() {
       tag: `v${rootPackage.version}`,
     },
     compatibility: {
-      definitionSchemaVersion: 1,
+      definitionSchemaVersion: 2,
       policySchemaVersion: 1,
-      compiledBundleVersion: 1,
+      compiledBundleVersion: 2,
       node: ">=22",
       go: ">=1.26.0",
       react: ">=19.0.0 <20",
@@ -153,9 +153,7 @@ async function main() {
       );
     }
   }
-  const manifestSha256 = createHash("sha256")
-    .update(expected)
-    .digest("hex");
+  const manifestSha256 = createHash("sha256").update(expected).digest("hex");
   process.stdout.write(`AnslDes release manifest: PASS ${manifestSha256}\n`);
 }
 

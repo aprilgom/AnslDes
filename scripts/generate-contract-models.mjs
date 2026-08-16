@@ -13,8 +13,8 @@ const policySchemaPath = path.join(
   root,
   "packages/schema/design-system-policy.schema.json",
 );
-const definitionSchema = await readSchema(definitionSchemaPath);
-const policySchema = await readSchema(policySchemaPath);
+const definitionSchema = await readSchema(definitionSchemaPath, 2);
+const policySchema = await readSchema(policySchemaPath, 1);
 
 const outputs = new Map([
   [
@@ -49,12 +49,14 @@ for (const [outputPath, contents] of outputs) {
   }
 }
 
-async function readSchema(schemaPath) {
+async function readSchema(schemaPath, expectedVersion) {
   const source = await readFile(schemaPath, "utf8");
   const schema = JSON.parse(source);
   const version = schema.properties?.schemaVersion?.const;
-  if (version !== 1 || typeof schema.$id !== "string") {
-    throw new Error(`${schemaPath} must declare schemaVersion const 1 and $id`);
+  if (version !== expectedVersion || typeof schema.$id !== "string") {
+    throw new Error(
+      `${schemaPath} must declare schemaVersion const ${expectedVersion} and $id`,
+    );
   }
   return {
     id: schema.$id,

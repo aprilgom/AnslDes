@@ -38,6 +38,7 @@ func TestLintDoesNotOverwriteReportWhenInputValidationFails(t *testing.T) {
 	if err == nil {
 		t.Fatal("run() error = nil")
 	}
+	// #nosec G304 -- output is a test-owned path under t.TempDir.
 	contents, readErr := os.ReadFile(output)
 	if readErr != nil {
 		t.Fatal(readErr)
@@ -85,6 +86,7 @@ func TestLintWritesPassingJSONAndFailingReports(t *testing.T) {
 
 func readReport(t *testing.T, path string) report.Report {
 	t.Helper()
+	// #nosec G304 -- callers provide test-owned fixture and temporary paths.
 	contents, err := os.ReadFile(path)
 	if err != nil {
 		t.Fatal(err)

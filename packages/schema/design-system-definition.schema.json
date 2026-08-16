@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ansldes.dev/schema/design-system-definition.v1.json",
+  "$id": "https://ansldes.dev/schema/design-system-definition.v2.json",
   "title": "AnslDes product design-system definition",
   "type": "object",
   "additionalProperties": false,
@@ -14,7 +14,7 @@
   ],
   "properties": {
     "$schema": { "type": "string" },
-    "schemaVersion": { "const": 1 },
+    "schemaVersion": { "const": 2 },
     "id": { "$ref": "#/$defs/name" },
     "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
     "themes": { "$ref": "#/$defs/themes" },
@@ -64,8 +64,8 @@
       "properties": {
         "color": { "$ref": "#/$defs/colorTokens" },
         "spacing": { "$ref": "#/$defs/spacingTokens" },
-        "radius": { "$ref": "#/$defs/numericTokens" },
-        "size": { "$ref": "#/$defs/numericTokens" },
+        "radius": { "$ref": "#/$defs/radiusTokens" },
+        "size": { "$ref": "#/$defs/sizeTokens" },
         "typography": { "$ref": "#/$defs/typographyTokens" },
         "motion": { "$ref": "#/$defs/motionTokens" },
         "elevation": { "$ref": "#/$defs/recipeTokens" },
@@ -92,13 +92,17 @@
           "additionalProperties": {
             "type": "object",
             "minProperties": 1,
-            "additionalProperties": { "$ref": "#/$defs/reference" }
+            "additionalProperties": {
+              "$ref": "#/$defs/colorPrimitiveReference"
+            }
           }
         },
         "component": {
           "type": "object",
           "minProperties": 1,
-          "additionalProperties": { "$ref": "#/$defs/reference" }
+          "additionalProperties": {
+            "$ref": "#/$defs/colorSemanticReference"
+          }
         },
         "asset": {
           "type": "object",
@@ -109,14 +113,24 @@
         }
       }
     },
-    "numericTokens": {
+    "radiusTokens": {
       "type": "object",
       "additionalProperties": false,
       "required": ["primitive", "semantic", "component"],
       "properties": {
-        "primitive": { "$ref": "#/$defs/numberMap" },
-        "semantic": { "$ref": "#/$defs/numericValueMap" },
-        "component": { "$ref": "#/$defs/numericValueMap" }
+        "primitive": { "$ref": "#/$defs/nonNegativeNumberMap" },
+        "semantic": { "$ref": "#/$defs/radiusPrimitiveReferenceMap" },
+        "component": { "$ref": "#/$defs/radiusSemanticReferenceMap" }
+      }
+    },
+    "sizeTokens": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["primitive", "semantic", "component"],
+      "properties": {
+        "primitive": { "$ref": "#/$defs/nonNegativeNumberMap" },
+        "semantic": { "$ref": "#/$defs/sizePrimitiveReferenceMap" },
+        "component": { "$ref": "#/$defs/sizeSemanticReferenceMap" }
       }
     },
     "spacingTokens": {
@@ -124,9 +138,9 @@
       "additionalProperties": false,
       "required": ["primitive", "semantic", "component"],
       "properties": {
-        "primitive": { "$ref": "#/$defs/numberMap" },
-        "semantic": { "$ref": "#/$defs/numericValueMap" },
-        "component": { "$ref": "#/$defs/signedNumericValueMap" }
+        "primitive": { "$ref": "#/$defs/signedNumberMap" },
+        "semantic": { "$ref": "#/$defs/spacingPrimitiveReferenceMap" },
+        "component": { "$ref": "#/$defs/spacingSemanticReferenceMap" }
       }
     },
     "integerTokens": {
@@ -150,31 +164,72 @@
       "minProperties": 1,
       "additionalProperties": { "type": "number", "minimum": 0 }
     },
-    "numberMap": {
-      "type": "object",
-      "additionalProperties": { "type": "number", "minimum": 0 }
-    },
-    "numericValueMap": {
+    "signedNumberMap": {
       "type": "object",
       "minProperties": 1,
-      "additionalProperties": {
-        "oneOf": [
-          { "$ref": "#/$defs/reference" },
-          { "type": "number", "minimum": 0 }
-        ]
-      }
+      "additionalProperties": { "type": "number" }
     },
-    "signedNumericValueMap": {
+    "colorPrimitiveReference": {
+      "type": "string",
+      "pattern": "^\\{color\\.primitive\\.[a-z0-9][a-z0-9._-]*\\}$"
+    },
+    "colorSemanticReference": {
+      "type": "string",
+      "pattern": "^\\{color\\.semantic\\.[a-z0-9][a-z0-9._-]*\\}$"
+    },
+    "spacingPrimitiveReferenceMap": {
       "type": "object",
       "minProperties": 1,
-      "additionalProperties": {
-        "oneOf": [{ "$ref": "#/$defs/reference" }, { "type": "number" }]
-      }
+      "additionalProperties": { "$ref": "#/$defs/spacingPrimitiveReference" }
     },
-    "referenceMap": {
+    "spacingSemanticReferenceMap": {
       "type": "object",
       "minProperties": 1,
-      "additionalProperties": { "$ref": "#/$defs/reference" }
+      "additionalProperties": { "$ref": "#/$defs/spacingSemanticReference" }
+    },
+    "spacingPrimitiveReference": {
+      "type": "string",
+      "pattern": "^\\{spacing\\.primitive\\.[a-z0-9][a-z0-9._-]*\\}$"
+    },
+    "spacingSemanticReference": {
+      "type": "string",
+      "pattern": "^\\{spacing\\.semantic\\.[a-z0-9][a-z0-9._-]*\\}$"
+    },
+    "radiusPrimitiveReferenceMap": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/radiusPrimitiveReference" }
+    },
+    "radiusSemanticReferenceMap": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/radiusSemanticReference" }
+    },
+    "radiusPrimitiveReference": {
+      "type": "string",
+      "pattern": "^\\{radius\\.primitive\\.[a-z0-9][a-z0-9._-]*\\}$"
+    },
+    "radiusSemanticReference": {
+      "type": "string",
+      "pattern": "^\\{radius\\.semantic\\.[a-z0-9][a-z0-9._-]*\\}$"
+    },
+    "sizePrimitiveReferenceMap": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/sizePrimitiveReference" }
+    },
+    "sizeSemanticReferenceMap": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/sizeSemanticReference" }
+    },
+    "sizePrimitiveReference": {
+      "type": "string",
+      "pattern": "^\\{size\\.primitive\\.[a-z0-9][a-z0-9._-]*\\}$"
+    },
+    "sizeSemanticReference": {
+      "type": "string",
+      "pattern": "^\\{size\\.semantic\\.[a-z0-9][a-z0-9._-]*\\}$"
     },
     "typographyTokens": {
       "type": "object",

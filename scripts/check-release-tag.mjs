@@ -14,7 +14,9 @@ const packageJson = JSON.parse(
 );
 
 if (manifest.release?.tag !== tag) {
-  throw new Error(`release tag ${tag} does not match manifest ${manifest.release?.tag}`);
+  throw new Error(
+    `release tag ${tag} does not match manifest ${manifest.release?.tag}`,
+  );
 }
 if (manifest.release?.version !== packageJson.version) {
   throw new Error("release manifest and root package version differ");

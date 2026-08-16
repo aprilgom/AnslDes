@@ -1,9 +1,13 @@
 export { Button, type ButtonProps } from "./Button";
 export {
+  assertButtonContract,
+  resolveButtonPresentation,
+} from "./buttonRecipe";
+export {
   DesignSystemProvider,
+  type FontWeightMode,
   useDesignSystem,
   useNativeFontWeightMode,
-  type FontWeightMode,
 } from "./context";
 export { DesignText, type DesignTextProps } from "./DesignText";
 export { Feedback, type FeedbackProps } from "./Feedback";
@@ -14,11 +18,7 @@ export {
 } from "./SelectionControl";
 export { TextField, type TextFieldProps } from "./TextField";
 export {
-  resolveNativeTextRecipe,
   type NativeFontWeight,
   type NativeTextRecipe,
+  resolveNativeTextRecipe,
 } from "./textRecipe";
-export {
-  assertButtonContract,
-  resolveButtonPresentation,
-} from "./buttonRecipe";

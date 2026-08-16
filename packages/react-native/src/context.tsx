@@ -1,6 +1,5 @@
-import { createContext, type ReactNode, useContext } from "react";
-
 import type { DesignSystemRuntime } from "@ansldes/core";
+import { createContext, type ReactNode, useContext } from "react";
 
 const DesignSystemContext = createContext<DesignSystemRuntime | null>(null);
 const FontWeightModeContext = createContext<FontWeightMode>("numeric");
