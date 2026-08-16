@@ -56,7 +56,7 @@ go build -o ./bin/deslint ./cmd/deslint
 Go toolchain을 통해 versioned release의 CLI를 설치할 수도 있다.
 
 ```bash
-go install github.com/aprilgom/AnslDes/deslint/cmd/deslint@v0.1.0
+go install github.com/aprilgom/AnslDes/deslint/cmd/deslint@v0.1.1
 deslint version
 ```
 
