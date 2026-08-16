@@ -57,8 +57,8 @@ checksum을 검증한다. tag와 제품 lock 절차는 [Release process](./docs/
 ## Status
 
 현재 schema, compiler, framework-neutral runtime, React Native 기본 anatomy와 linter bootstrap이 있다.
-AnslDes package가 versioned release되기 전까지 제품은 기존 디자인 시스템 구현을 제거하지 않고 dual-run
-migration을 사용해야 한다. 현재 `0.1.0`은 release candidate이며 아직 정식 tag가 아니다.
+제품은 기존 디자인 시스템 구현을 제거하기 전에 versioned AnslDes release를 exact pin하고 dual-run
+migration과 rollback evidence를 유지해야 한다. 첫 정식 release는 `v0.1.0`이다.
 
 - [Repository TODO](./TODO.md)
 - [Repository rules](./AGENTS.md)
