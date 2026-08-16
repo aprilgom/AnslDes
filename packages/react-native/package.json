@@ -1,6 +1,6 @@
 {
   "name": "@ansldes/react-native",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "type": "module",
   "main": "./dist/index.js",
@@ -21,7 +21,7 @@
     "build": "tsc -p tsconfig.json"
   },
   "dependencies": {
-    "@ansldes/core": "0.2.0"
+    "@ansldes/core": "0.2.1"
   },
   "peerDependencies": {
     "react": ">=19.0.0 <20",
