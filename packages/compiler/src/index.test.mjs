@@ -6,9 +6,9 @@ import path from "node:path";
 import test from "node:test";
 
 import {
-  DesignSystemCompileError,
   canonicalStringify,
   compileDesignSystem,
+  DesignSystemCompileError,
 } from "./index.mjs";
 
 const example = JSON.parse(

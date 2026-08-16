@@ -396,10 +396,7 @@ function requireMotionTransition(
   reduceMotion: boolean,
 ): ResolvedMotionTransition {
   const recipe = requireRecord(value, `motion transition ${name}`);
-  const reduced = requireRecord(
-    recipe.reducedMotion,
-    `${name}.reducedMotion`,
-  );
+  const reduced = requireRecord(recipe.reducedMotion, `${name}.reducedMotion`);
   return {
     duration: requireNumber(
       reduceMotion ? reduced.duration : recipe.duration,

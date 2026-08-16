@@ -6,11 +6,7 @@ import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
-import {
-  createManifest,
-  fingerprint,
-  serialize,
-} from "./release-manifest.mjs";
+import { createManifest, fingerprint, serialize } from "./release-manifest.mjs";
 
 test("keeps the checked-in release manifest byte-for-byte fresh", async () => {
   const expected = serialize(await createManifest());
@@ -53,7 +49,10 @@ test("accepts only the exact release tag from the manifest", () => {
 
 test("package exports support import and CommonJS-aware toolchains", async () => {
   const corePackage = JSON.parse(
-    await readFile(new URL("../packages/core/package.json", import.meta.url), "utf8"),
+    await readFile(
+      new URL("../packages/core/package.json", import.meta.url),
+      "utf8",
+    ),
   );
   const reactNativePackage = JSON.parse(
     await readFile(

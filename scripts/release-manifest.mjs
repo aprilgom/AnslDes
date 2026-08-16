@@ -153,9 +153,7 @@ async function main() {
       );
     }
   }
-  const manifestSha256 = createHash("sha256")
-    .update(expected)
-    .digest("hex");
+  const manifestSha256 = createHash("sha256").update(expected).digest("hex");
   process.stdout.write(`AnslDes release manifest: PASS ${manifestSha256}\n`);
 }
 

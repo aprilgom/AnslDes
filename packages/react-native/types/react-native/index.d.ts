@@ -82,10 +82,8 @@ declare module "react-native" {
     pressed: boolean;
   }
 
-  export interface PressableProps extends Omit<
-    ViewProps,
-    "children" | "style"
-  > {
+  export interface PressableProps
+    extends Omit<ViewProps, "children" | "style"> {
     accessibilityHint?: string;
     accessibilityLabel?: string;
     accessibilityRole?: "button" | "checkbox" | "radio";
