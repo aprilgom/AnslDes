@@ -161,6 +161,7 @@ Parser 오류, 실행 실패, stale report 또는 확보하지 못한 runtime ev
 ## 개발 및 검증
 
 ```bash
+go fix -diff ./...
 go fmt ./...
 go tool -modfile=golangci-lint.mod golangci-lint run
 go vet ./...
@@ -169,7 +170,8 @@ go test -race ./...
 ```
 
 `golangci-lint`는 전용 module file에 고정되어 애플리케이션 의존성과 분리된다. 저장소 루트에서는
-`npm run lint:deslint`로 같은 검사를 실행한다.
+`npm run lint:deslint`로 같은 검사를 실행한다. `go fix` 제안을 적용하려면 `npm run fix:deslint`, 소스를
+변경하지 않고 최신화 여부만 검사하려면 `npm run fix:deslint:check`를 사용한다.
 
 parser나 rule을 변경할 때는 관련 중립 fixture와 우회 fixture를 함께 검증해야 한다. Map iteration이나
 filesystem 순서가 report 결과에 영향을 주지 않도록 모든 외부 출력의 정렬 기준을 명시한다.
