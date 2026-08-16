@@ -41,6 +41,12 @@ AnslDes가 소유하는 것:
 자세한 경계는 [Architecture](./docs/architecture.md)와
 [Product boundary](./docs/product-boundary.md)를 참고한다.
 
+## Anti-slop roadmap
+
+Impeccable 2026의 결정론적 detector를 제품 중립 `deslint` evidence·rule provider로 수용하는 계획은
+[Anti-slop Gate TODO](./docs/anti-slop/TODO.md)에서 관리한다. AnslDes는 generic registry와 provider
+계약만 소유하며 실제 제품 화면의 baseline, owner, exception과 통과 report는 소비 저장소에 남긴다.
+
 ## Commands
 
 ```bash
@@ -61,4 +67,5 @@ checksum을 검증한다. tag와 제품 lock 절차는 [Release process](./docs/
 migration과 rollback evidence를 유지해야 한다. 첫 정식 release는 `v0.1.0`이다.
 
 - [Repository TODO](./TODO.md)
+- [Anti-slop Gate TODO](./docs/anti-slop/TODO.md)
 - [Repository rules](./AGENTS.md)

@@ -43,6 +43,13 @@
 - [ ] 제품 source owner, consumer와 예외는 product policy에 유지한다.
 - [ ] parity와 rollback release 없이 기존 구현을 제거하지 않는다.
 
+## 6. Anti-slop gate
+
+- [ ] [Impeccable 2026 기반 제품 중립 Anti-slop Gate](./docs/anti-slop/TODO.md)를 구현한다.
+- [ ] 59개 deterministic rule과 5개 LLM-only judgment의 evidence 경계를 고정한다.
+- [ ] Web, React Native와 design-document provider 결과를 서로 다른 evidence kind로 유지한다.
+- [ ] 제품 profile, owner, consumer, exception과 runtime report를 consumer policy에만 둔다.
+
 ## Completion
 
 - [ ] AnslDes generic source에 제품 이름·경로·브랜드 값이 없다.
