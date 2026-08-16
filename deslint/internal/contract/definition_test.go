@@ -1,6 +1,7 @@
 package contract_test
 
 import (
+	"encoding/json"
 	"os"
 	"strings"
 	"testing"
@@ -9,6 +10,41 @@ import (
 	"github.com/aprilgom/AnslDes/deslint/internal/diagnostic"
 	"github.com/aprilgom/AnslDes/deslint/internal/rules"
 )
+
+func TestAnalyzeDefinitionAllowsOptionalIconAndRejectsUnknownFoundation(t *testing.T) {
+	t.Parallel()
+	severity := func(string) diagnostic.Severity { return diagnostic.SeverityError }
+	var definition map[string]any
+	if err := json.Unmarshal(readDefinition(t), &definition); err != nil {
+		t.Fatal(err)
+	}
+	foundations := definition["foundations"].(map[string]any)
+	delete(foundations, "icon")
+	withoutIcon, err := json.Marshal(definition)
+	if err != nil {
+		t.Fatal(err)
+	}
+	analysis, err := contract.Analyze("definition.json", withoutIcon, severity)
+	if err != nil {
+		t.Fatalf("Analyze(withoutIcon) error = %v", err)
+	}
+	if len(analysis.Diagnostics) != 0 {
+		t.Fatalf("Analyze(withoutIcon) = %#v", analysis)
+	}
+
+	foundations["unknown-foundation"] = map[string]any{}
+	unknown, err := json.Marshal(definition)
+	if err != nil {
+		t.Fatal(err)
+	}
+	analysis, err = contract.Analyze("definition.json", unknown, severity)
+	if err != nil {
+		t.Fatalf("Analyze(unknownFoundation) error = %v", err)
+	}
+	if !hasRule(analysis.Diagnostics, rules.RuleDefinitionSchemaVersion) {
+		t.Fatalf("unknown foundation diagnostics = %#v", analysis.Diagnostics)
+	}
+}
 
 func TestAnalyzeDefinitionReferences(t *testing.T) {
 	t.Parallel()
