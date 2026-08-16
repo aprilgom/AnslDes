@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.1 - 2026-08-16
+
+- Go `deslint`가 definition v1의 optional `foundations.icon`을 TypeScript schema와 동일하게 허용하도록 수정했다.
+- icon이 없는 기존 definition의 하위 호환과 알 수 없는 foundation 거부를 회귀 테스트로 고정했다.
+
 ## 0.2.0 - 2026-08-16
 
 - definition v1에 optional generic icon geometry·usage·action group을 추가했다.

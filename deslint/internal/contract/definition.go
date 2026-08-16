@@ -59,7 +59,14 @@ func Analyze(path string, contents []byte, severity func(string) diagnostic.Seve
 	if !ok {
 		diagnostics = append(diagnostics, schemaDiagnostic(path, severity, "foundations must be an object"))
 	} else {
-		validateExactKeys(foundations, []string{"color", "spacing", "radius", "size", "typography", "motion", "elevation", "layer"}, path, severity, &diagnostics)
+		validateExactKeysWithOptional(
+			foundations,
+			[]string{"color", "spacing", "radius", "size", "typography", "motion", "elevation", "layer"},
+			[]string{"icon"},
+			path,
+			severity,
+			&diagnostics,
+		)
 	}
 	if components, ok := object(root["components"]); !ok || len(components) == 0 {
 		diagnostics = append(diagnostics, schemaDiagnostic(path, severity, "components must be a non-empty object"))
@@ -162,6 +169,17 @@ func referenceRegistry(foundations map[string]any) map[string]struct{} {
 }
 
 func validateExactKeys(value map[string]any, allowed []string, path string, severity func(string) diagnostic.Severity, diagnostics *[]diagnostic.Diagnostic) {
+	required := make([]string, 0, len(allowed))
+	for _, key := range allowed {
+		if key != "$schema" {
+			required = append(required, key)
+		}
+	}
+	validateExactKeysWithOptional(value, required, []string{"$schema"}, path, severity, diagnostics)
+}
+
+func validateExactKeysWithOptional(value map[string]any, required []string, optional []string, path string, severity func(string) diagnostic.Severity, diagnostics *[]diagnostic.Diagnostic) {
+	allowed := append(append([]string{}, required...), optional...)
 	allowedSet := make(map[string]bool, len(allowed))
 	for _, key := range allowed {
 		allowedSet[key] = true
@@ -171,10 +189,7 @@ func validateExactKeys(value map[string]any, allowed []string, path string, seve
 			*diagnostics = append(*diagnostics, schemaDiagnostic(path, severity, "unknown key "+key))
 		}
 	}
-	for _, key := range allowed {
-		if key == "$schema" {
-			continue
-		}
+	for _, key := range required {
 		if _, exists := value[key]; !exists {
 			*diagnostics = append(*diagnostics, schemaDiagnostic(path, severity, "missing key "+key))
 		}
