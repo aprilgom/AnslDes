@@ -54,7 +54,7 @@ npm install
 npm run check
 ```
 
-`npm run check`는 generic schema fixture, 제품 결합 방지 검사와 `deslint` Go test/vet을 실행한다.
+`npm run check`는 generic schema fixture, 제품 결합 방지 검사와 `deslint` golangci-lint/test/vet을 실행한다.
 
 릴리스 후보는 `npm run release:check`로
 [`release/ansldes-release.json`](./release/ansldes-release.json)의 package version과 source artifact

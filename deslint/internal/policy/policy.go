@@ -1,3 +1,4 @@
+// Package policy parses and evaluates product-owned lint configuration.
 package policy
 
 import (

@@ -102,6 +102,7 @@ func pointer(value lint.Input) *lint.Input { return &value }
 
 func read(t *testing.T, path string) []byte {
 	t.Helper()
+	// #nosec G304 -- callers provide repository-owned fixture paths.
 	contents, err := os.ReadFile(path)
 	if err != nil {
 		t.Fatal(err)

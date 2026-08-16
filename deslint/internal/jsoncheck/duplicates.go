@@ -40,9 +40,9 @@ func decodeValue(decoder *json.Decoder, path string, duplicates *[]string) error
 	case '{':
 		seen := make(map[string]struct{})
 		for decoder.More() {
-			keyToken, err := decoder.Token()
-			if err != nil {
-				return err
+			keyToken, tokenErr := decoder.Token()
+			if tokenErr != nil {
+				return tokenErr
 			}
 			key, ok := keyToken.(string)
 			if !ok {
@@ -53,8 +53,8 @@ func decodeValue(decoder *json.Decoder, path string, duplicates *[]string) error
 				*duplicates = append(*duplicates, childPath)
 			}
 			seen[key] = struct{}{}
-			if err := decodeValue(decoder, childPath, duplicates); err != nil {
-				return err
+			if decodeErr := decodeValue(decoder, childPath, duplicates); decodeErr != nil {
+				return decodeErr
 			}
 		}
 		_, err = decoder.Token()
@@ -62,8 +62,8 @@ func decodeValue(decoder *json.Decoder, path string, duplicates *[]string) error
 	case '[':
 		index := 0
 		for decoder.More() {
-			if err := decodeValue(decoder, fmt.Sprintf("%s[%d]", path, index), duplicates); err != nil {
-				return err
+			if decodeErr := decodeValue(decoder, fmt.Sprintf("%s[%d]", path, index), duplicates); decodeErr != nil {
+				return decodeErr
 			}
 			index++
 		}
