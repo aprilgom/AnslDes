@@ -17,6 +17,7 @@
 - [ ] 화면/root/node id, reviewer, date, before/after 또는 screenshot을 기록한다.
 - [ ] 판단의 사용자 영향과 consumer-specific 대안을 기록한다.
 - [ ] radius contract, asset registry, repeated structure처럼 결정론화 가능한 보조 규칙을 연결한다.
+- [ ] `Hero metric layout`의 시각적 적합성 판단과 `unverified-social-proof`의 출처 검증을 구분한다.
 - [ ] “LLM이 문제없다고 했다”는 단독 완료 증거로 인정하지 않는다.
 - [ ] P3 취향 finding을 과다 생성하지 않고 systemic P1/P2를 우선한다.
 
@@ -29,5 +30,6 @@
 
 - [59개 deterministic registry](../references/impeccable-detector-2026/upstream/cli/engine/registry/antipatterns.mjs)
 - [snapshot usage boundary](../references/impeccable-detector-2026/README.md#usage-boundary)
+- [Hallmark source mapping](../references/hallmark-eight-tells-2026/README.md)
 
 이 문서의 다섯 판단은 registry 밖에 있으므로 detector 통과 결과로 대체하지 않는다.

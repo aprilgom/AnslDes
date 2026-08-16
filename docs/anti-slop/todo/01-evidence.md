@@ -10,6 +10,7 @@ contract로 정의한다.
 - [ ] Web source, Web rendered, native source, design-document computed, simulator/emulator, physical device evidence를 구분한다.
 - [ ] detector finding과 실행 실패를 각각 exit code 2와 1로 보존한다.
 - [ ] deterministic finding과 visual judgment를 별도 report field로 저장한다.
+- [ ] canonical rule ID와 Impeccable/Hallmark source catalog ID를 분리해 저장하고 중복 finding을 병합한다.
 - [ ] false positive는 실제 문맥을 검증한 뒤에만 exact owner fingerprint로 분류한다.
 - [ ] audit finding마다 P0–P3, 위치, 사용자 영향, 기준, 수정 방향과 owner를 기록한다.
 - [ ] systemic issue와 isolated defect를 분리하고 positive finding도 보존한다.
@@ -35,3 +36,4 @@ AnslDes는 `operate`, `read`, `browse`, `create` 같은 consumer profile의 sche
 - [snapshot provenance](../references/impeccable-detector-2026/README.md)
 - [finding model](../references/impeccable-detector-2026/upstream/cli/engine/findings.mjs)
 - [rule registry와 engine support](../references/impeccable-detector-2026/upstream/cli/engine/registry/antipatterns.mjs)
+- [Hallmark source mapping](../references/hallmark-eight-tells-2026/README.md)

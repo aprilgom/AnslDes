@@ -43,7 +43,7 @@ AnslDes가 소유하는 것:
 
 ## Anti-slop roadmap
 
-Impeccable 2026의 결정론적 detector를 제품 중립 `deslint` evidence·rule provider로 수용하는 계획은
+Impeccable 2026 detector와 Hallmark의 eight tells를 제품 중립 `deslint` evidence·rule provider로 수용하는 계획은
 [Anti-slop Gate TODO](./docs/anti-slop/TODO.md)에서 관리한다. AnslDes는 generic registry와 provider
 계약만 소유하며 실제 제품 화면의 baseline, owner, exception과 통과 report는 소비 저장소에 남긴다.
 

@@ -19,7 +19,7 @@
 
 ## 운영
 
-- [ ] Impeccable version, rule drift와 exception을 90일 governance review에 포함한다.
+- [ ] Impeccable version, Hallmark pinned commit, rule/mapping drift와 exception을 90일 governance review에 포함한다.
 - [ ] 신규 rule은 owner와 migration plan을 지정한 후 활성화한다.
 
 ## 완료 조건
@@ -32,3 +32,4 @@
 - [snapshot provenance와 update policy](../references/impeccable-detector-2026/README.md)
 - [inline ignore 구현](../references/impeccable-detector-2026/upstream/cli/engine/shared/inline-ignores.mjs)
 - [CLI config·exit behavior](../references/impeccable-detector-2026/upstream/cli/engine/cli/main.mjs)
+- [Hallmark provenance와 update policy](../references/hallmark-eight-tells-2026/README.md)

@@ -1,11 +1,12 @@
-# Anti-slop Gate — Impeccable 2026
+# Anti-slop Gate — Impeccable 2026 + Hallmark eight tells
 
 > [AnslDes README](../../README.md) · [Repository TODO](../../TODO.md) · [Product boundary](../product-boundary.md)
 
-Impeccable 2026 catalog와 고정된 결정론적 detector source를 AnslDes의 제품 중립 lint·evidence
-계약으로 수용한다. AnslDes는 rule 의미, evidence schema, platform provider interface, diagnostic과
-governance를 소유한다. 실제 화면, token 값, 브랜드 identity, source owner·consumer, exception과
-통과 보고서는 각 소비 저장소가 소유한다.
+Impeccable 2026 catalog의 고정된 결정론적 detector source와 Hallmark의 eight tells를 AnslDes의
+제품 중립 lint·evidence 계약으로 수용한다. AnslDes는 rule 의미, upstream mapping, evidence schema,
+platform provider interface, diagnostic과 governance를 소유한다. 실제 화면, token 값, 브랜드
+identity, source owner·consumer, content provenance, exception과 통과 보고서는 각 소비 저장소가
+소유한다.
 
 ## 기준
 
@@ -16,10 +17,17 @@ governance를 소유한다. 실제 화면, token 값, 브랜드 identity, source
 - 공식 catalog: [Impeccable Slop](https://impeccable.style/slop/)
 - 공식 detector: [Detector CLI](https://impeccable.style/docs/detector/)
 - 공식 source: [pbakaus/impeccable](https://github.com/pbakaus/impeccable)
+- Hallmark eight tells: source rule 8개, 기존 Impeccable mapping 4개, unique supplement 4개
+- Hallmark pinned commit: `13ac0ec7e148655948100b6396439e481361d690`
+- Hallmark provenance와 mapping: [Hallmark eight tells reference](./references/hallmark-eight-tells-2026/README.md)
+- canonical deterministic registry 목표: 중복 제거된 63개 rule
 
 결정론적 기준의 source of truth는 vendored
 [rule registry](./references/impeccable-detector-2026/upstream/cli/engine/registry/antipatterns.mjs)와
 [rule implementation](./references/impeccable-detector-2026/upstream/cli/engine/rules/checks.mjs)이다.
+Hallmark source의 source of truth와 canonical mapping은
+[Hallmark eight tells reference](./references/hallmark-eight-tells-2026/README.md)에 고정한다.
+동일한 의도의 source rule은 별도 finding을 중복 생성하지 않고 한 canonical rule에 provenance를 병합한다.
 Web detector 결과는 React Native, Pencil 또는 실기기 runtime 증거의 대체물이 아니다.
 
 ## 실행 순서
@@ -59,3 +67,4 @@ Web detector 결과는 React Native, Pencil 또는 실기기 runtime 증거의 �
 - [Product boundary](../product-boundary.md)
 - [deslint architecture](../../deslint/docs/architecture.md)
 - [Pinned detector snapshot](./references/impeccable-detector-2026/README.md)
+- [Pinned Hallmark eight tells](./references/hallmark-eight-tells-2026/README.md)

@@ -2,13 +2,16 @@
 
 > 이전: [Native conformance](./13-native.md) · [Anti-slop 인덱스](../TODO.md) · 다음: [Native와 design-document provider](./15-native-pencil-provider.md)
 
-## Upstream snapshot
+## Upstream catalog와 snapshot
 
 - [ ] detector package를 exact version과 integrity로 고정한다.
 - [ ] 59개 rule id, category, scope와 advisory metadata를 machine registry로 저장한다.
 - [ ] vendored detector commit과 snapshot tree fingerprint를 저장한다.
 - [ ] 공식 LLM-only 5개 이름, URL과 snapshot date를 저장한다.
-- [ ] upstream update는 registry·implementation diff와 migration note 없이는 통과하지 못하게 한다.
+- [ ] Hallmark pinned commit의 source 8개와 canonical mapping exact set을 저장한다.
+- [ ] Hallmark와 Impeccable 중복 4개를 하나의 diagnostic으로 canonicalize한다.
+- [ ] canonical deterministic registry가 exact 63개인지 검사한다.
+- [ ] upstream update는 registry·implementation·mapping diff와 migration note 없이는 통과하지 못하게 한다.
 
 ## Web provider
 
@@ -37,3 +40,4 @@
 - [regex source engine](../references/impeccable-detector-2026/upstream/cli/engine/engines/regex/detect-text.mjs)
 - [static HTML engine](../references/impeccable-detector-2026/upstream/cli/engine/engines/static-html/detect-html.mjs)
 - [browser engine](../references/impeccable-detector-2026/upstream/cli/engine/engines/browser/detect-url.mjs)
+- [Hallmark eight tells provenance와 mapping](../references/hallmark-eight-tells-2026/README.md)

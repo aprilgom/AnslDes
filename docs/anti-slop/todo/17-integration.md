@@ -6,14 +6,15 @@
 
 - [ ] source, rendered Web, native/design-document provider와 LLM review evidence stage를 추가한다.
 - [ ] blocking/advisory/exception/not-run/deferred budget schema를 추가한다.
-- [ ] vendored detector snapshot과 anti-slop contract를 release dependency fingerprint에 포함한다.
+- [ ] vendored detector snapshot, Hallmark source fingerprint와 anti-slop contract를 release dependency fingerprint에 포함한다.
 - [ ] anti-slop stage가 빠지거나 report가 stale하면 실패하는 중립 fixture를 추가한다.
 - [ ] 실패를 rule id, engine, platform, viewport와 injected owner에 귀속한다.
 - [ ] `deslint` text, JSON과 SARIF가 같은 정렬·severity·location을 출력한다.
 
 ## 완료 감사
 
-- [ ] deterministic registry exact 59, LLM judgment exact 5다.
+- [ ] Impeccable source registry exact 59, Hallmark source catalog exact 8, 중복 제거된 canonical
+      deterministic registry exact 63, LLM judgment exact 5다.
 - [ ] Web source/rendered와 native/design-document evidence가 report에서 분리된다.
 - [ ] neutral fixtures의 blocking finding 0, execution error 0, expired exception 0이다.
 - [ ] advisory는 0 또는 승인 review record를 가진다.
@@ -44,3 +45,4 @@
 - [pinned detector snapshot](../references/impeccable-detector-2026/README.md)
 - [CLI entry](../references/impeccable-detector-2026/upstream/cli/engine/cli/main.mjs)
 - [rule registry](../references/impeccable-detector-2026/upstream/cli/engine/registry/antipatterns.mjs)
+- [Hallmark eight tells mapping](../references/hallmark-eight-tells-2026/README.md)

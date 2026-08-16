@@ -4,7 +4,8 @@
 
 ## Mapping
 
-- [ ] 59개 rule 각각에 Web-only, shared-intent, native supplement, design-document-computed 적용 상태를 기록한다.
+- [ ] canonical 63개 rule 각각에 Web-only, shared-intent, native supplement,
+      design-document-computed 적용 상태를 기록한다.
 - [ ] unsupported rule은 이유와 대체 evidence를 가진다.
 - [ ] 기존 color/layout/motion/icon/typography/UX lint는 중복 구현하지 않고 dependency로 연결한다.
 
@@ -13,6 +14,7 @@
 - [ ] side-tab과 rounded accent border structural lint를 추가한다.
 - [ ] nested card와 separate accessory tile depth lint를 추가한다.
 - [ ] icon-tile-above-heading과 decorative status dot을 검사한다.
+- [ ] equal icon feature columns와 full-viewport centered composition을 platform evidence별로 검사한다.
 - [ ] decorative glow/grid/stripe와 repeated container copy를 검사한다.
 - [ ] design-document visitor에서 surface depth, heading adjacency, overflow/overlap과 token owner를 검사한다.
 - [ ] React Native source provider에서 justify, raw animation과 hidden-at-rest 패턴을 검사한다.
@@ -33,3 +35,4 @@
 - [rule registry](../references/impeccable-detector-2026/upstream/cli/engine/registry/antipatterns.mjs)
 - [판정 구현](../references/impeccable-detector-2026/upstream/cli/engine/rules/checks.mjs)
 - [snapshot usage boundary](../references/impeccable-detector-2026/README.md#usage-boundary)
+- [Hallmark source mapping](../references/hallmark-eight-tells-2026/README.md)

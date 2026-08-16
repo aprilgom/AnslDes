@@ -22,6 +22,7 @@
 ## Consumer-policy 해석
 
 - [ ] 단일 family 자체를 실패시키지 않고 역할·크기·weight·line-height 결합을 판단한다.
+- [ ] Hallmark의 Inter/Roboto display+body 결합 predicate를 `overused-font` provenance로 보존한다.
 - [ ] consumer가 선언한 heading, body, label과 metadata semantic order를 재사용한다.
 - [ ] display, guide, legal copy와 task flow의 type-scale 정책을 분리한다.
 - [ ] consumer가 지원하는 font-scale matrix에서 hierarchy가 보존되는지 report에 연결한다.
@@ -36,3 +37,4 @@
 - [typography 판정 구현](../references/impeccable-detector-2026/upstream/cli/engine/rules/checks.mjs)
 - [font helpers](../references/impeccable-detector-2026/upstream/cli/engine/shared/fonts.mjs)
 - [rule registry](../references/impeccable-detector-2026/upstream/cli/engine/registry/antipatterns.mjs)
+- [Hallmark eight tells mapping](../references/hallmark-eight-tells-2026/README.md)

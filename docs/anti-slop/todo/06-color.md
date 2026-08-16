@@ -12,6 +12,7 @@
 - [ ] `radial-spotlight-glow`: low-opacity decorative radial spotlight를 검출한다.
 - [ ] `gray-on-color`: chromatic surface 위 neutral gray text를 검출한다.
 - [ ] `low-contrast`: body 4.5:1, large text 3:1 기준을 검사한다.
+- [ ] `pure-extreme-surface`: 순수 black/white가 page 또는 component surface로 사용되는지 검사한다.
 
 ## Consumer-policy 해석
 
@@ -19,10 +20,11 @@
 - [ ] Hero/brand/asset exception도 text contrast는 면제하지 않는다.
 - [ ] neutral elevation shadow와 decorative colored glow를 구분한다.
 - [ ] 각 지원 theme의 screenshot과 computed color evidence를 별도로 저장한다.
+- [ ] text와 monochrome asset은 surface finding에서 제외하고 매체 예외는 exact owner를 요구한다.
 
 ## 완료 조건
 
-- [ ] 여덟 rule의 literal, token, computed-color fixture가 통과한다.
+- [ ] 아홉 rule의 literal, token, computed-color fixture가 통과한다.
 - [ ] palette 판단은 hue 문자열만이 아니라 승인 palette와 사용 문맥을 확인한다.
 
 ## 결정론적 코드 기준
@@ -31,3 +33,4 @@
 - [색 파싱·휘도·contrast 계산](../references/impeccable-detector-2026/upstream/cli/engine/shared/color.mjs)
 - [static CSS cascade](../references/impeccable-detector-2026/upstream/cli/engine/engines/static-html/css-cascade.mjs)
 - [screenshot contrast](../references/impeccable-detector-2026/upstream/cli/engine/engines/visual/screenshot-contrast.mjs)
+- [Hallmark eight tells mapping](../references/hallmark-eight-tells-2026/README.md)
