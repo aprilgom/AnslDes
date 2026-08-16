@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ansldes.dev/schema/design-system-policy.v1.json",
+  "title": "AnslDes product lint policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "definitionId",
+    "severities",
+    "source",
+    "evidence",
+    "budgets",
+    "exceptions"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "definitionId": { "$ref": "#/$defs/name" },
+    "severities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "definition/schema-version",
+        "definition/invalid-reference",
+        "definition/unknown-token",
+        "source/syntax-error",
+        "source/raw-value",
+        "pencil/raw-value",
+        "layout/problem",
+        "evidence/missing",
+        "evidence/stale"
+      ],
+      "properties": {
+        "definition/schema-version": { "$ref": "#/$defs/severity" },
+        "definition/invalid-reference": { "$ref": "#/$defs/severity" },
+        "definition/unknown-token": { "$ref": "#/$defs/severity" },
+        "source/syntax-error": { "$ref": "#/$defs/severity" },
+        "source/raw-value": { "$ref": "#/$defs/severity" },
+        "pencil/raw-value": { "$ref": "#/$defs/severity" },
+        "layout/problem": { "$ref": "#/$defs/severity" },
+        "evidence/missing": { "$ref": "#/$defs/severity" },
+        "evidence/stale": { "$ref": "#/$defs/severity" }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rawProperties", "exactExcludes"],
+      "properties": {
+        "rawProperties": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["color", "number", "motion"],
+          "properties": {
+            "color": { "$ref": "#/$defs/names" },
+            "number": { "$ref": "#/$defs/names" },
+            "motion": { "$ref": "#/$defs/names" }
+          }
+        },
+        "exactExcludes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requiredKinds"],
+      "properties": {
+        "requiredKinds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": ["definition", "source", "pencil", "computed-layout"]
+          }
+        },
+        "layoutDocumentSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "budgets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["error", "warning", "raw", "overflow", "overlap"],
+      "properties": {
+        "error": { "type": "integer", "minimum": 0 },
+        "warning": { "type": "integer", "minimum": 0 },
+        "raw": { "type": "integer", "minimum": 0 },
+        "overflow": { "type": "integer", "minimum": 0 },
+        "overlap": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "exceptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["ruleId", "path", "owner", "rationale", "expiresAt"],
+        "properties": {
+          "ruleId": { "type": "string", "minLength": 1 },
+          "path": { "type": "string", "minLength": 1 },
+          "owner": { "type": "string", "minLength": 1 },
+          "rationale": { "type": "string", "minLength": 8 },
+          "expiresAt": {
+            "type": "string",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
+    },
+    "names": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "severity": { "enum": ["error", "warning"] }
+  }
+}

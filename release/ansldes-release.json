@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "release": {
+    "version": "0.1.0",
+    "tag": "v0.1.0"
+  },
+  "compatibility": {
+    "definitionSchemaVersion": 1,
+    "policySchemaVersion": 1,
+    "compiledBundleVersion": 1,
+    "node": ">=22",
+    "go": ">=1.26.0",
+    "react": ">=19.0.0 <20",
+    "reactNative": ">=0.85.0 <0.86"
+  },
+  "packages": {
+    "schema": {
+      "name": "@ansldes/schema",
+      "version": "0.1.0"
+    },
+    "compiler": {
+      "name": "@ansldes/compiler",
+      "version": "0.1.0"
+    },
+    "core": {
+      "name": "@ansldes/core",
+      "version": "0.1.0"
+    },
+    "reactNative": {
+      "name": "@ansldes/react-native",
+      "version": "0.1.0"
+    }
+  },
+  "deslint": {
+    "module": "github.com/aprilgom/AnslDes/deslint",
+    "version": "0.1.0",
+    "releaseVersionLinkerFlag": "-X main.version=0.1.0"
+  },
+  "artifacts": {
+    "schema": {
+      "fileCount": 8,
+      "sha256": "fb8c4ba0b4ce0632de408af7b82296117d646b3ed70819bc6e1a63656d7e6d42"
+    },
+    "compiler": {
+      "fileCount": 5,
+      "sha256": "b9082a7cb79115ffd6cb5f4bfe1d2aaf4d97c8a0f41dca71e066fcca4b35ec5a"
+    },
+    "core": {
+      "fileCount": 5,
+      "sha256": "42491016b85cd89b6aca82fbbaf13b28da93798cf6971ac82ae598cbc71e1b5b"
+    },
+    "reactNative": {
+      "fileCount": 19,
+      "sha256": "5e65fa1a9934722617fc7e5d37aae22f03546a9e286f7777ef5ef80f3276a971"
+    },
+    "deslint": {
+      "fileCount": 23,
+      "sha256": "caacef912145957824b39195ea62fc00aa32894cda646ed6e00a770c98254cfb"
+    }
+  }
+}

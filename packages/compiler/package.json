@@ -1,0 +1,16 @@
+{
+  "name": "@ansldes/compiler",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "ansldes-compile": "./src/cli.mjs"
+  },
+  "exports": {
+    ".": "./src/index.mjs"
+  },
+  "dependencies": {
+    "@ansldes/schema": "0.1.0",
+    "ajv": "8.20.0"
+  }
+}

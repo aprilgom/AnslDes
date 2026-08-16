@@ -1,0 +1,36 @@
+{
+  "$schema": "../design-system-policy.schema.json",
+  "schemaVersion": 1,
+  "definitionId": "example-product",
+  "severities": {
+    "definition/schema-version": "error",
+    "definition/invalid-reference": "error",
+    "definition/unknown-token": "error",
+    "source/syntax-error": "error",
+    "source/raw-value": "error",
+    "pencil/raw-value": "warning",
+    "layout/problem": "error",
+    "evidence/missing": "error",
+    "evidence/stale": "error"
+  },
+  "source": {
+    "rawProperties": {
+      "color": ["backgroundColor", "borderColor", "color", "fill"],
+      "number": ["borderRadius", "gap", "padding"],
+      "motion": ["duration"]
+    },
+    "exactExcludes": []
+  },
+  "evidence": {
+    "requiredKinds": ["definition", "source", "pencil", "computed-layout"],
+    "layoutDocumentSha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "budgets": {
+    "error": 0,
+    "warning": 0,
+    "raw": 0,
+    "overflow": 0,
+    "overlap": 0
+  },
+  "exceptions": []
+}

@@ -1,0 +1,18 @@
+{
+  "name": "@ansldes/schema",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./design-system-definition.schema.json": "./design-system-definition.schema.json",
+    "./design-system-policy.schema.json": "./design-system-policy.schema.json",
+    "./generated/design-system-definition": "./generated/design-system-definition.ts",
+    "./generated/design-system-policy": "./generated/design-system-policy.ts"
+  },
+  "files": [
+    "design-system-definition.schema.json",
+    "design-system-policy.schema.json",
+    "generated",
+    "README.md"
+  ]
+}

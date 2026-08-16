@@ -1,0 +1,322 @@
+{
+  "$schema": "../design-system-definition.schema.json",
+  "schemaVersion": 1,
+  "id": "example-product",
+  "version": "1.0.0",
+  "themes": {
+    "names": ["light", "dark"],
+    "default": "light"
+  },
+  "foundations": {
+    "color": {
+      "primitive": {
+        "neutral.0": "#FFFFFF",
+        "neutral.900": "#18202A",
+        "accent.500": "#4263EB"
+      },
+      "semantic": {
+        "text.primary": {
+          "light": "{color.primitive.neutral.900}",
+          "dark": "{color.primitive.neutral.0}"
+        },
+        "action.primary": {
+          "light": "{color.primitive.accent.500}",
+          "dark": "{color.primitive.accent.500}"
+        },
+        "action.primary-pressed": {
+          "light": "{color.primitive.neutral.900}",
+          "dark": "{color.primitive.neutral.0}"
+        },
+        "surface.disabled": {
+          "light": "{color.primitive.neutral.0}",
+          "dark": "{color.primitive.neutral.900}"
+        },
+        "text.disabled": {
+          "light": "{color.primitive.neutral.900}",
+          "dark": "{color.primitive.neutral.0}"
+        },
+        "text.secondary": {
+          "light": "{color.primitive.neutral.900}",
+          "dark": "{color.primitive.neutral.0}"
+        },
+        "surface.field": {
+          "light": "{color.primitive.neutral.0}",
+          "dark": "{color.primitive.neutral.900}"
+        },
+        "surface.subtle": {
+          "light": "{color.primitive.neutral.0}",
+          "dark": "{color.primitive.neutral.900}"
+        },
+        "border.default": {
+          "light": "{color.primitive.neutral.900}",
+          "dark": "{color.primitive.neutral.0}"
+        },
+        "status.danger": {
+          "light": "{color.primitive.neutral.900}",
+          "dark": "{color.primitive.neutral.0}"
+        },
+        "border.focus": {
+          "light": "{color.primitive.accent.500}",
+          "dark": "{color.primitive.accent.500}"
+        },
+        "border.transparent": {
+          "light": "{color.primitive.neutral.0}",
+          "dark": "{color.primitive.neutral.900}"
+        }
+      },
+      "component": {
+        "button.primary.container": "{color.semantic.action.primary}",
+        "button.primary.label": "{color.semantic.text.primary}",
+        "button.disabled.container": "{color.semantic.surface.disabled}",
+        "button.disabled.label": "{color.semantic.text.disabled}"
+      },
+      "asset": {}
+    },
+    "spacing": {
+      "primitive": { "0": 0, "2": 8, "4": 16 },
+      "semantic": {
+        "control.gap": "{spacing.primitive.2}",
+        "control.vertical": "{spacing.primitive.2}"
+      },
+      "component": {
+        "button.horizontal": "{spacing.primitive.4}",
+        "control.horizontal": "{spacing.primitive.4}"
+      }
+    },
+    "radius": {
+      "primitive": { "none": 0, "medium": 12 },
+      "semantic": { "control": "{radius.primitive.medium}" },
+      "component": {
+        "button": "{radius.semantic.control}",
+        "control": "{radius.semantic.control}",
+        "surface": "{radius.semantic.control}"
+      }
+    },
+    "size": {
+      "primitive": { "touch-target": 44, "control": 52 },
+      "semantic": { "control.minimum": "{size.primitive.touch-target}" },
+      "component": {
+        "button.medium": "{size.primitive.control}",
+        "control.medium": "{size.primitive.control}",
+        "list.two-line": "{size.primitive.control}"
+      }
+    },
+    "typography": {
+      "familyName": "Example Sans",
+      "weights": {
+        "regular": { "fontFamily": "ExampleSans-Regular", "fontWeight": 400 },
+        "bold": { "fontFamily": "ExampleSans-Bold", "fontWeight": 700 }
+      },
+      "tokens": {
+        "body.medium": {
+          "fontSize": 16,
+          "lineHeight": 24,
+          "maxFontSizeMultiplier": 2.35,
+          "allowedWeights": ["regular", "bold"],
+          "category": "core",
+          "functionalTextAllowed": true
+        }
+      },
+      "roles": {
+        "button.label": { "visualToken": "body.medium", "weight": "bold" },
+        "field.label": { "visualToken": "body.medium", "weight": "bold" },
+        "field.input": { "visualToken": "body.medium", "weight": "regular" },
+        "supporting.text": {
+          "visualToken": "body.medium",
+          "weight": "regular"
+        },
+        "selection.label": { "visualToken": "body.medium", "weight": "bold" },
+        "list.label": { "visualToken": "body.medium", "weight": "bold" },
+        "feedback.title": { "visualToken": "body.medium", "weight": "bold" }
+      }
+    },
+    "motion": {
+      "durations": { "instant": 0, "fast": 160 },
+      "easings": { "standard": [0.2, 0, 0, 1] },
+      "transitions": {
+        "control.press": {
+          "duration": "{motion.duration.fast}",
+          "easing": "{motion.easing.standard}",
+          "reduceMotionDuration": "{motion.duration.instant}"
+        }
+      }
+    },
+    "elevation": {
+      "flat": { "level": 0 },
+      "raised": { "level": 1 }
+    },
+    "layer": {
+      "semantic": { "content": 0, "overlay": 100 },
+      "component": { "modal": 100 }
+    }
+  },
+  "components": {
+    "button": {
+      "anatomy": ["root", "label", "leading-icon", "trailing-icon"],
+      "slots": {
+        "contentGap": "{spacing.semantic.control.gap}",
+        "disabledContainer": "{color.component.button.disabled.container}",
+        "disabledLabel": "{color.component.button.disabled.label}",
+        "focusBorder": "{color.semantic.border.focus}",
+        "focusBorderWidth": 2,
+        "idleBorder": "{color.semantic.border.transparent}"
+      },
+      "variants": {
+        "primary": {
+          "container": "{color.component.button.primary.container}",
+          "label": "{color.component.button.primary.label}",
+          "pressedContainer": "{color.semantic.action.primary-pressed}",
+          "pressedOpacity": 1,
+          "radius": "{radius.component.button}"
+        }
+      },
+      "sizes": {
+        "medium": {
+          "minHeight": "{size.component.button.medium}",
+          "horizontalPadding": "{spacing.component.button.horizontal}",
+          "verticalPadding": "{spacing.semantic.control.vertical}",
+          "typographyRole": "{typography.role.button.label}"
+        }
+      },
+      "states": ["default", "pressed", "disabled", "loading", "focused"],
+      "semantics": {
+        "role": "button",
+        "minimumTarget": "{size.semantic.control.minimum}"
+      }
+    },
+    "textField": {
+      "anatomy": ["root", "label", "input", "message"],
+      "slots": {
+        "disabledContainer": "{color.semantic.surface.disabled}",
+        "disabledText": "{color.semantic.text.disabled}",
+        "errorBorder": "{color.semantic.status.danger}",
+        "errorText": "{color.semantic.status.danger}",
+        "focusBorder": "{color.semantic.border.focus}",
+        "focusBorderWidth": 2,
+        "idleBorder": "{color.semantic.border.default}",
+        "idleBorderWidth": 1,
+        "placeholder": "{color.semantic.text.secondary}"
+      },
+      "variants": {
+        "default": {
+          "container": "{color.semantic.surface.field}",
+          "helper": "{color.semantic.text.secondary}",
+          "label": "{color.semantic.text.primary}",
+          "radius": "{radius.component.control}",
+          "text": "{color.semantic.text.primary}"
+        }
+      },
+      "sizes": {
+        "medium": {
+          "contentGap": "{spacing.semantic.control.gap}",
+          "horizontalPadding": "{spacing.component.control.horizontal}",
+          "inputRole": "{typography.role.field.input}",
+          "labelRole": "{typography.role.field.label}",
+          "messageRole": "{typography.role.supporting.text}",
+          "minHeight": "{size.component.control.medium}",
+          "verticalPadding": "{spacing.semantic.control.vertical}"
+        }
+      },
+      "states": ["default", "focused", "disabled", "error"],
+      "semantics": { "role": "input" }
+    },
+    "selection": {
+      "anatomy": ["root", "indicator", "label", "description"],
+      "slots": {
+        "disabledOpacity": 0.5,
+        "focusBorder": "{color.semantic.border.focus}",
+        "focusBorderWidth": 2,
+        "idleIndicator": "{color.semantic.surface.field}",
+        "indicatorRadius": 4,
+        "indicatorSize": 24,
+        "pressedOpacity": 0.8,
+        "selectedIndicator": "{color.semantic.action.primary}"
+      },
+      "variants": {
+        "default": {
+          "border": "{color.semantic.border.default}",
+          "container": "{color.semantic.surface.field}",
+          "description": "{color.semantic.text.secondary}",
+          "label": "{color.semantic.text.primary}",
+          "radius": "{radius.component.control}",
+          "selectedBorder": "{color.semantic.action.primary}",
+          "selectedContainer": "{color.semantic.surface.field}"
+        }
+      },
+      "sizes": {
+        "medium": {
+          "contentGap": "{spacing.semantic.control.gap}",
+          "descriptionRole": "{typography.role.supporting.text}",
+          "horizontalPadding": "{spacing.component.control.horizontal}",
+          "labelRole": "{typography.role.selection.label}",
+          "minHeight": "{size.semantic.control.minimum}",
+          "verticalPadding": "{spacing.semantic.control.vertical}"
+        }
+      },
+      "states": ["default", "selected", "focused", "disabled"],
+      "semantics": { "roles": ["checkbox", "radio"] }
+    },
+    "listItem": {
+      "anatomy": ["root", "copy", "label", "supporting", "accessory"],
+      "slots": {
+        "focusBorder": "{color.semantic.border.focus}",
+        "focusBorderWidth": 2,
+        "pressedOpacity": 0.8
+      },
+      "variants": {
+        "default": {
+          "border": "{color.semantic.border.transparent}",
+          "container": "{color.semantic.surface.field}",
+          "label": "{color.semantic.text.primary}",
+          "radius": "{radius.component.surface}",
+          "supporting": "{color.semantic.text.secondary}"
+        }
+      },
+      "sizes": {
+        "twoLine": {
+          "contentGap": "{spacing.semantic.control.gap}",
+          "horizontalPadding": "{spacing.component.control.horizontal}",
+          "labelRole": "{typography.role.list.label}",
+          "minHeight": "{size.component.list.two-line}",
+          "supportingRole": "{typography.role.supporting.text}",
+          "verticalPadding": "{spacing.semantic.control.vertical}"
+        }
+      },
+      "states": ["default", "pressed", "focused", "disabled"],
+      "semantics": { "interactiveRole": "button" }
+    },
+    "feedback": {
+      "anatomy": ["root", "title", "description", "action"],
+      "slots": { "borderWidth": 1 },
+      "variants": {
+        "info": {
+          "border": "{color.semantic.border.default}",
+          "container": "{color.semantic.surface.subtle}",
+          "description": "{color.semantic.text.secondary}",
+          "liveRegion": "polite",
+          "radius": "{radius.component.surface}",
+          "title": "{color.semantic.text.primary}"
+        },
+        "danger": {
+          "border": "{color.semantic.status.danger}",
+          "container": "{color.semantic.surface.subtle}",
+          "description": "{color.semantic.text.primary}",
+          "liveRegion": "assertive",
+          "radius": "{radius.component.surface}",
+          "title": "{color.semantic.status.danger}"
+        }
+      },
+      "sizes": {
+        "medium": {
+          "contentGap": "{spacing.semantic.control.gap}",
+          "descriptionRole": "{typography.role.supporting.text}",
+          "horizontalPadding": "{spacing.component.control.horizontal}",
+          "titleRole": "{typography.role.feedback.title}",
+          "verticalPadding": "{spacing.semantic.control.vertical}"
+        }
+      },
+      "states": ["default"],
+      "semantics": { "urgentRole": "alert" }
+    }
+  }
+}

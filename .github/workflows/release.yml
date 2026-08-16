@@ -1,0 +1,105 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  verify-and-pack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Require the exact main commit
+        shell: bash
+        run: |
+          git fetch origin main
+          test "$(git rev-parse origin/main)" = "$GITHUB_SHA"
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: deslint/go.mod
+          cache-dependency-path: deslint/go.sum
+      - run: npm ci
+      - run: node scripts/check-release-tag.mjs "$GITHUB_REF_NAME"
+      - run: npm run check
+      - name: Pack JavaScript packages
+        shell: bash
+        run: |
+          mkdir release-assets
+          cp release/ansldes-release.json release-assets/
+          npm pack --workspace @ansldes/schema --pack-destination release-assets
+          npm pack --workspace @ansldes/compiler --pack-destination release-assets
+          npm pack --workspace @ansldes/core --pack-destination release-assets
+          npm pack --workspace @ansldes/react-native --pack-destination release-assets
+          node scripts/hash-release-assets.mjs release-assets SHA256SUMS-packages.txt
+      - uses: actions/upload-artifact@v7
+        with:
+          name: packages
+          path: release-assets/*
+          if-no-files-found: error
+
+  deslint-binary:
+    needs: verify-and-pack
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: deslint/go.mod
+          cache-dependency-path: deslint/go.sum
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - name: Build versioned binary
+        shell: bash
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          GOOS_VALUE="$(go env GOOS)"
+          GOARCH_VALUE="$(go env GOARCH)"
+          EXTENSION=""
+          if [ "$GOOS_VALUE" = "windows" ]; then EXTENSION=".exe"; fi
+          mkdir release-assets
+          cd deslint
+          go build -trimpath -ldflags "-s -w -X main.version=$VERSION" \
+            -o "../release-assets/deslint-$GOOS_VALUE-$GOARCH_VALUE$EXTENSION" \
+            ./cmd/deslint
+          cd ..
+          node scripts/hash-release-assets.mjs \
+            release-assets "SHA256SUMS-$GOOS_VALUE-$GOARCH_VALUE.txt"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: deslint-${{ matrix.os }}
+          path: release-assets/*
+          if-no-files-found: error
+
+  publish:
+    needs: [verify-and-pack, deslint-binary]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v7
+        with:
+          path: release-assets
+          merge-multiple: true
+      - name: Publish immutable GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          gh release create "$GITHUB_REF_NAME" release-assets/* \
+            --repo "$GITHUB_REPOSITORY" \
+            --verify-tag \
+            --title "AnslDes $GITHUB_REF_NAME" \
+            --generate-notes

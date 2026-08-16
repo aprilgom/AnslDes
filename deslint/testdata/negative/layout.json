@@ -1,0 +1,18 @@
+{
+  "documentSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "nodeCount": 2,
+  "issues": [
+    {
+      "kind": "overflow",
+      "nodeId": "node-overflow",
+      "path": "Screen/Card",
+      "message": "content exceeds the card bounds"
+    },
+    {
+      "kind": "overlap",
+      "nodeId": "node-overlap",
+      "path": "Screen/Footer",
+      "message": "footer overlaps the content"
+    }
+  ]
+}

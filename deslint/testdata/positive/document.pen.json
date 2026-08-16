@@ -1,0 +1,8 @@
+{
+  "nodes": [
+    {
+      "fill": "{color.semantic.surface.field}",
+      "gap": "{spacing.semantic.control.gap}"
+    }
+  ]
+}

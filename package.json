@@ -1,0 +1,31 @@
+{
+  "name": "ansldes-workspace",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build:core && npm run build:react-native",
+    "build:core": "tsc -p packages/core/tsconfig.json",
+    "build:react-native": "tsc -p packages/react-native/tsconfig.json",
+    "check": "npm run check:boundary && npm run test:schema && npm run test:compiler && npm run build && npm run test:core && npm run test:react-native && npm run check:deslint && npm run test:release && npm run release:check",
+    "check:boundary": "node scripts/check-product-boundary.mjs",
+    "check:deslint": "npm run generate:models:check && tsc -p tsconfig.models.json && cd deslint && go test ./... && go test -race ./... && go vet ./...",
+    "generate:models": "node scripts/generate-contract-models.mjs",
+    "generate:models:check": "node scripts/generate-contract-models.mjs --check",
+    "release:manifest": "node scripts/release-manifest.mjs --write",
+    "release:check": "node scripts/release-manifest.mjs --check",
+    "test:release": "node --test scripts/release-manifest.test.mjs",
+    "test:core": "node --test packages/core/test/runtime.test.mjs",
+    "test:react-native": "node --test packages/react-native/test/*.test.mjs",
+    "test:compiler": "node --test packages/compiler/src/index.test.mjs",
+    "test:schema": "node --test scripts/design-system-schema.test.mjs"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.2",
+    "ajv": "8.20.0",
+    "react": "19.2.3",
+    "typescript": "6.0.3"
+  }
+}

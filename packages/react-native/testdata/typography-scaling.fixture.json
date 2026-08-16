@@ -1,0 +1,5 @@
+{
+  "scales": [1, 1.6, 2.35],
+  "singleLineControlMinHeights": [52, 55, 73],
+  "twoLineFeedbackMinHeights": [72, 101, 137]
+}
