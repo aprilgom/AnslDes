@@ -39,14 +39,32 @@ test("accepts only the exact release tag from the manifest", () => {
   const script = fileURLToPath(
     new URL("./check-release-tag.mjs", import.meta.url),
   );
-  const accepted = spawnSync(process.execPath, [script, "v0.1.0"], {
+  const accepted = spawnSync(process.execPath, [script, "v0.1.1"], {
     encoding: "utf8",
   });
   assert.equal(accepted.status, 0, accepted.stderr);
 
-  const rejected = spawnSync(process.execPath, [script, "v0.1.1"], {
+  const rejected = spawnSync(process.execPath, [script, "v0.1.0"], {
     encoding: "utf8",
   });
   assert.notEqual(rejected.status, 0);
   assert.match(rejected.stderr, /does not match manifest/);
+});
+
+test("package exports support import and CommonJS-aware toolchains", async () => {
+  const corePackage = JSON.parse(
+    await readFile(new URL("../packages/core/package.json", import.meta.url), "utf8"),
+  );
+  const reactNativePackage = JSON.parse(
+    await readFile(
+      new URL("../packages/react-native/package.json", import.meta.url),
+      "utf8",
+    ),
+  );
+
+  for (const packageJson of [corePackage, reactNativePackage]) {
+    assert.equal(packageJson.exports["."].import, "./dist/index.js");
+    assert.equal(packageJson.exports["."].require, "./dist/index.js");
+    assert.equal(packageJson.exports["."].default, "./dist/index.js");
+  }
 });
