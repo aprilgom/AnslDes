@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
   "release": {
-    "version": "0.2.1",
-    "tag": "v0.2.1"
+    "version": "1.0.0",
+    "tag": "v1.0.0"
   },
   "compatibility": {
-    "definitionSchemaVersion": 1,
+    "definitionSchemaVersion": 2,
     "policySchemaVersion": 1,
-    "compiledBundleVersion": 1,
+    "compiledBundleVersion": 2,
     "node": ">=22",
     "go": ">=1.26.0",
     "react": ">=19.0.0 <20",
@@ -16,46 +16,46 @@
   "packages": {
     "schema": {
       "name": "@ansldes/schema",
-      "version": "0.2.1"
+      "version": "1.0.0"
     },
     "compiler": {
       "name": "@ansldes/compiler",
-      "version": "0.2.1"
+      "version": "1.0.0"
     },
     "core": {
       "name": "@ansldes/core",
-      "version": "0.2.1"
+      "version": "1.0.0"
     },
     "reactNative": {
       "name": "@ansldes/react-native",
-      "version": "0.2.1"
+      "version": "1.0.0"
     }
   },
   "deslint": {
     "module": "github.com/aprilgom/AnslDes/deslint",
-    "version": "0.2.1",
-    "releaseVersionLinkerFlag": "-X main.version=0.2.1"
+    "version": "1.0.0",
+    "releaseVersionLinkerFlag": "-X main.version=1.0.0"
   },
   "artifacts": {
     "schema": {
       "fileCount": 8,
-      "sha256": "4cf14e254f06a620bf94fd7110b2066ce9b969105f6cf78d23528c163bb5fc3b"
+      "sha256": "ee83ee4d4f84cd5625062afbb4d01a3bec70203376bf5b8106b895626ecad96a"
     },
     "compiler": {
       "fileCount": 5,
-      "sha256": "76d97ffb5726cd65daf18fd386384d8ba5b760bb2bdca8ea6db43e08c75f5366"
+      "sha256": "926f51834e931303b85d4d8d29215a482351c418205fd03e7f1a7be123b2606b"
     },
     "core": {
       "fileCount": 5,
-      "sha256": "8199e4d7dffc43590cafc613aff291280fbb171fb8f00374a659e0da61765f5c"
+      "sha256": "4763ab5a47d38d14f97c756e47f153d80ba6a5a2e9acb1d1a98e53dafacc19f2"
     },
     "reactNative": {
       "fileCount": 19,
-      "sha256": "2a95cfb6e8f78306da2f97ee24447967fc4d7d46607fecded66ba8825777ce5d"
+      "sha256": "1dbd1f49485d3a8ed776d97db729e3e021e7e6e5937bf03f048753d7e0324291"
     },
     "deslint": {
       "fileCount": 23,
-      "sha256": "be32b45ba075557745950f33b03f6a9ea8184c5eda14c6c66034a363646b1fdf"
+      "sha256": "0a1eda4d2a55acdd657b112b9d9648c53a05b872c280f479caa976e96798aaf3"
     }
   }
 }

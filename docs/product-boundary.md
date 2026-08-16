@@ -32,5 +32,6 @@ brand.hero.overlay
 
 ## Migration rule
 
-기존 제품 계약을 즉시 삭제하지 않는다. 먼저 product definition을 생성하고 기존 resolver와 새 compiler가
-동일 값을 내는지 dual-run한다. 결과 fingerprint와 diagnostic parity가 일치한 뒤 제품 adapter를 전환한다.
+제품 경계를 처음 이관할 때는 product definition을 생성하고 기존 resolver와 새 compiler가 동일한 값을
+내는지 검증한다. Definition v2 전환 자체는 호환 계층 없이 한 번에 수행하며 v1 입력이나 bundle을
+runtime에 남기지 않는다.

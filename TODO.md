@@ -5,10 +5,12 @@
 ## 1. Product-neutral schema
 
 - [x] 제품 정의와 generic toolkit의 소유권 경계를 문서화한다.
-- [x] JSON Schema 2020-12 기반 definition v1 초안을 추가한다.
+- [x] JSON Schema 2020-12 기반 definition v2를 추가한다.
 - [x] generic example과 product-coupling negative 검사를 추가한다.
 - [x] token reference existence와 layer type을 schema/compiler 조합으로 검증한다.
 - [x] theme name과 semantic mapping의 exact-set 일치를 검증한다.
+- [x] color·spacing·radius·size의 `primitive → semantic → component` 단방향 참조를 강제한다.
+- [x] component recipe의 primitive·semantic 직접 소비와 non-primitive raw token을 거부한다.
 
 ## 2. Compiler
 

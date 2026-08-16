@@ -1,6 +1,6 @@
 {
   "name": "@ansldes/compiler",
-  "version": "0.2.1",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "bin": {
@@ -10,7 +10,7 @@
     ".": "./src/index.mjs"
   },
   "dependencies": {
-    "@ansldes/schema": "0.2.1",
+    "@ansldes/schema": "1.0.0",
     "ajv": "8.20.0"
   }
 }
