@@ -1,9 +1,9 @@
 // Code generated from https://ansldes.dev/schema/design-system-definition.v2.json; DO NOT EDIT.
-// definition schema SHA-256: 1e1d8c99aa9dab3825860c297a2c6a9086c3aba78162552a20d4ef75fbae504e
+// definition schema SHA-256: 6d72afbbcbd876ec8bfbaf5c9451c27067ea411ccb4865da302a85b7ce9cc041
 
 export const definitionSchemaVersion = 2 as const;
 export const definitionSchemaSha256 =
-  "1e1d8c99aa9dab3825860c297a2c6a9086c3aba78162552a20d4ef75fbae504e" as const;
+  "6d72afbbcbd876ec8bfbaf5c9451c27067ea411ccb4865da302a85b7ce9cc041" as const;
 
 export type RecipeValue =
   | string
@@ -28,6 +28,15 @@ export interface DesignSystemDefinition {
   id: string;
   version: string;
   themes: { names: string[]; default: string };
+  colorUsage?: ColorUsageDefinition;
   foundations: Record<string, unknown>;
   components: Record<string, ComponentDefinition>;
+}
+
+export interface ColorUsageDefinition {
+  contrast: { body: number; large: number };
+  approvedPalettes: Record<
+    string,
+    { contexts: string[]; themes: string[] }
+  >;
 }

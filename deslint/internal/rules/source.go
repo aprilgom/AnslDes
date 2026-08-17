@@ -5,6 +5,7 @@ import (
 	"regexp"
 	"strings"
 
+	"github.com/aprilgom/AnslDes/deslint/internal/designcontext"
 	"github.com/aprilgom/AnslDes/deslint/internal/diagnostic"
 	"github.com/aprilgom/AnslDes/deslint/internal/source"
 )
@@ -13,6 +14,11 @@ var rawColorPattern = regexp.MustCompile(`(?i)^(?:#[0-9a-f]{3,8}|rgba?\(|hsla?\(
 
 // AnalyzeSource evaluates normalized syntax evidence against injected product policy.
 func AnalyzeSource(summary source.Summary, propertyKinds map[string]string, severity func(string) diagnostic.Severity) []diagnostic.Diagnostic {
+	return AnalyzeSourceWithDesignContext(summary, propertyKinds, severity, nil)
+}
+
+// AnalyzeSourceWithDesignContext applies generated contract permissions before raw-value rules.
+func AnalyzeSourceWithDesignContext(summary source.Summary, propertyKinds map[string]string, severity func(string) diagnostic.Severity, context *designcontext.Context) []diagnostic.Diagnostic {
 	diagnostics := make([]diagnostic.Diagnostic, 0)
 	if summary.HasError {
 		diagnostics = append(diagnostics, diagnostic.New(
@@ -29,7 +35,7 @@ func AnalyzeSource(summary source.Summary, propertyKinds map[string]string, seve
 	}
 	for _, literal := range summary.PropertyLiterals {
 		category, configured := propertyKinds[literal.Property]
-		if !configured || !isRawLiteral(category, literal.Kind, literal.Value) {
+		if !configured || !isRawLiteral(category, literal.Kind, literal.Value) || (context != nil && DesignLiteralAllowed(literal, *context)) {
 			continue
 		}
 		sourceRange := &diagnostic.Range{
@@ -47,6 +53,9 @@ func AnalyzeSource(summary source.Summary, propertyKinds map[string]string, seve
 			"ansldes/source",
 			"raw",
 		))
+	}
+	if context != nil {
+		diagnostics = append(diagnostics, AnalyzeDesignSystem(summary, *context, severity)...)
 	}
 	diagnostic.Sort(diagnostics)
 	return diagnostics

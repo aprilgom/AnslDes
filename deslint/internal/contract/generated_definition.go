@@ -1,12 +1,12 @@
 // Code generated from https://ansldes.dev/schema/design-system-definition.v2.json; DO NOT EDIT.
-// definition schema SHA-256: 1e1d8c99aa9dab3825860c297a2c6a9086c3aba78162552a20d4ef75fbae504e
+// definition schema SHA-256: 6d72afbbcbd876ec8bfbaf5c9451c27067ea411ccb4865da302a85b7ce9cc041
 
 package contract
 
 import "encoding/json"
 
 const DefinitionSchemaVersion = 2
-const DefinitionSchemaSHA256 = "1e1d8c99aa9dab3825860c297a2c6a9086c3aba78162552a20d4ef75fbae504e"
+const DefinitionSchemaSHA256 = "6d72afbbcbd876ec8bfbaf5c9451c27067ea411ccb4865da302a85b7ce9cc041"
 
 type Definition struct {
 	Schema        string                         `json:"$schema,omitempty"`
@@ -14,8 +14,24 @@ type Definition struct {
 	ID            string                         `json:"id"`
 	Version       string                         `json:"version"`
 	Themes        ThemeDefinition                `json:"themes"`
+	ColorUsage    *ColorUsageDefinition          `json:"colorUsage,omitempty"`
 	Foundations   map[string]json.RawMessage     `json:"foundations"`
 	Components    map[string]ComponentDefinition `json:"components"`
+}
+
+type ColorUsageDefinition struct {
+	Contrast         ContrastDefinition         `json:"contrast"`
+	ApprovedPalettes map[string]ApprovedPalette `json:"approvedPalettes"`
+}
+
+type ContrastDefinition struct {
+	Body  float64 `json:"body"`
+	Large float64 `json:"large"`
+}
+
+type ApprovedPalette struct {
+	Contexts []string `json:"contexts"`
+	Themes   []string `json:"themes"`
 }
 
 type ThemeDefinition struct {

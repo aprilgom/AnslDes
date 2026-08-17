@@ -1,0 +1,36 @@
+{
+  "$schema": "../runtime-evidence.schema.json",
+  "schemaVersion": 1,
+  "evidenceKind": "web-rendered",
+  "platform": "web",
+  "surfaceId": "example-export-surface",
+  "runtimePolicyVersion": "1.0.0",
+  "captureStatus": "completed",
+  "detectorFailure": null,
+  "routes": [
+    {
+      "id": "example-export-route",
+      "owner": "example-export-owner",
+      "failures": [],
+      "content": [
+        {
+          "id": "always-visible-copy",
+          "owner": "example-export-owner",
+          "importance": "primary",
+          "revealStatus": "none",
+          "hiddenAtRest": false,
+          "defaultVisibleWithoutScript": true
+        }
+      ],
+      "text": [
+        {
+          "id": "export-body-copy",
+          "owner": "example-export-owner",
+          "role": "body",
+          "alignment": "justify",
+          "context": "export"
+        }
+      ]
+    }
+  ]
+}

@@ -12,7 +12,9 @@
       "**",
       "!!docs/anti-slop/references",
       "!!deslint/testdata",
-      "!!packages/schema/generated"
+      "!!deslint/internal/rules/anti_slop_catalog.json",
+      "!!packages/schema/generated",
+      "!!packages/schema/testdata/generated-design-context"
     ]
   },
   "formatter": {

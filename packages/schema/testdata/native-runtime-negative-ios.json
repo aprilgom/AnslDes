@@ -1,0 +1,94 @@
+{
+  "$schema": "../native-runtime-evidence.schema.json",
+  "schemaVersion": 1,
+  "evidenceKind": "simulator",
+  "platform": "ios",
+  "surfaceId": "example-native-surface",
+  "nativePolicyVersion": "1.0.0",
+  "captures": [
+    {
+      "id": "ios-phone-light",
+      "owner": "example-native-owner",
+      "environment": {
+        "formFactor": "phone",
+        "orientation": "portrait",
+        "windowMode": "fullscreen",
+        "foldPosture": "not-applicable",
+        "theme": "light",
+        "fontScale": 1,
+        "refreshRateHz": 60,
+        "reduceMotion": true
+      },
+      "systemGesture": { "backReachable": false, "conflictFree": false },
+      "safeArea": { "respected": false, "edgeToEdgeInsetsApplied": false },
+      "keyboardIme": {
+        "tested": true,
+        "inputVisible": false,
+        "primaryActionReachable": false
+      },
+      "accessibility": {
+        "readingOrder": ["primary-action"],
+        "focusOrder": ["primary-action"],
+        "controls": [
+          {
+            "id": "primary-action",
+            "owner": "example-native-owner",
+            "interactive": true,
+            "label": "",
+            "roleOrTrait": "",
+            "stateAnnounced": false,
+            "width": 43,
+            "height": 42,
+            "nearestAdjacentSpacing": 4
+          }
+        ]
+      },
+      "fontScaling": {
+        "clipped": true,
+        "overlap": true,
+        "unreachableControl": true,
+        "text": [
+          {
+            "id": "body-copy",
+            "owner": "example-native-owner",
+            "size": 10,
+            "usesScaledUnits": false,
+            "platformTypeRole": false
+          }
+        ]
+      },
+      "motion": { "fallbackApplied": false },
+      "appearance": {
+        "contrastPass": false,
+        "darkThemeComplete": false,
+        "quickInvertUsed": true
+      },
+      "adaptivity": {
+        "sizeOrWindowClassApplied": false,
+        "notSimplyScaled": false,
+        "windowModeSupported": false,
+        "foldPostureSupported": false
+      },
+      "performance": {
+        "synchronousStartupMs": 40,
+        "initializationMs": 1200,
+        "frames": [
+          {
+            "id": "scroll-results",
+            "owner": "example-performance-owner",
+            "totalFrames": 100,
+            "droppedFrames": 10,
+            "maxMainThreadWorkMs": 20
+          }
+        ]
+      },
+      "bundle": {
+        "jsBytes": 120000,
+        "jsBaselineBytes": 100000,
+        "appBinaryBytes": 220000,
+        "appBinaryBaselineBytes": 200000,
+        "unusedDependencyBytes": 4096
+      }
+    }
+  ]
+}

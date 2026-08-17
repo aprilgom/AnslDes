@@ -1,0 +1,21 @@
+{
+  "$schema": "../copy-evidence.schema.json",
+  "schemaVersion": 1,
+  "evidenceKind": "native-source",
+  "platform": "react-native",
+  "profileId": "operate",
+  "surfaceId": "example-copy-not-run",
+  "locale": "ko-KR",
+  "contentRegistryStatus": "not-run",
+  "nodes": [
+    {
+      "id": "unknown-claim",
+      "owner": "example-claim",
+      "containerId": "example-proof",
+      "contentRole": "testimonial",
+      "intent": "claim",
+      "text": "사용자 평가",
+      "cadencePattern": "none"
+    }
+  ]
+}

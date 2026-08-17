@@ -1,0 +1,22 @@
+{
+  "$schema": "../web-provider-evidence.schema.json",
+  "schemaVersion": 1,
+  "evidenceKind": "web-rendered",
+  "platform": "web",
+  "provider": "browser",
+  "surfaceId": "example-web-surface",
+  "webPolicyVersion": "1.0.0",
+  "captureId": "browser-dark-large",
+  "routeId": "example-home",
+  "owner": "example-web-owner",
+  "viewport": { "id": "mobile", "width": 390, "height": 844 },
+  "theme": "dark",
+  "fontScale": 1.6,
+  "reduceMotion": true,
+  "execution": {
+    "status": "failed",
+    "capability": "full",
+    "reason": "browser-launch-failed"
+  },
+  "findings": []
+}

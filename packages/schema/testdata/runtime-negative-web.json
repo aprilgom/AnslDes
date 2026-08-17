@@ -1,0 +1,50 @@
+{
+  "$schema": "../runtime-evidence.schema.json",
+  "schemaVersion": 1,
+  "evidenceKind": "web-rendered",
+  "platform": "web",
+  "surfaceId": "example-surface",
+  "runtimePolicyVersion": "1.0.0",
+  "captureStatus": "completed",
+  "detectorFailure": null,
+  "routes": [
+    {
+      "id": "example-route",
+      "owner": "example-route-owner",
+      "failures": [
+        { "id": "console-1", "kind": "console-error" },
+        { "id": "promise-1", "kind": "unhandled-rejection" },
+        { "id": "render-1", "kind": "route-render-failure" },
+        { "id": "uncaught-1", "kind": "uncaught-error" },
+        { "id": "parse-1", "kind": "parse-failure" }
+      ],
+      "content": [
+        {
+          "id": "primary-copy",
+          "owner": "example-content-owner",
+          "importance": "primary",
+          "revealStatus": "completed",
+          "hiddenAtRest": true,
+          "defaultVisibleWithoutScript": true
+        },
+        {
+          "id": "fallback-copy",
+          "owner": "example-content-owner",
+          "importance": "primary",
+          "revealStatus": "failed",
+          "hiddenAtRest": true,
+          "defaultVisibleWithoutScript": false
+        }
+      ],
+      "text": [
+        {
+          "id": "body-copy",
+          "owner": "example-content-owner",
+          "role": "body",
+          "alignment": "justify",
+          "context": "screen"
+        }
+      ]
+    }
+  ]
+}

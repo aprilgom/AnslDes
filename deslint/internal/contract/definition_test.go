@@ -58,6 +58,10 @@ func TestAnalyzeDefinitionReferences(t *testing.T) {
 	if analysis.DefinitionID != "example-product" || len(analysis.Diagnostics) != 0 {
 		t.Fatalf("Analyze(valid) = %#v", analysis)
 	}
+	motion := analysis.Motion["control.press"]
+	if motion.Owner != "example-control" || motion.Purpose != "state-change" || motion.DurationMS != 160 || motion.ReducedDurationMS != 0 || len(motion.Easing) != 4 || motion.ReducedFallback != "instant" {
+		t.Fatalf("resolved motion registry = %#v", motion)
+	}
 
 	unknown := []byte(strings.Replace(string(valid), "{radius.primitive.medium}", "{radius.primitive.missing}", 1))
 	analysis, err = contract.Analyze("definition.json", unknown, severity)

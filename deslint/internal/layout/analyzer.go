@@ -12,9 +12,17 @@ import (
 
 // Report is the stable input boundary for a headless layout engine.
 type Report struct {
-	DocumentSHA256 string  `json:"documentSha256"`
-	NodeCount      int     `json:"nodeCount"`
-	Issues         []Issue `json:"issues"`
+	DocumentSHA256 string         `json:"documentSha256"`
+	VisitorOptions VisitorOptions `json:"visitorOptions"`
+	NodeCount      int            `json:"nodeCount"`
+	Issues         []Issue        `json:"issues"`
+}
+
+// VisitorOptions preserves the exact design-document traversal configuration.
+type VisitorOptions struct {
+	ResolveInstances bool `json:"resolveInstances"`
+	IncludeHidden    bool `json:"includeHidden"`
+	ComputeBounds    bool `json:"computeBounds"`
 }
 
 // Issue is one computed geometry problem.
@@ -33,8 +41,8 @@ func Analyze(path string, contents []byte, expectedSHA string, severity func(str
 	if err := decoder.Decode(&report); err != nil {
 		return nil, fmt.Errorf("decode layout report: %w", err)
 	}
-	if report.DocumentSHA256 == "" || report.NodeCount < 0 {
-		return nil, fmt.Errorf("layout report requires documentSha256 and non-negative nodeCount")
+	if report.DocumentSHA256 == "" || report.NodeCount < 0 || !report.VisitorOptions.ResolveInstances || !report.VisitorOptions.ComputeBounds {
+		return nil, fmt.Errorf("layout report requires documentSha256, non-negative nodeCount, resolved instances, and computed bounds")
 	}
 	diagnostics := make([]diagnostic.Diagnostic, 0, len(report.Issues)+1)
 	if expectedSHA != "" && report.DocumentSHA256 != expectedSHA {

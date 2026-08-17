@@ -4,28 +4,28 @@
 
 ## Rules
 
-- [ ] `gradient-text`: text fill gradient를 검출한다.
-- [ ] `ai-color-palette`: reflex purple/violet gradient와 cyan-on-dark 조합을 검출한다.
-- [ ] `cream-palette`: 근거 없는 warm cream/beige page surface를 검출한다.
-- [ ] `dark-glow`: chromatic blurred shadow/glow를 검출한다.
-- [ ] `radial-halo`: saturated radial halo를 검출한다.
-- [ ] `radial-spotlight-glow`: low-opacity decorative radial spotlight를 검출한다.
-- [ ] `gray-on-color`: chromatic surface 위 neutral gray text를 검출한다.
-- [ ] `low-contrast`: body 4.5:1, large text 3:1 기준을 검사한다.
-- [ ] `pure-extreme-surface`: 순수 black/white가 page 또는 component surface로 사용되는지 검사한다.
+- [x] `gradient-text`: text fill gradient를 검출한다.
+- [x] `ai-color-palette`: reflex purple/violet gradient와 cyan-on-dark 조합을 검출한다.
+- [x] `cream-palette`: 근거 없는 warm cream/beige page surface를 검출한다.
+- [x] `dark-glow`: chromatic blurred shadow/glow를 검출한다.
+- [x] `radial-halo`: saturated radial halo를 검출한다.
+- [x] `radial-spotlight-glow`: low-opacity decorative radial spotlight를 검출한다.
+- [x] `gray-on-color`: chromatic surface 위 neutral gray text를 검출한다.
+- [x] `low-contrast`: body 4.5:1, large text 3:1 기준을 검사한다.
+- [x] `pure-extreme-surface`: 순수 black/white가 page 또는 component surface로 사용되는지 검사한다.
 
 ## Consumer-policy 해석
 
-- [ ] consumer definition의 contrast registry와 theme mapping을 source of truth로 사용한다.
-- [ ] Hero/brand/asset exception도 text contrast는 면제하지 않는다.
-- [ ] neutral elevation shadow와 decorative colored glow를 구분한다.
-- [ ] 각 지원 theme의 screenshot과 computed color evidence를 별도로 저장한다.
-- [ ] text와 monochrome asset은 surface finding에서 제외하고 매체 예외는 exact owner를 요구한다.
+- [x] consumer definition의 contrast registry와 theme mapping을 source of truth로 사용한다.
+- [x] Hero/brand/asset exception도 text contrast는 면제하지 않는다.
+- [x] neutral elevation shadow와 decorative colored glow를 구분한다.
+- [x] 각 지원 theme의 screenshot과 computed color evidence를 별도로 저장한다.
+- [x] text와 monochrome asset은 surface finding에서 제외하고 매체 예외는 exact owner를 요구한다.
 
 ## 완료 조건
 
-- [ ] 아홉 rule의 literal, token, computed-color fixture가 통과한다.
-- [ ] palette 판단은 hue 문자열만이 아니라 승인 palette와 사용 문맥을 확인한다.
+- [x] 아홉 rule의 literal, token, computed-color fixture가 통과한다.
+- [x] palette 판단은 hue 문자열만이 아니라 승인 palette와 사용 문맥을 확인한다.
 
 ## 결정론적 코드 기준
 

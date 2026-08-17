@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ansldes.dev/schema/color-evidence.v1.json",
+  "title": "AnslDes theme color and contrast evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "evidenceKind",
+    "platform",
+    "theme",
+    "surfaceId",
+    "screenshotPath",
+    "computedColorPath",
+    "nodes"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "evidenceKind": {
+      "enum": [
+        "web-rendered",
+        "design-document-computed",
+        "simulator",
+        "emulator",
+        "physical-device"
+      ]
+    },
+    "platform": { "enum": ["web", "design-document", "ios", "android"] },
+    "theme": { "$ref": "#/$defs/name" },
+    "surfaceId": { "$ref": "#/$defs/name" },
+    "screenshotPath": { "type": "string", "minLength": 1 },
+    "computedColorPath": { "type": "string", "minLength": 1 },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/node" }
+    }
+  },
+  "$defs": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[._/-][a-z0-9]+)*$"
+    },
+    "color": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "owner",
+        "mediaRole",
+        "context",
+        "colorSource",
+        "foreground",
+        "background",
+        "fontSize",
+        "fontWeight",
+        "fillKind",
+        "palettePattern",
+        "paletteApproved",
+        "surfaceTemperature",
+        "glowPresent",
+        "glowColor",
+        "glowBlur",
+        "neutralElevation",
+        "radialSaturated",
+        "radialOpacity",
+        "radialDecorative",
+        "monochromeAsset"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/name" },
+        "owner": { "$ref": "#/$defs/name" },
+        "mediaRole": {
+          "enum": ["text", "surface", "monochrome-asset", "color-asset"]
+        },
+        "context": { "enum": ["page", "component", "hero", "brand", "status"] },
+        "colorSource": { "enum": ["literal", "token", "computed"] },
+        "foreground": { "$ref": "#/$defs/color" },
+        "background": { "$ref": "#/$defs/color" },
+        "fontSize": { "type": "number", "minimum": 0 },
+        "fontWeight": { "type": "integer", "minimum": 1, "maximum": 1000 },
+        "fillKind": { "enum": ["solid", "linear-gradient", "radial-gradient"] },
+        "palettePattern": {
+          "enum": ["none", "purple-violet-gradient", "cyan-on-dark"]
+        },
+        "paletteApproved": { "type": "boolean" },
+        "paletteId": { "$ref": "#/$defs/name" },
+        "surfaceTemperature": { "enum": ["neutral", "warm-cream"] },
+        "glowPresent": { "type": "boolean" },
+        "glowColor": { "$ref": "#/$defs/color" },
+        "glowBlur": { "type": "number", "minimum": 0 },
+        "neutralElevation": { "type": "boolean" },
+        "radialSaturated": { "type": "boolean" },
+        "radialOpacity": { "type": "number", "minimum": 0, "maximum": 1 },
+        "radialDecorative": { "type": "boolean" },
+        "monochromeAsset": { "type": "boolean" },
+        "mediumExceptionOwner": { "$ref": "#/$defs/name" }
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "../web-provider-evidence.schema.json",
+  "schemaVersion": 1,
+  "evidenceKind": "web-source",
+  "platform": "web",
+  "provider": "regex-source",
+  "surfaceId": "example-web-surface",
+  "webPolicyVersion": "1.0.0",
+  "captureId": "regex-source-light",
+  "routeId": "example-home",
+  "owner": "example-web-owner",
+  "viewport": { "id": "desktop", "width": 1280, "height": 800 },
+  "theme": "light",
+  "fontScale": 1,
+  "reduceMotion": false,
+  "execution": { "status": "completed", "capability": "full", "reason": "" },
+  "findings": []
+}

@@ -1,0 +1,53 @@
+{
+  "$schema": "../motion-evidence.schema.json",
+  "schemaVersion": 1,
+  "evidenceKind": "design-document-computed",
+  "platform": "design-document",
+  "profileId": "operate",
+  "surfaceId": "example-motion-document",
+  "preference": "no-preference",
+  "capturePath": "evidence/example-motion-document.json",
+  "preferenceResolvedBeforeEffects": true,
+  "effectsReplayedAfterResolution": false,
+  "nodes": [
+    {
+      "id": "control-press",
+      "owner": "example-control",
+      "transitionId": "control.press",
+      "purpose": "state-change",
+      "motionKind": "state-change",
+      "durationMs": 160,
+      "easing": [0.2, 0, 0, 1],
+      "easingBehavior": "standard",
+      "animatedProperties": ["transform"],
+      "perpetual": false,
+      "userControlled": true,
+      "changingDataSource": false,
+      "accessibleLabel": "Pressed",
+      "editableInput": false,
+      "hoverPurpose": "none",
+      "reducedMotionFallbackApplied": false,
+      "reducedStateUnderstandable": true,
+      "nextActionUnderstandable": true
+    },
+    {
+      "id": "live-status",
+      "owner": "example-live-data",
+      "purpose": "decorative",
+      "motionKind": "status-pulse",
+      "durationMs": 1000,
+      "easing": [0.2, 0, 0, 1],
+      "easingBehavior": "standard",
+      "animatedProperties": ["opacity"],
+      "perpetual": true,
+      "userControlled": false,
+      "changingDataSource": true,
+      "accessibleLabel": "Live data is updating",
+      "editableInput": false,
+      "hoverPurpose": "none",
+      "reducedMotionFallbackApplied": false,
+      "reducedStateUnderstandable": true,
+      "nextActionUnderstandable": true
+    }
+  ]
+}

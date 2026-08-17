@@ -44,6 +44,11 @@ async function readJson(relativePath) {
   );
 }
 
+async function fileSha256(relativePath) {
+  const contents = await readFile(path.join(repositoryRoot, relativePath));
+  return createHash("sha256").update(contents).digest("hex");
+}
+
 export async function collectFiles(relativePath, root = repositoryRoot) {
   const absolutePath = path.join(root, relativePath);
   const entries = await readdir(absolutePath, { withFileTypes: true }).catch(
@@ -108,6 +113,22 @@ export async function createManifest() {
     artifacts[id] = await fingerprint(paths);
   }
 
+  const antiSlopCatalog = await readJson(
+    "deslint/internal/rules/anti_slop_catalog.json",
+  );
+  const antiSlopCatalogSha256 = await fileSha256(
+    "deslint/internal/rules/anti_slop_catalog.json",
+  );
+  const antiSlopContract = await fingerprint([
+    "packages/schema/design-system-policy.schema.json",
+    "packages/schema/deslint-report.schema.json",
+    "packages/schema/web-provider-evidence.schema.json",
+    "packages/schema/native-source-evidence.schema.json",
+    "packages/schema/native-runtime-evidence.schema.json",
+    "packages/schema/layout-evidence.schema.json",
+    "packages/schema/stage-execution-evidence.schema.json",
+  ]);
+
   return {
     schemaVersion: 1,
     release: {
@@ -117,6 +138,22 @@ export async function createManifest() {
     compatibility: {
       definitionSchemaVersion: 2,
       policySchemaVersion: 1,
+      reportSchemaVersion: 1,
+      consumerConformanceSchemaVersion: 1,
+      designContextSchemaVersion: 1,
+      visualDetailEvidenceSchemaVersion: 1,
+      typographyEvidenceSchemaVersion: 1,
+      colorEvidenceSchemaVersion: 1,
+      layoutEvidenceSchemaVersion: 1,
+      motionEvidenceSchemaVersion: 1,
+      copyEvidenceSchemaVersion: 1,
+      imageryEvidenceSchemaVersion: 1,
+      runtimeEvidenceSchemaVersion: 1,
+      nativeSourceEvidenceSchemaVersion: 1,
+      nativeRuntimeEvidenceSchemaVersion: 1,
+      webProviderEvidenceSchemaVersion: 1,
+      consumerReleaseLockSchemaVersion: 1,
+      stageExecutionEvidenceSchemaVersion: 1,
       compiledBundleVersion: 2,
       node: ">=22",
       go: ">=1.26.0",
@@ -128,6 +165,19 @@ export async function createManifest() {
       module: "github.com/aprilgom/AnslDes/deslint",
       version: rootPackage.version,
       releaseVersionLinkerFlag: `-X main.version=${rootPackage.version}`,
+    },
+    dependencies: {
+      antiSlopCatalog: {
+        sha256: antiSlopCatalogSha256,
+        pack: antiSlopCatalog.pack,
+      },
+      impeccable: antiSlopCatalog.impeccable,
+      hallmark: {
+        commit: antiSlopCatalog.hallmark.commit,
+        sourceSha256: antiSlopCatalog.hallmark.sourceSha256,
+      },
+      migrationNote: antiSlopCatalog.migrationNote,
+      antiSlopContract,
     },
     artifacts,
   };

@@ -1,0 +1,49 @@
+{
+  "$schema": "../imagery-evidence.schema.json",
+  "schemaVersion": 1,
+  "evidenceKind": "design-document-computed",
+  "platform": "design-document",
+  "surfaceId": "example-imagery-permissions",
+  "assetRegistryVersion": "1.0.0",
+  "nodes": [
+    {
+      "id": "small-icon",
+      "owner": "example-icons",
+      "consumer": "example-control",
+      "medium": "inline-svg",
+      "role": "icon",
+      "width": 24,
+      "height": 24,
+      "primitiveShapeCount": 10,
+      "pictorialScene": false,
+      "deliberatelyDrawn": false,
+      "sourceStatus": "loaded",
+      "source": "asset://example-icon",
+      "fingerprintSha256": "3333333333333333333333333333333333333333333333333333333333333333",
+      "decorative": true,
+      "screenReaderExcluded": true,
+      "accessibleLabel": "",
+      "gradientOrShapePlaceholder": false
+    },
+    {
+      "id": "omitted-art",
+      "owner": "example-asset-owner",
+      "consumer": "example-optional-hero",
+      "assetId": "optional-art",
+      "medium": "img",
+      "role": "hero-illustration",
+      "width": 0,
+      "height": 0,
+      "primitiveShapeCount": 0,
+      "pictorialScene": false,
+      "deliberatelyDrawn": false,
+      "sourceStatus": "intentionally-omitted",
+      "source": "none",
+      "fingerprintSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "decorative": true,
+      "screenReaderExcluded": true,
+      "accessibleLabel": "",
+      "gradientOrShapePlaceholder": false
+    }
+  ]
+}

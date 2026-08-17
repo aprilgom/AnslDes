@@ -2,6 +2,25 @@
   "$schema": "../design-system-policy.schema.json",
   "schemaVersion": 1,
   "definitionId": "example-product",
+  "profile": {
+    "id": "operate",
+    "primaryUserGoal": "complete a structured task",
+    "density": "comfortable",
+    "noveltyTolerance": "low",
+    "nativeAffordancePriority": "preferred",
+    "severityOverrides": {
+      "design-system/color": "error",
+      "design-system/font": "error",
+      "design-system/font-size": "error",
+      "design-system/radius": "error",
+      "profile/gratuitous-motion": "warning"
+    },
+    "thresholds": {
+      "maxOversizedActions": 1,
+      "maxInconsistentActions": 0
+    },
+    "requiredEvidence": ["consumer-conformance"]
+  },
   "severities": {
     "definition/schema-version": "error",
     "definition/invalid-reference": "error",
@@ -21,8 +40,210 @@
     },
     "exactExcludes": []
   },
+  "content": {
+    "registryVersion": "1.0.0",
+    "locales": {
+      "ko-KR": {
+        "phraseRegistryVersion": "1.0.0",
+        "marketingBuzzwords": ["혁신적인", "원활한"],
+        "theaterPhrases": ["보안 연극"],
+        "protectedTerms": ["복구 지점"],
+        "recoveryCopyIds": ["recovery.retry"]
+      },
+      "en-US": {
+        "phraseRegistryVersion": "1.0.0",
+        "marketingBuzzwords": ["seamless", "revolutionary"],
+        "theaterPhrases": ["security theater"],
+        "protectedTerms": ["recovery point"],
+        "recoveryCopyIds": ["recovery.retry"]
+      }
+    },
+    "sourceReferences": ["source.metrics.active-users"]
+  },
+  "assets": {
+    "registryVersion": "1.0.0",
+    "entries": {
+      "hero-art": {
+        "owner": "example-asset-owner",
+        "role": "hero-illustration",
+        "implementationSource": "asset://example-hero",
+        "consumers": ["example-hero"],
+        "fingerprintSha256": "1111111111111111111111111111111111111111111111111111111111111111",
+        "intentionallyOmitted": false,
+        "decorative": false
+      },
+      "optional-art": {
+        "owner": "example-asset-owner",
+        "role": "hero-illustration",
+        "implementationSource": "none",
+        "consumers": ["example-optional-hero"],
+        "fingerprintSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "intentionallyOmitted": true,
+        "decorative": true
+      }
+    }
+  },
+  "runtime": {
+    "registryVersion": "1.0.0",
+    "justifiedTextExceptions": [
+      {
+        "platform": "web",
+        "surfaceId": "example-export-surface",
+        "routeId": "example-export-route",
+        "nodeId": "export-body-copy",
+        "owner": "example-export-owner",
+        "context": "export"
+      }
+    ]
+  },
+  "native": {
+    "registryVersion": "1.0.0",
+    "iosAdjacentTargetSpacing": 8,
+    "thresholds": {
+      "maxSynchronousStartupMs": 20,
+      "maxInitializationMs": 800,
+      "maxMainThreadWorkMs": 8,
+      "maxFrameDropRatio": 0.02,
+      "maxThumbnailDecodeRatio": 4,
+      "maxJsBundleRegressionBytes": 1024,
+      "maxAppBinaryRegressionBytes": 2048
+    },
+    "requiredRuntimeCaptures": [
+      {
+        "id": "ios-phone-light",
+        "platform": "ios",
+        "evidenceKind": "simulator",
+        "formFactor": "phone",
+        "orientation": "portrait",
+        "windowMode": "fullscreen",
+        "foldPosture": "not-applicable",
+        "theme": "light",
+        "minimumFontScale": 1,
+        "reduceMotion": false
+      },
+      {
+        "id": "ios-tablet-dark-large",
+        "platform": "ios",
+        "evidenceKind": "simulator",
+        "formFactor": "tablet",
+        "orientation": "landscape",
+        "windowMode": "split",
+        "foldPosture": "not-applicable",
+        "theme": "dark",
+        "minimumFontScale": 2.35,
+        "reduceMotion": true
+      },
+      {
+        "id": "android-phone-light",
+        "platform": "android",
+        "evidenceKind": "emulator",
+        "formFactor": "phone",
+        "orientation": "portrait",
+        "windowMode": "fullscreen",
+        "foldPosture": "not-applicable",
+        "theme": "light",
+        "minimumFontScale": 1,
+        "reduceMotion": false
+      },
+      {
+        "id": "android-tablet-dark-large",
+        "platform": "android",
+        "evidenceKind": "emulator",
+        "formFactor": "tablet",
+        "orientation": "landscape",
+        "windowMode": "multi-window",
+        "foldPosture": "not-applicable",
+        "theme": "dark",
+        "minimumFontScale": 2.35,
+        "reduceMotion": true
+      },
+      {
+        "id": "android-foldable-half-open",
+        "platform": "android",
+        "evidenceKind": "emulator",
+        "formFactor": "foldable",
+        "orientation": "portrait",
+        "windowMode": "multi-window",
+        "foldPosture": "half-open",
+        "theme": "dark",
+        "minimumFontScale": 1.6,
+        "reduceMotion": true
+      }
+    ]
+  },
+  "web": {
+    "registryVersion": "1.0.0",
+    "buildCommand": "npm run build:example",
+    "routes": [
+      {
+        "id": "example-home",
+        "owner": "example-web-owner",
+        "target": "http://127.0.0.1:4173/example"
+      }
+    ],
+    "viewports": [
+      { "id": "desktop", "width": 1280, "height": 800 },
+      { "id": "mobile", "width": 390, "height": 844 }
+    ],
+    "themes": ["light", "dark"],
+    "fontScales": [1, 1.6],
+    "reduceMotion": [false, true],
+    "requiredCaptures": [
+      {
+        "id": "regex-source-light",
+        "provider": "regex-source",
+        "routeId": "example-home",
+        "viewportId": "desktop",
+        "theme": "light",
+        "fontScale": 1,
+        "reduceMotion": false
+      },
+      {
+        "id": "static-html-light",
+        "provider": "static-html",
+        "routeId": "example-home",
+        "viewportId": "desktop",
+        "theme": "light",
+        "fontScale": 1,
+        "reduceMotion": false
+      },
+      {
+        "id": "browser-dark-large",
+        "provider": "browser",
+        "routeId": "example-home",
+        "viewportId": "mobile",
+        "theme": "dark",
+        "fontScale": 1.6,
+        "reduceMotion": true
+      },
+      {
+        "id": "visual-dark-large",
+        "provider": "visual-contrast",
+        "routeId": "example-home",
+        "viewportId": "mobile",
+        "theme": "dark",
+        "fontScale": 1.6,
+        "reduceMotion": true
+      }
+    ],
+    "artifactExclusions": [
+      {
+        "path": "generated/example.css",
+        "fingerprintSha256": "1111111111111111111111111111111111111111111111111111111111111111",
+        "owner": "example-build-owner",
+        "rationale": "generated vendor compatibility artifact",
+        "reproductionCommand": "npm run build:example"
+      }
+    ]
+  },
   "evidence": {
-    "requiredKinds": ["definition", "source", "pencil", "computed-layout"],
+    "requiredKinds": [
+      "definition",
+      "native-source",
+      "design-document-source",
+      "design-document-computed"
+    ],
+    "deferredKinds": [],
     "layoutDocumentSha256": "0000000000000000000000000000000000000000000000000000000000000000"
   },
   "budgets": {
@@ -30,7 +251,47 @@
     "warning": 0,
     "raw": 0,
     "overflow": 0,
-    "overlap": 0
+    "overlap": 0,
+    "blocking": 0,
+    "advisory": 1,
+    "exception": 4,
+    "notRun": 1,
+    "deferred": 1
   },
-  "exceptions": []
+  "exceptions": [],
+  "rulePacks": [
+    {
+      "id": "ansldes-anti-slop",
+      "version": "1.1.0",
+      "fingerprintSha256": "df05187c79c254c8b7f1159b375ae2017e5d55b20af512aabf7f7b522173159f"
+    },
+    {
+      "id": "ansldes-core",
+      "version": "1.12.0",
+      "fingerprintSha256": "977d5b250fcb57cca5c1af87215f2d477cf9132eeebe9de12b3659a3587e4561"
+    }
+  ],
+  "ruleOverrides": [],
+  "governance": {
+    "reviewedAt": "2026-08-17",
+    "reviewIntervalDays": 90,
+    "reviewer": "example-governance-reviewer",
+    "reviewSubjects": [
+      "impeccable-version",
+      "hallmark-commit",
+      "rule-mapping-drift",
+      "exceptions"
+    ],
+    "advisoryMode": "report",
+    "forbiddenFlags": [
+      "--no-config",
+      "--no-design-system",
+      "--no-inline-ignores",
+      "--no-advisory"
+    ],
+    "requireExitCode2": true,
+    "requireUnmodifiedReport": true,
+    "passingReportsOnly": true,
+    "ignores": []
+  }
 }

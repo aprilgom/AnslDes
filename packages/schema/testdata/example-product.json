@@ -7,6 +7,18 @@
     "names": ["light", "dark"],
     "default": "light"
   },
+  "colorUsage": {
+    "contrast": {
+      "body": 4.5,
+      "large": 3
+    },
+    "approvedPalettes": {
+      "brand-accent": {
+        "contexts": ["brand"],
+        "themes": ["dark"]
+      }
+    }
+  },
   "foundations": {
     "color": {
       "primitive": {
@@ -198,6 +210,8 @@
       },
       "transitions": {
         "control.press": {
+          "owner": "example-control",
+          "purpose": "state-change",
           "duration": "{motion.duration.fast}",
           "easing": "{motion.easing.standard}",
           "reducedMotion": {

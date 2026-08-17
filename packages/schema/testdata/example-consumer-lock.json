@@ -1,0 +1,38 @@
+{
+  "$schema": "../consumer-release-lock.schema.json",
+  "schemaVersion": 1,
+  "release": {
+    "version": "1.0.0",
+    "tag": "v1.0.0",
+    "manifestSha256": "1111111111111111111111111111111111111111111111111111111111111111"
+  },
+  "packages": [
+    {
+      "id": "schema",
+      "version": "1.0.0",
+      "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+    }
+  ],
+  "deslint": {
+    "id": "deslint",
+    "version": "1.0.0",
+    "sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+  },
+  "rulePacks": [
+    {
+      "id": "ansldes-anti-slop",
+      "version": "1.1.0",
+      "fingerprintSha256": "df05187c79c254c8b7f1159b375ae2017e5d55b20af512aabf7f7b522173159f"
+    }
+  ],
+  "definition": {
+    "schemaVersion": 2,
+    "productDefinitionVersion": "2026.08.1"
+  },
+  "dependencies": {
+    "antiSlopCatalogSha256": "4444444444444444444444444444444444444444444444444444444444444444",
+    "impeccableTreeSha256": "a4dfe2060edf918b1241afac131ed9fbdf2d9eecaa448a6f57365e895da1908c",
+    "hallmarkSourceSha256": "83083b5e37b99cb8211268b778aa0cb3f677f8fe53f8d817f54fcad799882e0e",
+    "antiSlopContractSha256": "5555555555555555555555555555555555555555555555555555555555555555"
+  }
+}

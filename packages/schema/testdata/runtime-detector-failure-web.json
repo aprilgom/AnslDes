@@ -1,0 +1,14 @@
+{
+  "$schema": "../runtime-evidence.schema.json",
+  "schemaVersion": 1,
+  "evidenceKind": "web-rendered",
+  "platform": "web",
+  "surfaceId": "example-surface",
+  "runtimePolicyVersion": "1.0.0",
+  "captureStatus": "detector-process-failed",
+  "detectorFailure": {
+    "stage": "navigation",
+    "code": "browser-disconnected"
+  },
+  "routes": []
+}

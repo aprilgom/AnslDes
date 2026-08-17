@@ -1,0 +1,86 @@
+{
+  "$schema": "../visual-detail-evidence.schema.json",
+  "schemaVersion": 1,
+  "evidenceKind": "native-source",
+  "platform": "react-native",
+  "surfaceId": "example-permission-surface",
+  "nodes": [
+    {
+      "id": "status-edge",
+      "owner": "example-status",
+      "kind": "status",
+      "radius": 12,
+      "borderWidth": 0,
+      "shadowBlur": 0,
+      "shadowSpread": 0,
+      "accentEdges": [
+        {
+          "side": "left",
+          "thickness": 3,
+          "colorRole": "status"
+        }
+      ],
+      "backgroundPattern": "none",
+      "patternDataMeaning": false,
+      "semanticState": "error",
+      "componentOwner": "example-status",
+      "accessoryWrapper": false,
+      "declaresBorder": false,
+      "declaresElevation": false
+    },
+    {
+      "id": "broad-card",
+      "owner": "example-card",
+      "kind": "card",
+      "radius": 12,
+      "borderWidth": 0,
+      "shadowBlur": 0,
+      "shadowSpread": 0,
+      "accentEdges": [
+        {
+          "side": "left",
+          "thickness": 3,
+          "colorRole": "status"
+        }
+      ],
+      "backgroundPattern": "none",
+      "patternDataMeaning": false,
+      "semanticState": "error",
+      "componentOwner": "example-card",
+      "accessoryWrapper": false,
+      "declaresBorder": false,
+      "declaresElevation": false
+    },
+    {
+      "id": "diagram-grid",
+      "owner": "example-diagram",
+      "kind": "diagram",
+      "radius": 0,
+      "borderWidth": 0,
+      "shadowBlur": 0,
+      "shadowSpread": 0,
+      "accentEdges": [],
+      "backgroundPattern": "grid",
+      "patternDataMeaning": true,
+      "diagramOwner": "example-diagram",
+      "accessoryWrapper": false,
+      "declaresBorder": false,
+      "declaresElevation": false
+    },
+    {
+      "id": "list-accessory",
+      "owner": "example-list",
+      "kind": "list-row",
+      "radius": 0,
+      "borderWidth": 0,
+      "shadowBlur": 0,
+      "shadowSpread": 0,
+      "accentEdges": [],
+      "backgroundPattern": "none",
+      "patternDataMeaning": false,
+      "accessoryWrapper": true,
+      "declaresBorder": false,
+      "declaresElevation": false
+    }
+  ]
+}

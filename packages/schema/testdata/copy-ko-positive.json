@@ -1,0 +1,52 @@
+{
+  "$schema": "../copy-evidence.schema.json",
+  "schemaVersion": 1,
+  "evidenceKind": "design-document-source",
+  "platform": "design-document",
+  "profileId": "operate",
+  "surfaceId": "example-copy-ko-positive",
+  "locale": "ko-KR",
+  "contentRegistryStatus": "executed",
+  "nodes": [
+    {
+      "id": "domain-term",
+      "owner": "example-domain",
+      "containerId": "example-settings",
+      "contentRole": "domain-term",
+      "intent": "inform",
+      "text": "복구 지점을 선택하세요.",
+      "cadencePattern": "none",
+      "rationaleReference": "rationale.recovery-point"
+    },
+    {
+      "id": "recovery-question",
+      "owner": "example-recovery",
+      "containerId": "example-error",
+      "contentRole": "question",
+      "intent": "recover",
+      "text": "다시 시도할까요?",
+      "cadencePattern": "none",
+      "recoveryCopyId": "recovery.retry"
+    },
+    {
+      "id": "recovery-action",
+      "owner": "example-recovery",
+      "containerId": "example-error",
+      "contentRole": "next-action",
+      "intent": "recover",
+      "text": "다시 시도할까요?",
+      "cadencePattern": "none",
+      "recoveryCopyId": "recovery.retry"
+    },
+    {
+      "id": "verified-metric",
+      "owner": "example-claim",
+      "containerId": "example-proof",
+      "contentRole": "metric",
+      "intent": "claim",
+      "text": "활성 사용자 집계",
+      "cadencePattern": "none",
+      "sourceReference": "source.metrics.active-users"
+    }
+  ]
+}

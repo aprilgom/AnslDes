@@ -1,0 +1,1891 @@
+{
+  "schemaVersion": 1,
+  "migrationNote": {
+    "path": "docs/anti-slop/references/impeccable-detector-2026/MIGRATION.md",
+    "sha256": "f2573b1d0776901b291a7c72e3c74c4259493ba57d4e7058310c63eb5fe10c16"
+  },
+  "impeccable": {
+    "name": "impeccable",
+    "version": "3.6.0",
+    "integrity": "sha512-nysc6/2OHTWqLrcSxTxZk4r4QMufhU8NTIuG2ic6p5zzyZe45AWBX3/18OA5S88pCWq+4z8pKsjUxhAM990RKg==",
+    "commit": "7b646bafd60b9dd9828ce5c4c1a25691702c9e92",
+    "sourceTreeSha256": "84d3d3a66be62ea4c361420a6662f42010b123b680e00d8306e6a627ab5f5954",
+    "treeSha256": "a4dfe2060edf918b1241afac131ed9fbdf2d9eecaa448a6f57365e895da1908c",
+    "computedTreeSha256": "a4dfe2060edf918b1241afac131ed9fbdf2d9eecaa448a6f57365e895da1908c"
+  },
+  "hallmark": {
+    "commit": "13ac0ec7e148655948100b6396439e481361d690",
+    "sourceSha256": "83083b5e37b99cb8211268b778aa0cb3f677f8fe53f8d817f54fcad799882e0e",
+    "mappings": [
+      {
+        "sourceId": "hallmark-eight-01",
+        "canonicalSourceId": "ai-color-palette"
+      },
+      {
+        "sourceId": "hallmark-eight-02",
+        "canonicalSourceId": "overused-font"
+      },
+      {
+        "sourceId": "hallmark-eight-03",
+        "canonicalSourceId": "equal-icon-feature-columns"
+      },
+      {
+        "sourceId": "hallmark-eight-04",
+        "canonicalSourceId": "full-viewport-centered-hero"
+      },
+      {
+        "sourceId": "hallmark-eight-05",
+        "canonicalSourceId": "nested-cards"
+      },
+      {
+        "sourceId": "hallmark-eight-06",
+        "canonicalSourceId": "gradient-text"
+      },
+      {
+        "sourceId": "hallmark-eight-07",
+        "canonicalSourceId": "pure-extreme-surface"
+      },
+      {
+        "sourceId": "hallmark-eight-08",
+        "canonicalSourceId": "unverified-social-proof"
+      }
+    ]
+  },
+  "pack": {
+    "id": "ansldes-anti-slop",
+    "version": "1.1.0",
+    "fingerprintSha256": "df05187c79c254c8b7f1159b375ae2017e5d55b20af512aabf7f7b522173159f"
+  },
+  "rules": [
+    {
+      "id": "color/ai-color-palette",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "hallmark/hallmark-eight-01#13ac0ec7e148655948100b6396439e481361d690",
+        "impeccable/ai-color-palette@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "hallmark/hallmark-eight-01",
+        "impeccable/ai-color-palette"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "color/cream-palette",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/cream-palette@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/cream-palette"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "color/dark-glow",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/dark-glow@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/dark-glow"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "color/gradient-text",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "hallmark/hallmark-eight-06#13ac0ec7e148655948100b6396439e481361d690",
+        "impeccable/gradient-text@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "hallmark/hallmark-eight-06",
+        "impeccable/gradient-text"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "color/gray-on-color",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "quality",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/gray-on-color@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/gray-on-color"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "color/low-contrast",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "quality",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/low-contrast@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/low-contrast"
+      ],
+      "dependencies": [
+        "computed-color"
+      ],
+      "providers": [
+        "browser",
+        "static-html",
+        "visual-contrast"
+      ]
+    },
+    {
+      "id": "color/pure-extreme-surface",
+      "implementationVersion": "hallmark-eight@2026-08-06",
+      "category": "supplement",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "hallmark/hallmark-eight-07#13ac0ec7e148655948100b6396439e481361d690"
+      ],
+      "sourceRuleIds": [
+        "hallmark/hallmark-eight-07"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "color/radial-halo",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/radial-halo@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/radial-halo"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "color/radial-spotlight-glow",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/radial-spotlight-glow@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/radial-spotlight-glow"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "copy/aphoristic-cadence",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/aphoristic-cadence@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/aphoristic-cadence"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "copy/em-dash-overuse",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "advisory",
+      "upstreamAdvisory": true,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/em-dash-overuse@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/em-dash-overuse"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "copy/marketing-buzzword",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/marketing-buzzword@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/marketing-buzzword"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "copy/repeated-container-text",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "quality",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/repeated-container-text@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/repeated-container-text"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "copy/theater-slop-phrase",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "advisory",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "advisory",
+      "provenance": [
+        "impeccable/theater-slop-phrase@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/theater-slop-phrase"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "copy/unverified-social-proof",
+      "implementationVersion": "hallmark-eight@2026-08-06",
+      "category": "supplement",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "consumer-content-registry",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "hallmark/hallmark-eight-08#13ac0ec7e148655948100b6396439e481361d690"
+      ],
+      "sourceRuleIds": [
+        "hallmark/hallmark-eight-08"
+      ],
+      "dependencies": [
+        "consumer-content-registry"
+      ],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "design-system/color",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "quality",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "advisory",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "advisory",
+      "provenance": [
+        "impeccable/design-system-color@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/design-system-color"
+      ],
+      "dependencies": [
+        "design-context"
+      ],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "design-system/font",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "quality",
+      "scopes": [
+        "type"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/design-system-font@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/design-system-font"
+      ],
+      "dependencies": [
+        "design-context"
+      ],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "design-system/font-size",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "quality",
+      "scopes": [
+        "type"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "advisory",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "advisory",
+      "provenance": [
+        "impeccable/design-system-font-size@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/design-system-font-size"
+      ],
+      "dependencies": [
+        "design-context"
+      ],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "design-system/radius",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "quality",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "advisory",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "advisory",
+      "provenance": [
+        "impeccable/design-system-radius@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/design-system-radius"
+      ],
+      "dependencies": [
+        "design-context"
+      ],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "imagery/broken-image",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "quality",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/broken-image@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/broken-image"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "imagery/shape-assembled-illustration",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "advisory",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "advisory",
+      "provenance": [
+        "impeccable/shape-assembled-illustration@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/shape-assembled-illustration"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "layout/body-text-viewport-edge",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "quality",
+      "scopes": [
+        "layout"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/body-text-viewport-edge@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/body-text-viewport-edge"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "static-html"
+      ]
+    },
+    {
+      "id": "layout/clipped-overflow-container",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "quality",
+      "scopes": [
+        "layout"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/clipped-overflow-container@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/clipped-overflow-container"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "static-html"
+      ]
+    },
+    {
+      "id": "layout/cramped-padding",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "quality",
+      "scopes": [
+        "layout"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/cramped-padding@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/cramped-padding"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "static-html"
+      ]
+    },
+    {
+      "id": "layout/edge-flush-cards",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "quality",
+      "scopes": [
+        "layout"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/edge-flush-cards@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/edge-flush-cards"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "static-html"
+      ]
+    },
+    {
+      "id": "layout/equal-icon-feature-columns",
+      "implementationVersion": "hallmark-eight@2026-08-06",
+      "category": "supplement",
+      "scopes": [
+        "layout"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "hallmark/hallmark-eight-03#13ac0ec7e148655948100b6396439e481361d690"
+      ],
+      "sourceRuleIds": [
+        "hallmark/hallmark-eight-03"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "layout/first-viewport-column-overflow",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "quality",
+      "scopes": [
+        "layout"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/first-viewport-column-overflow@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/first-viewport-column-overflow"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "static-html"
+      ]
+    },
+    {
+      "id": "layout/full-viewport-centered-hero",
+      "implementationVersion": "hallmark-eight@2026-08-06",
+      "category": "supplement",
+      "scopes": [
+        "layout"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "hallmark/hallmark-eight-04#13ac0ec7e148655948100b6396439e481361d690"
+      ],
+      "sourceRuleIds": [
+        "hallmark/hallmark-eight-04"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "layout/heading-rhythm",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "quality",
+      "scopes": [
+        "layout",
+        "type"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/heading-rhythm@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/heading-rhythm"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "static-html"
+      ]
+    },
+    {
+      "id": "layout/line-length",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "quality",
+      "scopes": [
+        "layout",
+        "type"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/line-length@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/line-length"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "static-html"
+      ]
+    },
+    {
+      "id": "layout/monotonous-spacing",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [
+        "layout"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/monotonous-spacing@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/monotonous-spacing"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "static-html"
+      ]
+    },
+    {
+      "id": "layout/nested-cards",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [
+        "layout"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "hallmark/hallmark-eight-05#13ac0ec7e148655948100b6396439e481361d690",
+        "impeccable/nested-cards@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "hallmark/hallmark-eight-05",
+        "impeccable/nested-cards"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "static-html"
+      ]
+    },
+    {
+      "id": "layout/numbered-section-labels",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [
+        "type"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "advisory",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "advisory",
+      "provenance": [
+        "impeccable/numbered-section-labels@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/numbered-section-labels"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "static-html"
+      ]
+    },
+    {
+      "id": "layout/text-occlusion",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "quality",
+      "scopes": [
+        "layout"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/text-occlusion@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/text-occlusion"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "static-html"
+      ]
+    },
+    {
+      "id": "layout/text-overflow",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "quality",
+      "scopes": [
+        "layout"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/text-overflow@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/text-overflow"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "static-html"
+      ]
+    },
+    {
+      "id": "motion/blinking-cursor",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "advisory",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "advisory",
+      "provenance": [
+        "impeccable/blinking-cursor@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/blinking-cursor"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "motion/bounce-easing",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/bounce-easing@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/bounce-easing"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "motion/image-hover-transform",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "advisory",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "advisory",
+      "provenance": [
+        "impeccable/image-hover-transform@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/image-hover-transform"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "motion/layout-transition",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "quality",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/layout-transition@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/layout-transition"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "motion/marquee",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/marquee@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/marquee"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "motion/pulsing-dot",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/pulsing-dot@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/pulsing-dot"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "runtime/content-hidden-at-rest",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "quality",
+      "scopes": [
+        "layout"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/content-hidden-at-rest@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/content-hidden-at-rest"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser"
+      ]
+    },
+    {
+      "id": "runtime/justified-text",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "quality",
+      "scopes": [
+        "type"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/justified-text@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/justified-text"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "runtime/script-error",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "quality",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/script-error@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/script-error"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source"
+      ]
+    },
+    {
+      "id": "typography/all-caps-body",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "quality",
+      "scopes": [
+        "type"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/all-caps-body@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/all-caps-body"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "typography/extreme-negative-tracking",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [
+        "type"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/extreme-negative-tracking@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/extreme-negative-tracking"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "typography/flat-type-hierarchy",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [
+        "type"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/flat-type-hierarchy@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/flat-type-hierarchy"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "static-html"
+      ]
+    },
+    {
+      "id": "typography/hero-eyebrow-chip",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [
+        "type"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/hero-eyebrow-chip@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/hero-eyebrow-chip"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "typography/icon-tile-stack",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [
+        "layout"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/icon-tile-stack@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/icon-tile-stack"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "typography/italic-serif-display",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [
+        "type"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/italic-serif-display@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/italic-serif-display"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "typography/kicker-above-heading",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [
+        "type"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/kicker-above-heading@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/kicker-above-heading"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "typography/oversized-h1",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [
+        "type"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/oversized-h1@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/oversized-h1"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "typography/overused-font",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [
+        "type"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "hallmark/hallmark-eight-02#13ac0ec7e148655948100b6396439e481361d690",
+        "impeccable/overused-font@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "hallmark/hallmark-eight-02",
+        "impeccable/overused-font"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "typography/skipped-heading",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "quality",
+      "scopes": [
+        "type"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/skipped-heading@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/skipped-heading"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "typography/tight-leading",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "quality",
+      "scopes": [
+        "type"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/tight-leading@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/tight-leading"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "typography/tiny-text",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "quality",
+      "scopes": [
+        "type"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/tiny-text@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/tiny-text"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "typography/undersized-ui-text",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "quality",
+      "scopes": [
+        "type"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/undersized-ui-text@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/undersized-ui-text"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "typography/wide-tracking",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "quality",
+      "scopes": [
+        "type"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/wide-tracking@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/wide-tracking"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "visual/border-accent-on-rounded",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/border-accent-on-rounded@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/border-accent-on-rounded"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "visual/codex-grid-background",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "advisory",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "advisory",
+      "provenance": [
+        "impeccable/codex-grid-background@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/codex-grid-background"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "visual/gpt-thin-border-wide-shadow",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "advisory",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "advisory",
+      "provenance": [
+        "impeccable/gpt-thin-border-wide-shadow@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/gpt-thin-border-wide-shadow"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "visual/repeating-stripes-gradient",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "advisory",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "advisory",
+      "provenance": [
+        "impeccable/repeating-stripes-gradient@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/repeating-stripes-gradient"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    },
+    {
+      "id": "visual/side-tab",
+      "implementationVersion": "impeccable@3.6.0",
+      "category": "slop",
+      "scopes": [],
+      "platforms": [
+        "web"
+      ],
+      "evidenceKinds": [
+        "web-rendered",
+        "web-source"
+      ],
+      "defaultSeverity": "error",
+      "upstreamAdvisory": false,
+      "upstreamSeverity": "error",
+      "provenance": [
+        "impeccable/side-tab@3.6.0#7b646bafd60b9dd9828ce5c4c1a25691702c9e92"
+      ],
+      "sourceRuleIds": [
+        "impeccable/side-tab"
+      ],
+      "dependencies": [],
+      "providers": [
+        "browser",
+        "regex-source",
+        "static-html"
+      ]
+    }
+  ]
+}

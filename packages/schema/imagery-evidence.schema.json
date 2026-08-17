@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ansldes.dev/schema/imagery-evidence.v1.json",
+  "title": "AnslDes imagery and asset evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "evidenceKind",
+    "platform",
+    "surfaceId",
+    "assetRegistryVersion",
+    "nodes"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "evidenceKind": {
+      "enum": [
+        "web-source",
+        "web-rendered",
+        "native-source",
+        "design-document-source",
+        "design-document-computed",
+        "simulator",
+        "emulator",
+        "physical-device"
+      ]
+    },
+    "platform": {
+      "enum": ["web", "react-native", "design-document", "ios", "android"]
+    },
+    "surfaceId": { "$ref": "#/$defs/name" },
+    "assetRegistryVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/node" }
+    }
+  },
+  "$defs": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[._/-][a-z0-9]+)*$"
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "owner",
+        "consumer",
+        "medium",
+        "role",
+        "width",
+        "height",
+        "primitiveShapeCount",
+        "pictorialScene",
+        "deliberatelyDrawn",
+        "sourceStatus",
+        "source",
+        "fingerprintSha256",
+        "decorative",
+        "screenReaderExcluded",
+        "accessibleLabel",
+        "gradientOrShapePlaceholder"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/name" },
+        "owner": { "$ref": "#/$defs/name" },
+        "consumer": { "$ref": "#/$defs/name" },
+        "assetId": { "$ref": "#/$defs/name" },
+        "medium": {
+          "enum": ["img", "video-poster", "native-image", "inline-svg"]
+        },
+        "role": {
+          "enum": [
+            "icon",
+            "logo",
+            "data-diagram",
+            "hero-illustration",
+            "photo",
+            "video-poster"
+          ]
+        },
+        "width": { "type": "number", "minimum": 0 },
+        "height": { "type": "number", "minimum": 0 },
+        "primitiveShapeCount": { "type": "integer", "minimum": 0 },
+        "pictorialScene": { "type": "boolean" },
+        "deliberatelyDrawn": { "type": "boolean" },
+        "sourceStatus": {
+          "enum": [
+            "missing",
+            "empty",
+            "placeholder",
+            "loaded",
+            "load-failed",
+            "intentionally-omitted"
+          ]
+        },
+        "source": { "type": "string" },
+        "fingerprintSha256": {
+          "type": "string",
+          "pattern": "^(?:[0-9a-f]{64})?$"
+        },
+        "decorative": { "type": "boolean" },
+        "screenReaderExcluded": { "type": "boolean" },
+        "accessibleLabel": { "type": "string" },
+        "gradientOrShapePlaceholder": { "type": "boolean" }
+      }
+    }
+  }
+}

@@ -1,0 +1,275 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ansldes.dev/schema/deslint-report.v1.json",
+  "title": "AnslDes deterministic lint report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "status",
+    "definitionId",
+    "fingerprintSha256",
+    "ruleSet",
+    "evidence",
+    "summary",
+    "diagnostics",
+    "falsePositives",
+    "visualJudgments",
+    "stageExecutions"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "status": { "enum": ["pass", "fail"] },
+    "definitionId": { "$ref": "#/$defs/name" },
+    "fingerprintSha256": { "$ref": "#/$defs/sha256" },
+    "ruleSet": { "$ref": "#/$defs/ruleSet" },
+    "evidence": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/evidenceRecord" }
+    },
+    "summary": { "$ref": "#/$defs/summary" },
+    "diagnostics": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/diagnostic" }
+    },
+    "falsePositives": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/falsePositive" }
+    },
+    "visualJudgments": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/visualJudgment" }
+    },
+    "stageExecutions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/stageExecution" }
+    }
+  },
+  "$defs": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[._/-][a-z0-9]+)*$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "evidenceKind": {
+      "enum": [
+        "definition",
+        "web-source",
+        "web-rendered",
+        "native-source",
+        "design-document-source",
+        "design-document-computed",
+        "simulator",
+        "emulator",
+        "physical-device",
+        "consumer-conformance",
+        "consumer-content-registry",
+        "execution"
+      ]
+    },
+    "ruleSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fingerprintSha256", "packs", "rules"],
+      "properties": {
+        "fingerprintSha256": { "$ref": "#/$defs/sha256" },
+        "packs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "version", "fingerprintSha256"],
+            "properties": {
+              "id": { "$ref": "#/$defs/name" },
+              "version": { "type": "string", "minLength": 1 },
+              "fingerprintSha256": { "$ref": "#/$defs/sha256" }
+            }
+          }
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["ruleId", "status"],
+            "properties": {
+              "ruleId": { "$ref": "#/$defs/name" },
+              "status": {
+                "enum": ["active", "not-applicable", "disabled", "unsupported"]
+              },
+              "reason": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      }
+    },
+    "evidenceRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "platform", "status"],
+      "properties": {
+        "kind": { "$ref": "#/$defs/evidenceKind" },
+        "platform": { "type": "string", "minLength": 1 },
+        "status": {
+          "enum": [
+            "pass",
+            "fail",
+            "advisory",
+            "false-positive",
+            "not-run",
+            "deferred"
+          ]
+        },
+        "path": { "type": "string", "minLength": 1 }
+      }
+    },
+    "position": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["line", "column"],
+      "properties": {
+        "line": { "type": "integer", "minimum": 1 },
+        "column": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "range": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["start", "end"],
+      "properties": {
+        "start": { "$ref": "#/$defs/position" },
+        "end": { "$ref": "#/$defs/position" }
+      }
+    },
+    "diagnostic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ruleId",
+        "sourceRuleIds",
+        "status",
+        "severity",
+        "message",
+        "path",
+        "evidenceKind",
+        "platform",
+        "owner",
+        "fingerprint"
+      ],
+      "properties": {
+        "ruleId": { "$ref": "#/$defs/name" },
+        "sourceRuleIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/name" }
+        },
+        "status": { "enum": ["fail", "advisory"] },
+        "severity": { "enum": ["error", "warning"] },
+        "message": { "type": "string", "minLength": 1 },
+        "path": { "type": "string", "minLength": 1 },
+        "range": { "$ref": "#/$defs/range" },
+        "evidenceKind": { "$ref": "#/$defs/evidenceKind" },
+        "platform": { "type": "string", "minLength": 1 },
+        "viewport": { "type": "string", "minLength": 1 },
+        "owner": { "type": "string", "minLength": 1 },
+        "fingerprint": { "$ref": "#/$defs/sha256" },
+        "category": { "type": "string", "minLength": 1 }
+      }
+    },
+    "falsePositive": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ruleId",
+        "findingFingerprint",
+        "owner",
+        "ownerFingerprint",
+        "rationale",
+        "path",
+        "evidenceKind",
+        "platform",
+        "status"
+      ],
+      "properties": {
+        "ruleId": { "$ref": "#/$defs/name" },
+        "findingFingerprint": { "$ref": "#/$defs/sha256" },
+        "owner": { "type": "string", "minLength": 1 },
+        "ownerFingerprint": { "$ref": "#/$defs/sha256" },
+        "rationale": { "type": "string", "minLength": 8 },
+        "path": { "type": "string", "minLength": 1 },
+        "evidenceKind": { "$ref": "#/$defs/evidenceKind" },
+        "platform": { "type": "string", "minLength": 1 },
+        "status": { "const": "false-positive" }
+      }
+    },
+    "visualJudgment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "status", "evidenceKind", "platform"],
+      "properties": {
+        "id": { "$ref": "#/$defs/name" },
+        "status": { "enum": ["pass", "fail", "not-reviewed"] },
+        "evidenceKind": { "$ref": "#/$defs/evidenceKind" },
+        "platform": { "type": "string", "minLength": 1 },
+        "reviewer": { "type": "string", "minLength": 1 },
+        "note": { "type": "string", "minLength": 1 }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "errors",
+        "warnings",
+        "raw",
+        "overflow",
+        "overlap",
+        "falsePositives"
+      ],
+      "properties": {
+        "errors": { "type": "integer", "minimum": 0 },
+        "warnings": { "type": "integer", "minimum": 0 },
+        "raw": { "type": "integer", "minimum": 0 },
+        "overflow": { "type": "integer", "minimum": 0 },
+        "overlap": { "type": "integer", "minimum": 0 },
+        "falsePositives": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "stageExecution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stageId",
+        "owner",
+        "platform",
+        "command",
+        "status",
+        "exitCode",
+        "stdout",
+        "stderr",
+        "dependencySha256",
+        "observedDependencySha256"
+      ],
+      "properties": {
+        "stageId": { "$ref": "#/$defs/name" },
+        "owner": { "type": "string", "minLength": 1 },
+        "platform": { "type": "string", "minLength": 1 },
+        "command": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "status": { "enum": ["pass", "fail"] },
+        "exitCode": { "type": "integer", "minimum": 0 },
+        "stdout": { "type": "string" },
+        "stderr": { "type": "string" },
+        "dependencySha256": { "$ref": "#/$defs/sha256" },
+        "observedDependencySha256": { "$ref": "#/$defs/sha256" }
+      }
+    }
+  }
+}

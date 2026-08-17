@@ -11,12 +11,16 @@
     "source",
     "evidence",
     "budgets",
-    "exceptions"
+    "exceptions",
+    "rulePacks",
+    "ruleOverrides",
+    "governance"
   ],
   "properties": {
     "$schema": { "type": "string" },
     "schemaVersion": { "const": 1 },
     "definitionId": { "$ref": "#/$defs/name" },
+    "profile": { "$ref": "#/$defs/profile" },
     "severities": {
       "type": "object",
       "additionalProperties": false,
@@ -65,6 +69,12 @@
         }
       }
     },
+    "content": { "$ref": "#/$defs/contentPolicy" },
+    "assets": { "$ref": "#/$defs/assetPolicy" },
+    "runtime": { "$ref": "#/$defs/runtimePolicy" },
+    "native": { "$ref": "#/$defs/nativePolicy" },
+    "web": { "$ref": "#/$defs/webPolicy" },
+    "governance": { "$ref": "#/$defs/governancePolicy" },
     "evidence": {
       "type": "object",
       "additionalProperties": false,
@@ -74,7 +84,40 @@
           "type": "array",
           "uniqueItems": true,
           "items": {
-            "enum": ["definition", "source", "pencil", "computed-layout"]
+            "enum": [
+              "definition",
+              "web-source",
+              "web-rendered",
+              "native-source",
+              "design-document-source",
+              "design-document-computed",
+              "simulator",
+              "emulator",
+              "physical-device",
+              "consumer-conformance",
+              "consumer-content-registry",
+              "source",
+              "pencil",
+              "computed-layout"
+            ]
+          }
+        },
+        "deferredKinds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "web-source",
+              "web-rendered",
+              "native-source",
+              "design-document-source",
+              "design-document-computed",
+              "simulator",
+              "emulator",
+              "physical-device",
+              "consumer-conformance",
+              "consumer-content-registry"
+            ]
           }
         },
         "layoutDocumentSha256": {
@@ -86,13 +129,29 @@
     "budgets": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["error", "warning", "raw", "overflow", "overlap"],
+      "required": [
+        "error",
+        "warning",
+        "raw",
+        "overflow",
+        "overlap",
+        "blocking",
+        "advisory",
+        "exception",
+        "notRun",
+        "deferred"
+      ],
       "properties": {
         "error": { "type": "integer", "minimum": 0 },
         "warning": { "type": "integer", "minimum": 0 },
         "raw": { "type": "integer", "minimum": 0 },
         "overflow": { "type": "integer", "minimum": 0 },
-        "overlap": { "type": "integer", "minimum": 0 }
+        "overlap": { "type": "integer", "minimum": 0 },
+        "blocking": { "type": "integer", "minimum": 0 },
+        "advisory": { "type": "integer", "minimum": 0 },
+        "exception": { "type": "integer", "minimum": 0 },
+        "notRun": { "type": "integer", "minimum": 0 },
+        "deferred": { "type": "integer", "minimum": 0 }
       }
     },
     "exceptions": {
@@ -100,18 +159,41 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["ruleId", "path", "owner", "rationale", "expiresAt"],
+        "required": [
+          "ruleId",
+          "engine",
+          "platform",
+          "path",
+          "owner",
+          "rationale",
+          "reviewer",
+          "expiresAt",
+          "reviewTrigger"
+        ],
         "properties": {
           "ruleId": { "type": "string", "minLength": 1 },
+          "engine": { "$ref": "#/$defs/evidenceKind" },
+          "platform": { "type": "string", "minLength": 1 },
           "path": { "type": "string", "minLength": 1 },
           "owner": { "type": "string", "minLength": 1 },
           "rationale": { "type": "string", "minLength": 8 },
+          "reviewer": { "$ref": "#/$defs/name" },
           "expiresAt": {
             "type": "string",
             "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
-          }
+          },
+          "reviewTrigger": { "type": "string", "minLength": 8 }
         }
       }
+    },
+    "rulePacks": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/rulePack" }
+    },
+    "ruleOverrides": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/ruleOverride" }
     }
   },
   "$defs": {
@@ -124,6 +206,562 @@
       "uniqueItems": true,
       "items": { "type": "string", "minLength": 1 }
     },
-    "severity": { "enum": ["error", "warning"] }
+    "severity": { "enum": ["error", "warning"] },
+    "evidenceKind": {
+      "enum": [
+        "definition",
+        "web-source",
+        "web-rendered",
+        "native-source",
+        "design-document-source",
+        "design-document-computed",
+        "simulator",
+        "emulator",
+        "physical-device",
+        "consumer-conformance",
+        "consumer-content-registry",
+        "execution"
+      ]
+    },
+    "contentPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["registryVersion", "locales", "sourceReferences"],
+      "properties": {
+        "registryVersion": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "locales": {
+          "type": "object",
+          "minProperties": 1,
+          "patternProperties": {
+            "^[a-z]{2}(?:-[A-Z]{2})?$": {
+              "$ref": "#/$defs/localeContentPolicy"
+            }
+          },
+          "additionalProperties": false
+        },
+        "sourceReferences": { "$ref": "#/$defs/names" }
+      }
+    },
+    "localeContentPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "phraseRegistryVersion",
+        "marketingBuzzwords",
+        "theaterPhrases",
+        "protectedTerms",
+        "recoveryCopyIds"
+      ],
+      "properties": {
+        "phraseRegistryVersion": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "marketingBuzzwords": { "$ref": "#/$defs/names" },
+        "theaterPhrases": { "$ref": "#/$defs/names" },
+        "protectedTerms": { "$ref": "#/$defs/names" },
+        "recoveryCopyIds": { "$ref": "#/$defs/names" }
+      }
+    },
+    "assetPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["registryVersion", "entries"],
+      "properties": {
+        "registryVersion": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "entries": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/assetEntry" }
+        }
+      }
+    },
+    "assetEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "owner",
+        "role",
+        "implementationSource",
+        "consumers",
+        "fingerprintSha256",
+        "intentionallyOmitted",
+        "decorative"
+      ],
+      "properties": {
+        "owner": { "$ref": "#/$defs/name" },
+        "role": {
+          "enum": [
+            "icon",
+            "logo",
+            "data-diagram",
+            "hero-illustration",
+            "photo",
+            "video-poster"
+          ]
+        },
+        "implementationSource": { "type": "string", "minLength": 1 },
+        "consumers": { "$ref": "#/$defs/names" },
+        "fingerprintSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "intentionallyOmitted": { "type": "boolean" },
+        "decorative": { "type": "boolean" }
+      }
+    },
+    "runtimePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["registryVersion", "justifiedTextExceptions"],
+      "properties": {
+        "registryVersion": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "justifiedTextExceptions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/justifiedTextException" }
+        }
+      }
+    },
+    "justifiedTextException": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "platform",
+        "surfaceId",
+        "routeId",
+        "nodeId",
+        "owner",
+        "context"
+      ],
+      "properties": {
+        "platform": { "enum": ["web", "ios", "android"] },
+        "surfaceId": { "$ref": "#/$defs/name" },
+        "routeId": { "$ref": "#/$defs/name" },
+        "nodeId": { "$ref": "#/$defs/name" },
+        "owner": { "$ref": "#/$defs/name" },
+        "context": { "enum": ["print", "export"] }
+      }
+    },
+    "nativePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "registryVersion",
+        "iosAdjacentTargetSpacing",
+        "thresholds",
+        "requiredRuntimeCaptures"
+      ],
+      "properties": {
+        "registryVersion": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "iosAdjacentTargetSpacing": { "type": "number", "minimum": 0 },
+        "thresholds": { "$ref": "#/$defs/nativeThresholds" },
+        "requiredRuntimeCaptures": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/nativeRuntimeRequirement" }
+        }
+      }
+    },
+    "nativeThresholds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "maxSynchronousStartupMs",
+        "maxInitializationMs",
+        "maxMainThreadWorkMs",
+        "maxFrameDropRatio",
+        "maxThumbnailDecodeRatio",
+        "maxJsBundleRegressionBytes",
+        "maxAppBinaryRegressionBytes"
+      ],
+      "properties": {
+        "maxSynchronousStartupMs": { "type": "number", "minimum": 0 },
+        "maxInitializationMs": { "type": "number", "minimum": 0 },
+        "maxMainThreadWorkMs": { "type": "number", "minimum": 0 },
+        "maxFrameDropRatio": { "type": "number", "minimum": 0, "maximum": 1 },
+        "maxThumbnailDecodeRatio": { "type": "number", "minimum": 1 },
+        "maxJsBundleRegressionBytes": { "type": "integer", "minimum": 0 },
+        "maxAppBinaryRegressionBytes": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "nativeRuntimeRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "platform",
+        "evidenceKind",
+        "formFactor",
+        "orientation",
+        "windowMode",
+        "foldPosture",
+        "theme",
+        "minimumFontScale",
+        "reduceMotion"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/name" },
+        "platform": { "enum": ["ios", "android"] },
+        "evidenceKind": {
+          "enum": ["simulator", "emulator", "physical-device"]
+        },
+        "formFactor": { "enum": ["phone", "tablet", "foldable"] },
+        "orientation": { "enum": ["portrait", "landscape"] },
+        "windowMode": { "enum": ["fullscreen", "split", "multi-window"] },
+        "foldPosture": { "enum": ["not-applicable", "flat", "half-open"] },
+        "theme": { "enum": ["light", "dark"] },
+        "minimumFontScale": { "type": "number", "minimum": 1 },
+        "reduceMotion": { "type": "boolean" }
+      }
+    },
+    "webPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "registryVersion",
+        "buildCommand",
+        "routes",
+        "viewports",
+        "themes",
+        "fontScales",
+        "reduceMotion",
+        "requiredCaptures",
+        "artifactExclusions"
+      ],
+      "properties": {
+        "registryVersion": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "buildCommand": { "type": "string", "minLength": 1 },
+        "routes": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/webRoute" }
+        },
+        "viewports": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/webViewport" }
+        },
+        "themes": { "$ref": "#/$defs/names" },
+        "fontScales": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "number", "minimum": 1 }
+        },
+        "reduceMotion": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "boolean" }
+        },
+        "requiredCaptures": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/webCaptureRequirement" }
+        },
+        "artifactExclusions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/webArtifactExclusion" }
+        }
+      }
+    },
+    "webRoute": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "owner", "target"],
+      "properties": {
+        "id": { "$ref": "#/$defs/name" },
+        "owner": { "$ref": "#/$defs/name" },
+        "target": { "type": "string", "minLength": 1 }
+      }
+    },
+    "webViewport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "width", "height"],
+      "properties": {
+        "id": { "$ref": "#/$defs/name" },
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "webCaptureRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "provider",
+        "routeId",
+        "viewportId",
+        "theme",
+        "fontScale",
+        "reduceMotion"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/name" },
+        "provider": {
+          "enum": ["regex-source", "static-html", "browser", "visual-contrast"]
+        },
+        "routeId": { "$ref": "#/$defs/name" },
+        "viewportId": { "$ref": "#/$defs/name" },
+        "theme": { "$ref": "#/$defs/name" },
+        "fontScale": { "type": "number", "minimum": 1 },
+        "reduceMotion": { "type": "boolean" }
+      }
+    },
+    "webArtifactExclusion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "fingerprintSha256",
+        "owner",
+        "rationale",
+        "reproductionCommand"
+      ],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "fingerprintSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "owner": { "$ref": "#/$defs/name" },
+        "rationale": { "type": "string", "minLength": 8 },
+        "reproductionCommand": { "type": "string", "minLength": 1 }
+      }
+    },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "primaryUserGoal",
+        "density",
+        "noveltyTolerance",
+        "nativeAffordancePriority",
+        "severityOverrides",
+        "thresholds",
+        "requiredEvidence"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/name" },
+        "primaryUserGoal": { "type": "string", "minLength": 1 },
+        "density": { "enum": ["compact", "comfortable", "spacious"] },
+        "noveltyTolerance": { "enum": ["low", "medium", "high"] },
+        "nativeAffordancePriority": {
+          "enum": ["required", "preferred", "neutral"]
+        },
+        "severityOverrides": {
+          "type": "object",
+          "propertyNames": { "pattern": "^[a-z][a-z0-9-]*(?:/[a-z0-9-]+)+$" },
+          "additionalProperties": { "$ref": "#/$defs/severity" }
+        },
+        "thresholds": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["maxOversizedActions", "maxInconsistentActions"],
+          "properties": {
+            "maxOversizedActions": { "type": "integer", "minimum": 0 },
+            "maxInconsistentActions": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "requiredEvidence": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "definition",
+              "web-source",
+              "web-rendered",
+              "native-source",
+              "design-document-source",
+              "design-document-computed",
+              "simulator",
+              "emulator",
+              "physical-device",
+              "consumer-conformance",
+              "consumer-content-registry"
+            ]
+          }
+        },
+        "rationale": { "type": "string", "minLength": 8 },
+        "reviewer": { "type": "string", "minLength": 1 },
+        "evidenceOwner": { "type": "string", "minLength": 1 }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "id": {
+                "not": { "enum": ["operate", "read", "browse", "create"] }
+              }
+            }
+          },
+          "then": {
+            "required": ["rationale", "reviewer", "evidenceOwner"],
+            "properties": {
+              "rationale": true,
+              "reviewer": true,
+              "evidenceOwner": true
+            }
+          }
+        }
+      ]
+    },
+    "rulePack": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "fingerprintSha256"],
+      "properties": {
+        "id": { "$ref": "#/$defs/name" },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "fingerprintSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    },
+    "governancePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reviewedAt",
+        "reviewIntervalDays",
+        "reviewer",
+        "reviewSubjects",
+        "advisoryMode",
+        "forbiddenFlags",
+        "requireExitCode2",
+        "requireUnmodifiedReport",
+        "passingReportsOnly",
+        "ignores"
+      ],
+      "properties": {
+        "reviewedAt": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "reviewIntervalDays": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 90
+        },
+        "reviewer": { "$ref": "#/$defs/name" },
+        "reviewSubjects": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "impeccable-version",
+              "hallmark-commit",
+              "rule-mapping-drift",
+              "exceptions"
+            ]
+          }
+        },
+        "advisoryMode": { "const": "report" },
+        "forbiddenFlags": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "--no-config",
+              "--no-design-system",
+              "--no-inline-ignores",
+              "--no-advisory"
+            ]
+          }
+        },
+        "requireExitCode2": { "const": true },
+        "requireUnmodifiedReport": { "const": true },
+        "passingReportsOnly": { "const": true },
+        "ignores": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/ignoreAllowance" }
+        }
+      }
+    },
+    "ignoreAllowance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "engine",
+        "platform",
+        "path",
+        "owner",
+        "rationale",
+        "reviewer",
+        "expiresAt",
+        "reviewTrigger"
+      ],
+      "properties": {
+        "kind": { "enum": ["rule", "file", "value", "inline"] },
+        "ruleId": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*(?:/[a-z0-9-]+)+$"
+        },
+        "engine": { "$ref": "#/$defs/evidenceKind" },
+        "platform": { "type": "string", "minLength": 1 },
+        "path": { "type": "string", "minLength": 1 },
+        "property": { "type": "string", "minLength": 1 },
+        "value": { "type": "string", "minLength": 1 },
+        "owner": { "$ref": "#/$defs/name" },
+        "rationale": { "type": "string", "minLength": 8 },
+        "reviewer": { "$ref": "#/$defs/name" },
+        "expiresAt": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "reviewTrigger": { "type": "string", "minLength": 8 }
+      }
+    },
+    "ruleOverride": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ruleId",
+        "packId",
+        "packVersion",
+        "status",
+        "owner",
+        "rationale",
+        "reviewer",
+        "expiresAt",
+        "reviewTrigger"
+      ],
+      "properties": {
+        "ruleId": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*(?:/[a-z0-9-]+)+$"
+        },
+        "packId": { "$ref": "#/$defs/name" },
+        "packVersion": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "status": { "const": "disabled" },
+        "owner": { "type": "string", "minLength": 1 },
+        "rationale": { "type": "string", "minLength": 8 },
+        "reviewer": { "$ref": "#/$defs/name" },
+        "expiresAt": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "reviewTrigger": { "type": "string", "minLength": 8 }
+      }
+    }
   }
 }

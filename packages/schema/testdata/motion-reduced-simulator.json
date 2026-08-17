@@ -1,0 +1,34 @@
+{
+  "$schema": "../motion-evidence.schema.json",
+  "schemaVersion": 1,
+  "evidenceKind": "simulator",
+  "platform": "ios",
+  "profileId": "operate",
+  "surfaceId": "example-motion-reduced",
+  "preference": "reduce",
+  "capturePath": "evidence/example-motion-reduced.mp4",
+  "preferenceResolvedBeforeEffects": true,
+  "effectsReplayedAfterResolution": false,
+  "nodes": [
+    {
+      "id": "control-press",
+      "owner": "example-control",
+      "transitionId": "control.press",
+      "purpose": "state-change",
+      "motionKind": "state-change",
+      "durationMs": 0,
+      "easing": [0.2, 0, 0, 1],
+      "easingBehavior": "standard",
+      "animatedProperties": ["transform"],
+      "perpetual": false,
+      "userControlled": true,
+      "changingDataSource": false,
+      "accessibleLabel": "Pressed",
+      "editableInput": false,
+      "hoverPurpose": "none",
+      "reducedMotionFallbackApplied": true,
+      "reducedStateUnderstandable": true,
+      "nextActionUnderstandable": true
+    }
+  ]
+}
