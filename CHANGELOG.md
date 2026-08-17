@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 1.1.0 - 2026-08-17
+
 - blocking/advisory/exception/not-run/deferred budget, viewport·owner attribution과 text/JSON/SARIF effective-rule
   parity를 추가하고, neutral multi-stage report ordering을 회귀 테스트로 고정했다.
 - release manifest에 Impeccable/Hallmark/catalog/anti-slop-contract dependency fingerprint를 포함하고 exact

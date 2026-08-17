@@ -46,16 +46,17 @@ test("pins detector provenance, rule pack, and anti-slop contract", async () => 
   assert.match(manifest.dependencies.antiSlopContract.sha256, /^[a-f0-9]{64}$/);
 });
 
-test("accepts only the exact release tag from the manifest", () => {
+test("accepts only the exact release tag from the manifest", async () => {
   const script = fileURLToPath(
     new URL("./check-release-tag.mjs", import.meta.url),
   );
-  const accepted = spawnSync(process.execPath, [script, "v1.0.0"], {
+  const manifest = await createManifest();
+  const accepted = spawnSync(process.execPath, [script, manifest.release.tag], {
     encoding: "utf8",
   });
   assert.equal(accepted.status, 0, accepted.stderr);
 
-  const rejected = spawnSync(process.execPath, [script, "v0.2.1"], {
+  const rejected = spawnSync(process.execPath, [script, "v0.0.0"], {
     encoding: "utf8",
   });
   assert.notEqual(rejected.status, 0);

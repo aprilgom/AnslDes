@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "release": {
-    "version": "1.0.0",
-    "tag": "v1.0.0"
+    "version": "1.1.0",
+    "tag": "v1.1.0"
   },
   "compatibility": {
     "definitionSchemaVersion": 2,
@@ -32,25 +32,25 @@
   "packages": {
     "schema": {
       "name": "@ansldes/schema",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     "compiler": {
       "name": "@ansldes/compiler",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     "core": {
       "name": "@ansldes/core",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     "reactNative": {
       "name": "@ansldes/react-native",
-      "version": "1.0.0"
+      "version": "1.1.0"
     }
   },
   "deslint": {
     "module": "github.com/aprilgom/AnslDes/deslint",
-    "version": "1.0.0",
-    "releaseVersionLinkerFlag": "-X main.version=1.0.0"
+    "version": "1.1.0",
+    "releaseVersionLinkerFlag": "-X main.version=1.1.0"
   },
   "dependencies": {
     "antiSlopCatalog": {
@@ -86,23 +86,23 @@
   "artifacts": {
     "schema": {
       "fileCount": 76,
-      "sha256": "e9ec036e708dd411dff2f87002c8eb2900af85d9d5c432161ceb90b81fa9938d"
+      "sha256": "f1fec75b177bbbaa1e4692cc916e2cf4932813ccf5965bec8d72cd54b6ff2804"
     },
     "compiler": {
       "fileCount": 5,
-      "sha256": "ecf4582102049468839051bd47c75c62d9848a7b9f8c2f3ed0ba643eb13267ae"
+      "sha256": "e17fe3485bd8dd5b589122334139107dc1e2aeb98dfa0a7fbd0d8e548c39e660"
     },
     "core": {
       "fileCount": 5,
-      "sha256": "9b35aeef0e911da926dd621121c224add8dab05333db5668aef23a4c46ded970"
+      "sha256": "bdf5222ac98fcb4e32e7397b771f072d46641c9b2c21265e0f84b9609540fe33"
     },
     "reactNative": {
       "fileCount": 19,
-      "sha256": "374d032dfd47efad3394420e368e22b0c2adac956e74bfc9788a45d66dc377cb"
+      "sha256": "4bed95092a514279a18618d067a6e08ccd1e426f827076bbc694129f3aa0656b"
     },
     "deslint": {
       "fileCount": 67,
-      "sha256": "10d6c3ef84893e0b68b2f2a93c7ef24ba62cde59fb2d901ea0267d1836f010d5"
+      "sha256": "b7856dae32753412bea50ae9d034d8377610f2920181b77b58c4785d5efd31a2"
     }
   }
 }

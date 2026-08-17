@@ -72,7 +72,7 @@ Anti-slop detector dependency와 consumer release lock 절차는
 ## Status
 
 현재 schema, compiler, framework-neutral runtime, React Native 기본 anatomy와 linter bootstrap이 있다.
-Definition v2와 compiled bundle v2는 v1 호환 경로를 제공하지 않는다. 제품은 `v1.0.0` release를 exact
+Definition v2와 compiled bundle v2는 v1 호환 경로를 제공하지 않는다. 새 소비자는 `v1.1.0` release를 exact
 pin하고 정의를 한 번에 v2로 이관해야 한다. 구체적인 규칙은
 [Definition v2 migration](./docs/definition-v2-migration.md)에 있다.
 
