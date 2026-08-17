@@ -44,9 +44,13 @@ async function readJson(relativePath) {
   );
 }
 
+function canonicalText(contents) {
+  return contents.toString("utf8").replaceAll("\r\n", "\n");
+}
+
 async function fileSha256(relativePath) {
   const contents = await readFile(path.join(repositoryRoot, relativePath));
-  return createHash("sha256").update(contents).digest("hex");
+  return createHash("sha256").update(canonicalText(contents)).digest("hex");
 }
 
 export async function collectFiles(relativePath, root = repositoryRoot) {
@@ -80,7 +84,9 @@ export async function fingerprint(paths, root = repositoryRoot) {
   const hash = createHash("sha256");
   for (const file of files) {
     const contents = await readFile(path.join(root, file));
-    const fileHash = createHash("sha256").update(contents).digest("hex");
+    const fileHash = createHash("sha256")
+      .update(canonicalText(contents))
+      .digest("hex");
     hash.update(file);
     hash.update("\0");
     hash.update(fileHash);

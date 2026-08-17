@@ -26,6 +26,11 @@ test("fingerprints sorted paths and changes when artifact content changes", asyn
   const reverse = await fingerprint(["b.ts", "a.ts"], root);
   assert.deepEqual(reverse, forward);
 
+  const lf = await fingerprint(["a.ts"], root);
+  await writeFile(path.join(root, "a.ts"), "export const a = 1;\r\n", "utf8");
+  const crlf = await fingerprint(["a.ts"], root);
+  assert.deepEqual(crlf, lf);
+
   await writeFile(path.join(root, "b.ts"), "export const b = 3;\n", "utf8");
   const changed = await fingerprint(["a.ts", "b.ts"], root);
   assert.notEqual(changed.sha256, forward.sha256);
