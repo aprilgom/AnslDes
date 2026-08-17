@@ -1,0 +1,261 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ansldes.dev/schema/native-source-evidence.v1.json",
+  "title": "AnslDes React Native source conformance evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "evidenceKind",
+    "platform",
+    "surfaceId",
+    "nativePolicyVersion",
+    "controls",
+    "lists",
+    "renderPaths",
+    "images",
+    "dependencies",
+    "appearance",
+    "patterns",
+    "adaptivity",
+    "navigation"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "evidenceKind": { "const": "native-source" },
+    "platform": { "const": "react-native" },
+    "surfaceId": { "$ref": "#/$defs/name" },
+    "nativePolicyVersion": { "$ref": "#/$defs/version" },
+    "controls": { "$ref": "#/$defs/controls" },
+    "lists": { "$ref": "#/$defs/lists" },
+    "renderPaths": { "$ref": "#/$defs/renderPaths" },
+    "images": { "$ref": "#/$defs/images" },
+    "dependencies": { "$ref": "#/$defs/dependencies" },
+    "appearance": { "$ref": "#/$defs/appearance" },
+    "patterns": { "$ref": "#/$defs/patterns" },
+    "adaptivity": { "$ref": "#/$defs/adaptivity" },
+    "navigation": { "$ref": "#/$defs/navigation" }
+  },
+  "$defs": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[._/-][a-z0-9]+)*$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "owned": {
+      "type": "object",
+      "required": ["id", "owner"],
+      "properties": {
+        "id": { "$ref": "#/$defs/name" },
+        "owner": { "$ref": "#/$defs/name" }
+      }
+    },
+    "controls": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          { "$ref": "#/$defs/owned" },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "owner",
+              "interactive",
+              "label",
+              "roleOrTrait",
+              "stateAnnouncement",
+              "readingOrder",
+              "focusOrder"
+            ],
+            "properties": {
+              "id": { "$ref": "#/$defs/name" },
+              "owner": { "$ref": "#/$defs/name" },
+              "interactive": { "type": "boolean" },
+              "label": { "type": "string" },
+              "roleOrTrait": { "type": "string" },
+              "stateAnnouncement": { "type": "boolean" },
+              "readingOrder": { "type": "integer", "minimum": 0 },
+              "focusOrder": { "type": "integer", "minimum": 0 }
+            }
+          }
+        ]
+      }
+    },
+    "lists": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "owner", "longList", "virtualized", "stableKey"],
+        "properties": {
+          "id": { "$ref": "#/$defs/name" },
+          "owner": { "$ref": "#/$defs/name" },
+          "longList": { "type": "boolean" },
+          "virtualized": { "type": "boolean" },
+          "stableKey": { "type": "boolean" }
+        }
+      }
+    },
+    "renderPaths": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "owner",
+          "unnecessaryRerender",
+          "unstableCallback",
+          "unstableKey",
+          "memoizationRequired",
+          "memoized"
+        ],
+        "properties": {
+          "id": { "$ref": "#/$defs/name" },
+          "owner": { "$ref": "#/$defs/name" },
+          "unnecessaryRerender": { "type": "boolean" },
+          "unstableCallback": { "type": "boolean" },
+          "unstableKey": { "type": "boolean" },
+          "memoizationRequired": { "type": "boolean" },
+          "memoized": { "type": "boolean" }
+        }
+      }
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "owner",
+          "thumbnail",
+          "displayPixels",
+          "decodedPixels",
+          "cached",
+          "repeatedLoad"
+        ],
+        "properties": {
+          "id": { "$ref": "#/$defs/name" },
+          "owner": { "$ref": "#/$defs/name" },
+          "thumbnail": { "type": "boolean" },
+          "displayPixels": { "type": "integer", "minimum": 1 },
+          "decodedPixels": { "type": "integer", "minimum": 1 },
+          "cached": { "type": "boolean" },
+          "repeatedLoad": { "type": "boolean" }
+        }
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "owner", "used", "contributionBytes"],
+        "properties": {
+          "id": { "$ref": "#/$defs/name" },
+          "owner": { "$ref": "#/$defs/name" },
+          "used": { "type": "boolean" },
+          "contributionBytes": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "appearance": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "owner",
+          "rawColor",
+          "semanticSystemRole",
+          "handRolledMaterial"
+        ],
+        "properties": {
+          "id": { "$ref": "#/$defs/name" },
+          "owner": { "$ref": "#/$defs/name" },
+          "rawColor": { "type": "boolean" },
+          "semanticSystemRole": { "type": "boolean" },
+          "handRolledMaterial": { "type": "boolean" }
+        }
+      }
+    },
+    "patterns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "owner",
+          "textAlignment",
+          "hiddenAtRest",
+          "revealFallbackVisible",
+          "rawAnimation",
+          "transitionId"
+        ],
+        "properties": {
+          "id": { "$ref": "#/$defs/name" },
+          "owner": { "$ref": "#/$defs/name" },
+          "textAlignment": { "enum": ["start", "center", "end", "justify"] },
+          "hiddenAtRest": { "type": "boolean" },
+          "revealFallbackVisible": { "type": "boolean" },
+          "rawAnimation": { "type": "boolean" },
+          "transitionId": {
+            "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/name" }]
+          }
+        }
+      }
+    },
+    "adaptivity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "owner",
+        "usesSizeOrWindowClass",
+        "simplePhoneScaleOnExpanded",
+        "supportsPortrait",
+        "supportsLandscape",
+        "supportsSplitView",
+        "supportsMultiWindow",
+        "supportsFoldPosture",
+        "compactNavigation",
+        "expandedNavigation"
+      ],
+      "properties": {
+        "owner": { "$ref": "#/$defs/name" },
+        "usesSizeOrWindowClass": { "type": "boolean" },
+        "simplePhoneScaleOnExpanded": { "type": "boolean" },
+        "supportsPortrait": { "type": "boolean" },
+        "supportsLandscape": { "type": "boolean" },
+        "supportsSplitView": { "type": "boolean" },
+        "supportsMultiWindow": { "type": "boolean" },
+        "supportsFoldPosture": { "type": "boolean" },
+        "compactNavigation": { "enum": ["stack", "tabs", "bar", "none"] },
+        "expandedNavigation": { "enum": ["sidebar", "rail", "drawer", "none"] }
+      }
+    },
+    "navigation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "owner",
+        "iosNavigationStackOrSheet",
+        "iosEdgeSwipeBack",
+        "androidPredictiveBack"
+      ],
+      "properties": {
+        "owner": { "$ref": "#/$defs/name" },
+        "iosNavigationStackOrSheet": { "type": "boolean" },
+        "iosEdgeSwipeBack": { "type": "boolean" },
+        "androidPredictiveBack": { "type": "boolean" }
+      }
+    }
+  }
+}

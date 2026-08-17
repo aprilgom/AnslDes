@@ -1,0 +1,133 @@
+{
+  "$schema": "../layout-evidence.schema.json",
+  "schemaVersion": 1,
+  "evidenceKind": "web-rendered",
+  "platform": "web",
+  "profileId": "operate",
+  "surfaceId": "example-layout-negative",
+  "viewport": { "width": 1280, "height": 800 },
+  "capturePath": "evidence/example-layout-negative.png",
+  "computedBoundsPath": "evidence/example-layout-negative-bounds.json",
+  "nodes": [
+    {
+      "id": "nested-accessory",
+      "owner": "example-accessory",
+      "kind": "accessory-tile",
+      "contentRole": "control",
+      "cardDepth": 2,
+      "repeatedCardSiblings": 3,
+      "accessoryTile": true,
+      "semanticBoundary": false
+    },
+    {
+      "id": "guide-skeleton",
+      "owner": "example-guide",
+      "kind": "guide",
+      "contentRole": "decorative",
+      "guideSkeletonRepeated": true,
+      "spacingRelations": [
+        { "kind": "intra-component", "value": 16, "token": "space-flat" },
+        { "kind": "inter-component", "value": 16, "token": "space-flat" },
+        { "kind": "section", "value": 16, "token": "space-flat" }
+      ]
+    },
+    {
+      "id": "numbered-label",
+      "owner": "example-section",
+      "kind": "section",
+      "contentRole": "prose",
+      "sectionLabelNumbered": true,
+      "sectionLabelMeaningful": false,
+      "sectionLabelFontSize": 10
+    },
+    {
+      "id": "edge-flush",
+      "owner": "example-scroller",
+      "kind": "scroller",
+      "contentRole": "control",
+      "horizontalScroller": true,
+      "leadingGutter": 0,
+      "trailingGutter": 24
+    },
+    {
+      "id": "occluded-copy",
+      "owner": "example-copy",
+      "kind": "text",
+      "contentRole": "prose",
+      "opaqueOverlapArea": 120
+    },
+    {
+      "id": "opening-columns",
+      "owner": "example-columns",
+      "kind": "section",
+      "contentRole": "prose",
+      "openingViewport": true,
+      "columnHeights": [520, 1040]
+    },
+    {
+      "id": "heading-rhythm",
+      "owner": "example-heading",
+      "kind": "heading",
+      "contentRole": "prose",
+      "spacingBefore": 8,
+      "spacingAfter": 16
+    },
+    {
+      "id": "long-prose",
+      "owner": "example-prose",
+      "kind": "text",
+      "contentRole": "prose",
+      "lineLengthChars": 92
+    },
+    {
+      "id": "cramped-copy",
+      "owner": "example-bounded",
+      "kind": "text",
+      "contentRole": "prose",
+      "boundedText": true,
+      "padding": { "top": 4, "right": 4, "bottom": 4, "left": 4 }
+    },
+    {
+      "id": "edge-copy",
+      "owner": "example-body",
+      "kind": "text",
+      "contentRole": "prose",
+      "viewportHorizontalInset": 4
+    },
+    {
+      "id": "overflow-copy",
+      "owner": "example-overflow",
+      "kind": "text",
+      "contentRole": "prose",
+      "overflowsContainer": true,
+      "unintendedHorizontalScroll": true
+    },
+    {
+      "id": "clipped-popover",
+      "owner": "example-overlay",
+      "kind": "overlay",
+      "contentRole": "control",
+      "positionedOverlay": true,
+      "clippingAncestor": true
+    },
+    {
+      "id": "feature-triptych",
+      "owner": "example-features",
+      "kind": "feature-grid",
+      "contentRole": "prose",
+      "featureColumnCount": 3,
+      "equalColumns": true,
+      "iconAboveHeading": true,
+      "pageFeatureRegion": true
+    },
+    {
+      "id": "centered-hero",
+      "owner": "example-hero",
+      "kind": "hero",
+      "contentRole": "prose",
+      "minHeightVh": 100,
+      "centerHorizontal": true,
+      "centerVertical": true
+    }
+  ]
+}

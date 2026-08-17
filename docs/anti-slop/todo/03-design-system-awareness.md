@@ -4,23 +4,23 @@
 
 ## Rules
 
-- [ ] `design-system-font`: canonical family/variant 밖의 font와 physical/logical weight drift를 실패시킨다.
-- [ ] `design-system-color`: raw color와 semantic/component/asset exception 밖의 값을 실패시킨다.
-- [ ] `design-system-radius`: surface/control/compact/pill 계약 밖의 radius를 실패시킨다.
-- [ ] `design-system-font-size`: semantic typography ramp 밖의 size와 role mismatch를 실패시킨다.
+- [x] `design-system-font`: canonical family/variant 밖의 font와 physical/logical weight drift를 실패시킨다.
+- [x] `design-system-color`: raw color와 semantic/component/asset exception 밖의 값을 실패시킨다.
+- [x] `design-system-radius`: surface/control/compact/pill 계약 밖의 radius를 실패시킨다.
+- [x] `design-system-font-size`: semantic typography ramp 밖의 size와 role mismatch를 실패시킨다.
 
 ## 구현
 
-- [ ] 기존 framework-neutral contract에서 `DESIGN.md`와 `.impeccable/design.json`을 생성한다.
-- [ ] 생성 파일의 source contract SHA와 generator version을 저장한다.
-- [ ] 사람이 복사한 token 목록과 generated snapshot이 함께 존재하지 못하게 한다.
-- [ ] upstream advisory보다 consumer policy의 명시적 error budget이 강하면 error를 유지한다.
-- [ ] font/color/radius/size 각각 unknown, stale sidecar와 config-disabled fixture를 추가한다.
+- [x] 기존 framework-neutral contract에서 `DESIGN.md`와 `.impeccable/design.json`을 생성한다.
+- [x] 생성 파일의 source contract SHA와 generator version을 저장한다.
+- [x] 사람이 복사한 token 목록과 generated snapshot이 함께 존재하지 못하게 한다.
+- [x] upstream advisory보다 consumer policy의 명시적 error budget이 강하면 error를 유지한다.
+- [x] font/color/radius/size 각각 unknown, stale sidecar와 config-disabled fixture를 추가한다.
 
 ## 완료 조건
 
-- [ ] 네 rule의 upstream id와 AnslDes rule mapping이 exact하다.
-- [ ] generated design context와 canonical contract fingerprint가 최신이다.
+- [x] 네 rule의 upstream id와 AnslDes rule mapping이 exact하다.
+- [x] generated design context와 canonical contract fingerprint가 최신이다.
 
 ## 결정론적 코드 기준
 

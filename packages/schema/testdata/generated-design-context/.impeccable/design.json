@@ -1,0 +1,160 @@
+{
+  "$schema": "https://ansldes.dev/schema/design-context.v1.json",
+  "colors": {
+    "asset": {},
+    "component": {
+      "button.disabled.container": "{color.semantic.surface.disabled}",
+      "button.disabled.label": "{color.semantic.text.disabled}",
+      "button.primary.container": "{color.semantic.action.primary}",
+      "button.primary.label": "{color.semantic.text.primary}",
+      "recipe.action.primary": "{color.semantic.action.primary}",
+      "recipe.action.primary-pressed": "{color.semantic.action.primary-pressed}",
+      "recipe.border.default": "{color.semantic.border.default}",
+      "recipe.border.focus": "{color.semantic.border.focus}",
+      "recipe.border.transparent": "{color.semantic.border.transparent}",
+      "recipe.status.danger": "{color.semantic.status.danger}",
+      "recipe.surface.disabled": "{color.semantic.surface.disabled}",
+      "recipe.surface.field": "{color.semantic.surface.field}",
+      "recipe.surface.subtle": "{color.semantic.surface.subtle}",
+      "recipe.text.disabled": "{color.semantic.text.disabled}",
+      "recipe.text.primary": "{color.semantic.text.primary}",
+      "recipe.text.secondary": "{color.semantic.text.secondary}"
+    },
+    "primitive": {
+      "accent.500": "#4263EB",
+      "neutral.0": "#FFFFFF",
+      "neutral.900": "#18202A"
+    },
+    "semantic": {
+      "action.primary": {
+        "dark": "{color.primitive.accent.500}",
+        "light": "{color.primitive.accent.500}"
+      },
+      "action.primary-pressed": {
+        "dark": "{color.primitive.neutral.0}",
+        "light": "{color.primitive.neutral.900}"
+      },
+      "border.default": {
+        "dark": "{color.primitive.neutral.0}",
+        "light": "{color.primitive.neutral.900}"
+      },
+      "border.focus": {
+        "dark": "{color.primitive.accent.500}",
+        "light": "{color.primitive.accent.500}"
+      },
+      "border.transparent": {
+        "dark": "{color.primitive.neutral.900}",
+        "light": "{color.primitive.neutral.0}"
+      },
+      "status.danger": {
+        "dark": "{color.primitive.neutral.0}",
+        "light": "{color.primitive.neutral.900}"
+      },
+      "surface.disabled": {
+        "dark": "{color.primitive.neutral.900}",
+        "light": "{color.primitive.neutral.0}"
+      },
+      "surface.field": {
+        "dark": "{color.primitive.neutral.900}",
+        "light": "{color.primitive.neutral.0}"
+      },
+      "surface.subtle": {
+        "dark": "{color.primitive.neutral.900}",
+        "light": "{color.primitive.neutral.0}"
+      },
+      "text.disabled": {
+        "dark": "{color.primitive.neutral.0}",
+        "light": "{color.primitive.neutral.900}"
+      },
+      "text.primary": {
+        "dark": "{color.primitive.neutral.0}",
+        "light": "{color.primitive.neutral.900}"
+      },
+      "text.secondary": {
+        "dark": "{color.primitive.neutral.0}",
+        "light": "{color.primitive.neutral.900}"
+      }
+    }
+  },
+  "generator": {
+    "id": "ansldes-design-context",
+    "version": "1.0.0"
+  },
+  "radii": {
+    "component": {
+      "button": "{radius.semantic.control}",
+      "control": "{radius.semantic.control}",
+      "surface": "{radius.semantic.control}"
+    },
+    "primitive": {
+      "medium": 12,
+      "none": 0
+    },
+    "semantic": {
+      "control": "{radius.primitive.medium}"
+    }
+  },
+  "schemaVersion": 1,
+  "source": {
+    "contractSha256": "736de7bf712497cbda273b320ac504c1d4e7aaf2ce76fb5aaa621b5f67a28740",
+    "id": "example-product",
+    "schemaVersion": 2,
+    "version": "1.0.0"
+  },
+  "typography": {
+    "familyName": "Example Sans",
+    "roles": {
+      "button.label": {
+        "visualToken": "body.medium",
+        "weight": "bold"
+      },
+      "feedback.title": {
+        "visualToken": "body.medium",
+        "weight": "bold"
+      },
+      "field.input": {
+        "visualToken": "body.medium",
+        "weight": "regular"
+      },
+      "field.label": {
+        "visualToken": "body.medium",
+        "weight": "bold"
+      },
+      "list.label": {
+        "visualToken": "body.medium",
+        "weight": "bold"
+      },
+      "selection.label": {
+        "visualToken": "body.medium",
+        "weight": "bold"
+      },
+      "supporting.text": {
+        "visualToken": "body.medium",
+        "weight": "regular"
+      }
+    },
+    "tokens": {
+      "body.medium": {
+        "allowedWeights": [
+          "regular",
+          "bold"
+        ],
+        "category": "core",
+        "fontSize": 16,
+        "functionalTextAllowed": true,
+        "lineHeight": 24,
+        "maxFontSizeMultiplier": 2.35
+      }
+    },
+    "weights": {
+      "bold": {
+        "fontFamily": "ExampleSans-Bold",
+        "fontWeight": 700
+      },
+      "regular": {
+        "fontFamily": "ExampleSans-Regular",
+        "fontWeight": 400
+      }
+    }
+  }
+}

@@ -31,16 +31,32 @@ test("fingerprints sorted paths and changes when artifact content changes", asyn
   assert.notEqual(changed.sha256, forward.sha256);
 });
 
-test("accepts only the exact release tag from the manifest", () => {
+test("pins detector provenance, rule pack, and anti-slop contract", async () => {
+  const manifest = await createManifest();
+  assert.equal(manifest.dependencies.impeccable.version, "3.6.0");
+  assert.equal(
+    manifest.dependencies.hallmark.commit,
+    "13ac0ec7e148655948100b6396439e481361d690",
+  );
+  assert.equal(
+    manifest.dependencies.antiSlopCatalog.pack.id,
+    "ansldes-anti-slop",
+  );
+  assert.match(manifest.dependencies.antiSlopCatalog.sha256, /^[a-f0-9]{64}$/);
+  assert.match(manifest.dependencies.antiSlopContract.sha256, /^[a-f0-9]{64}$/);
+});
+
+test("accepts only the exact release tag from the manifest", async () => {
   const script = fileURLToPath(
     new URL("./check-release-tag.mjs", import.meta.url),
   );
-  const accepted = spawnSync(process.execPath, [script, "v1.0.0"], {
+  const manifest = await createManifest();
+  const accepted = spawnSync(process.execPath, [script, manifest.release.tag], {
     encoding: "utf8",
   });
   assert.equal(accepted.status, 0, accepted.stderr);
 
-  const rejected = spawnSync(process.execPath, [script, "v0.2.1"], {
+  const rejected = spawnSync(process.execPath, [script, "v0.0.0"], {
     encoding: "utf8",
   });
   assert.notEqual(rejected.status, 0);

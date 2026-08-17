@@ -17,6 +17,13 @@ func TestDevelopmentVersionMatchesReleaseCandidate(t *testing.T) {
 	}
 }
 
+func TestExitCodeSeparatesFindingsFromExecutionErrors(t *testing.T) {
+	t.Parallel()
+	if exitCode(nil) != 0 || exitCode(errLintFailed) != 2 || exitCode(errors.New("execution")) != 1 {
+		t.Fatalf("exit codes = success:%d finding:%d execution:%d", exitCode(nil), exitCode(errLintFailed), exitCode(errors.New("execution")))
+	}
+}
+
 func TestLintDoesNotOverwriteReportWhenInputValidationFails(t *testing.T) {
 	t.Parallel()
 	directory := t.TempDir()
@@ -59,6 +66,8 @@ func TestLintWritesPassingJSONAndFailingReports(t *testing.T) {
 		"--source", "../../testdata/positive/Example.tsx",
 		"--pencil", "../../testdata/positive/document.pen.json",
 		"--layout", "../../testdata/positive/layout.json",
+		"--conformance", "../../../packages/schema/testdata/operate-conformance.json",
+		"--design-context", "../../../packages/schema/testdata/generated-design-context/.impeccable/design.json",
 		"--format", "json",
 		"--out", output,
 	}

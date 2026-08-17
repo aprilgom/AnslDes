@@ -1,6 +1,7 @@
 # Anti-slop Gate — Impeccable 2026 + Hallmark eight tells
 
-> [AnslDes README](../../README.md) · [Repository TODO](../../TODO.md) · [Product boundary](../product-boundary.md)
+> [AnslDes README](../../README.md) · [Repository TODO](../../TODO.md) ·
+> [Optional non-deterministic work](../../TODO_Optional.md) · [Product boundary](../product-boundary.md)
 
 Impeccable 2026 catalog의 고정된 결정론적 detector source와 Hallmark의 eight tells를 AnslDes의
 제품 중립 lint·evidence 계약으로 수용한다. AnslDes는 rule 의미, upstream mapping, evidence schema,
@@ -21,6 +22,7 @@ identity, source owner·consumer, content provenance, exception과 통과 보고
 - Hallmark pinned commit: `13ac0ec7e148655948100b6396439e481361d690`
 - Hallmark provenance와 mapping: [Hallmark eight tells reference](./references/hallmark-eight-tells-2026/README.md)
 - canonical deterministic registry 목표: 중복 제거된 63개 rule
+- canonical 63개는 engine 조건문이 아니라 versioned built-in rule pack manifest로 구성한다.
 
 결정론적 기준의 source of truth는 vendored
 [rule registry](./references/impeccable-detector-2026/upstream/cli/engine/registry/antipatterns.mjs)와
@@ -30,29 +32,34 @@ Hallmark source의 source of truth와 canonical mapping은
 동일한 의도의 source rule은 별도 finding을 중복 생성하지 않고 한 canonical rule에 provenance를 병합한다.
 Web detector 결과는 React Native, Pencil 또는 실기기 runtime 증거의 대체물이 아니다.
 
+각 rule은 공통 `RuleSpec`과 evaluator interface로 등록한다. pack composition과 consumer activation은
+versioned manifest와 policy input으로 결정하며 duplicate identity, unknown member, missing dependency,
+wildcard disable과 stale fingerprint를 실패시킨다. rule 제거는 report 후처리나 broad ignore가 아니라
+명시적인 activation status와 governance record로만 표현한다.
+
 ## 실행 순서
 
-- [ ] [01. Evidence contract와 audit 경계](./todo/01-evidence.md)
-- [ ] [02. Consumer conformance profile](./todo/02-consumer-profile.md)
-- [ ] [03. Design-system awareness rules](./todo/03-design-system-awareness.md)
-- [ ] [04. Visual detail rules](./todo/04-visual-detail.md)
-- [ ] [05. Typography와 hierarchy rules](./todo/05-typography.md)
-- [ ] [06. Color와 contrast rules](./todo/06-color.md)
-- [ ] [07. Layout과 space rules](./todo/07-layout.md)
-- [ ] [08. Motion rules](./todo/08-motion.md)
-- [ ] [09. Copy rules](./todo/09-copy.md)
-- [ ] [10. Imagery rules](./todo/10-imagery.md)
-- [ ] [11. Runtime과 general quality rules](./todo/11-runtime.md)
-- [ ] [12. LLM-only critique](./todo/12-llm-review.md)
-- [ ] [13. Native platform conformance](./todo/13-native.md)
-- [ ] [14. Upstream snapshot과 Web provider](./todo/14-web-gate.md)
-- [ ] [15. React Native와 Pencil provider](./todo/15-native-pencil-provider.md)
-- [ ] [16. Exception과 governance](./todo/16-governance.md)
-- [ ] [17. AnslDes gate 통합과 완료 감사](./todo/17-integration.md)
+- [x] [01. Evidence contract와 audit 경계](./todo/01-evidence.md)
+- [x] [02. Consumer conformance profile](./todo/02-consumer-profile.md)
+- [x] [03. Design-system awareness rules](./todo/03-design-system-awareness.md)
+- [x] [04. Visual detail rules](./todo/04-visual-detail.md)
+- [x] [05. Typography와 hierarchy rules](./todo/05-typography.md)
+- [x] [06. Color와 contrast rules](./todo/06-color.md)
+- [x] [07. Layout과 space rules](./todo/07-layout.md)
+- [x] [08. Motion rules](./todo/08-motion.md)
+- [x] [09. Copy rules](./todo/09-copy.md)
+- [x] [10. Imagery rules](./todo/10-imagery.md)
+- [x] [11. Runtime과 general quality rules](./todo/11-runtime.md)
+- [x] [13. Native platform conformance](./todo/13-native.md)
+- [x] [14. Upstream snapshot과 Web provider](./todo/14-web-gate.md)
+- [x] [15. React Native와 Pencil provider](./todo/15-native-pencil-provider.md)
+- [x] [16. Exception과 governance](./todo/16-governance.md)
+- [x] [17. AnslDes gate 통합과 완료 감사](./todo/17-integration.md)
 
-각 단계는 deterministic finding, false positive, advisory, LLM judgment와 미확보 runtime evidence를
-서로 다른 상태로 기록한다. 미검증을 통과로 표시하지 않으며 broad ignore나 report 후처리로 finding을
-숨기지 않는다.
+필수 16개 단계는 versioned input과 provider evidence에서 같은 결과를 재현해야 한다. deterministic
+finding, false positive, advisory와 미확보 runtime evidence를 서로 다른 상태로 기록한다. 미검증을
+통과로 표시하지 않으며 broad ignore나 report 후처리로 finding을 숨기지 않는다. 사람·LLM의 정성적
+판단은 [Optional TODO](../../TODO_Optional.md)에서 별도로 관리한다.
 
 ## 제품 중립 경계
 
@@ -68,3 +75,4 @@ Web detector 결과는 React Native, Pencil 또는 실기기 runtime 증거의 �
 - [deslint architecture](../../deslint/docs/architecture.md)
 - [Pinned detector snapshot](./references/impeccable-detector-2026/README.md)
 - [Pinned Hallmark eight tells](./references/hallmark-eight-tells-2026/README.md)
+- [Release migration과 rule-pack lifecycle](./release-migration.md)

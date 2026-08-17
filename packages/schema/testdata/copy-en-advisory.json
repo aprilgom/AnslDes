@@ -1,0 +1,21 @@
+{
+  "$schema": "../copy-evidence.schema.json",
+  "schemaVersion": 1,
+  "evidenceKind": "web-source",
+  "platform": "web",
+  "profileId": "operate",
+  "surfaceId": "example-copy-en-advisory",
+  "locale": "en-US",
+  "contentRegistryStatus": "executed",
+  "nodes": [
+    {
+      "id": "dash-saturation",
+      "owner": "example-editorial",
+      "containerId": "example-article",
+      "contentRole": "body",
+      "intent": "inform",
+      "text": "The first point—clear ownership—keeps work moving. The second point—stable evidence—keeps reviews reproducible. The third point—explicit scope—prevents accidental expansion. The fourth point—known recovery—makes failure understandable. The fifth point—direct language—keeps instructions useful. The sixth point—measured behavior—supports verification. The seventh point—exact identity—keeps policy narrow. The eighth point—durable provenance—makes the record auditable.",
+      "cadencePattern": "none"
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ansldes.dev/schema/web-provider-evidence.v1.json",
+  "title": "AnslDes Web provider evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "evidenceKind",
+    "platform",
+    "provider",
+    "surfaceId",
+    "webPolicyVersion",
+    "captureId",
+    "routeId",
+    "owner",
+    "viewport",
+    "theme",
+    "fontScale",
+    "reduceMotion",
+    "execution",
+    "findings"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "evidenceKind": { "enum": ["web-source", "web-rendered"] },
+    "platform": { "const": "web" },
+    "provider": {
+      "enum": ["regex-source", "static-html", "browser", "visual-contrast"]
+    },
+    "surfaceId": { "$ref": "#/$defs/name" },
+    "webPolicyVersion": { "$ref": "#/$defs/version" },
+    "captureId": { "$ref": "#/$defs/name" },
+    "routeId": { "$ref": "#/$defs/name" },
+    "owner": { "$ref": "#/$defs/name" },
+    "viewport": { "$ref": "#/$defs/viewport" },
+    "theme": { "$ref": "#/$defs/name" },
+    "fontScale": { "type": "number", "minimum": 1 },
+    "reduceMotion": { "type": "boolean" },
+    "execution": { "$ref": "#/$defs/execution" },
+    "findings": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/finding" }
+    }
+  },
+  "$defs": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[._/-][a-z0-9]+)*$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "viewport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "width", "height"],
+      "properties": {
+        "id": { "$ref": "#/$defs/name" },
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "capability", "reason"],
+      "properties": {
+        "status": { "enum": ["completed", "not-run", "failed"] },
+        "capability": { "enum": ["full", "regex-fallback"] },
+        "reason": { "type": "string" }
+      }
+    },
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "upstreamRuleId",
+        "owner",
+        "path",
+        "message",
+        "artifact"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/name" },
+        "upstreamRuleId": { "$ref": "#/$defs/name" },
+        "owner": { "$ref": "#/$defs/name" },
+        "path": { "type": "string", "minLength": 1 },
+        "message": { "type": "string", "minLength": 1 },
+        "artifact": {
+          "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/artifact" }]
+        }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "fingerprintSha256", "generated"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "fingerprintSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "generated": { "type": "boolean" }
+      }
+    }
+  }
+}

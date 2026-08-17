@@ -1,0 +1,84 @@
+{
+  "$schema": "../copy-evidence.schema.json",
+  "schemaVersion": 1,
+  "evidenceKind": "native-source",
+  "platform": "react-native",
+  "profileId": "operate",
+  "surfaceId": "example-copy-ko-negative",
+  "locale": "ko-KR",
+  "contentRegistryStatus": "executed",
+  "nodes": [
+    {
+      "id": "buzzword",
+      "owner": "example-copy",
+      "containerId": "example-intro",
+      "contentRole": "body",
+      "intent": "market",
+      "text": "혁신적인 경험을 제공합니다.",
+      "cadencePattern": "none"
+    },
+    {
+      "id": "cadence-one",
+      "owner": "example-copy",
+      "containerId": "example-cadence",
+      "contentRole": "heading",
+      "intent": "market",
+      "text": "기능이 아닙니다. 기반입니다.",
+      "cadencePattern": "manufactured-contrast"
+    },
+    {
+      "id": "cadence-two",
+      "owner": "example-copy",
+      "containerId": "example-cadence",
+      "contentRole": "body",
+      "intent": "market",
+      "text": "도구가 아닙니다. 흐름입니다.",
+      "cadencePattern": "manufactured-contrast"
+    },
+    {
+      "id": "cadence-three",
+      "owner": "example-copy",
+      "containerId": "example-cadence",
+      "contentRole": "label",
+      "intent": "market",
+      "text": "선택이 아닙니다. 기준입니다.",
+      "cadencePattern": "manufactured-contrast"
+    },
+    {
+      "id": "repeat-question",
+      "owner": "example-recovery",
+      "containerId": "example-error",
+      "contentRole": "question",
+      "intent": "recover",
+      "text": "다시 시도하세요.",
+      "cadencePattern": "none"
+    },
+    {
+      "id": "repeat-next",
+      "owner": "example-recovery",
+      "containerId": "example-error",
+      "contentRole": "next-action",
+      "intent": "recover",
+      "text": "다시 시도하세요.",
+      "cadencePattern": "none"
+    },
+    {
+      "id": "theater",
+      "owner": "example-copy",
+      "containerId": "example-security",
+      "contentRole": "body",
+      "intent": "market",
+      "text": "이 과정은 보안 연극에 불과합니다.",
+      "cadencePattern": "none"
+    },
+    {
+      "id": "metric",
+      "owner": "example-claim",
+      "containerId": "example-proof",
+      "contentRole": "metric",
+      "intent": "claim",
+      "text": "활성 사용자 10만 명",
+      "cadencePattern": "none"
+    }
+  ]
+}

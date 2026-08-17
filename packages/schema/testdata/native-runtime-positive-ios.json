@@ -1,0 +1,178 @@
+{
+  "$schema": "../native-runtime-evidence.schema.json",
+  "schemaVersion": 1,
+  "evidenceKind": "simulator",
+  "platform": "ios",
+  "surfaceId": "example-native-surface",
+  "nativePolicyVersion": "1.0.0",
+  "captures": [
+    {
+      "id": "ios-phone-light",
+      "owner": "example-native-owner",
+      "environment": {
+        "formFactor": "phone",
+        "orientation": "portrait",
+        "windowMode": "fullscreen",
+        "foldPosture": "not-applicable",
+        "theme": "light",
+        "fontScale": 1,
+        "refreshRateHz": 60,
+        "reduceMotion": false
+      },
+      "systemGesture": { "backReachable": true, "conflictFree": true },
+      "safeArea": { "respected": true, "edgeToEdgeInsetsApplied": true },
+      "keyboardIme": {
+        "tested": true,
+        "inputVisible": true,
+        "primaryActionReachable": true
+      },
+      "accessibility": {
+        "readingOrder": ["primary-action"],
+        "focusOrder": ["primary-action"],
+        "controls": [
+          {
+            "id": "primary-action",
+            "owner": "example-native-owner",
+            "interactive": true,
+            "label": "Continue",
+            "roleOrTrait": "button",
+            "stateAnnounced": true,
+            "width": 44,
+            "height": 44,
+            "nearestAdjacentSpacing": 8
+          }
+        ]
+      },
+      "fontScaling": {
+        "clipped": false,
+        "overlap": false,
+        "unreachableControl": false,
+        "text": [
+          {
+            "id": "body-copy",
+            "owner": "example-native-owner",
+            "size": 14,
+            "usesScaledUnits": true,
+            "platformTypeRole": true
+          }
+        ]
+      },
+      "motion": { "fallbackApplied": true },
+      "appearance": {
+        "contrastPass": true,
+        "darkThemeComplete": true,
+        "quickInvertUsed": false
+      },
+      "adaptivity": {
+        "sizeOrWindowClassApplied": true,
+        "notSimplyScaled": true,
+        "windowModeSupported": true,
+        "foldPostureSupported": true
+      },
+      "performance": {
+        "synchronousStartupMs": 5,
+        "initializationMs": 300,
+        "frames": [
+          {
+            "id": "scroll-results",
+            "owner": "example-performance-owner",
+            "totalFrames": 100,
+            "droppedFrames": 1,
+            "maxMainThreadWorkMs": 4
+          }
+        ]
+      },
+      "bundle": {
+        "jsBytes": 100000,
+        "jsBaselineBytes": 100000,
+        "appBinaryBytes": 200000,
+        "appBinaryBaselineBytes": 200000,
+        "unusedDependencyBytes": 0
+      }
+    },
+    {
+      "id": "ios-tablet-dark-large",
+      "owner": "example-native-owner",
+      "environment": {
+        "formFactor": "tablet",
+        "orientation": "landscape",
+        "windowMode": "split",
+        "foldPosture": "not-applicable",
+        "theme": "dark",
+        "fontScale": 2.35,
+        "refreshRateHz": 120,
+        "reduceMotion": true
+      },
+      "systemGesture": { "backReachable": true, "conflictFree": true },
+      "safeArea": { "respected": true, "edgeToEdgeInsetsApplied": true },
+      "keyboardIme": {
+        "tested": true,
+        "inputVisible": true,
+        "primaryActionReachable": true
+      },
+      "accessibility": {
+        "readingOrder": ["primary-action"],
+        "focusOrder": ["primary-action"],
+        "controls": [
+          {
+            "id": "primary-action",
+            "owner": "example-native-owner",
+            "interactive": true,
+            "label": "Continue",
+            "roleOrTrait": "button",
+            "stateAnnounced": true,
+            "width": 52,
+            "height": 52,
+            "nearestAdjacentSpacing": 8
+          }
+        ]
+      },
+      "fontScaling": {
+        "clipped": false,
+        "overlap": false,
+        "unreachableControl": false,
+        "text": [
+          {
+            "id": "body-copy",
+            "owner": "example-native-owner",
+            "size": 14,
+            "usesScaledUnits": true,
+            "platformTypeRole": true
+          }
+        ]
+      },
+      "motion": { "fallbackApplied": true },
+      "appearance": {
+        "contrastPass": true,
+        "darkThemeComplete": true,
+        "quickInvertUsed": false
+      },
+      "adaptivity": {
+        "sizeOrWindowClassApplied": true,
+        "notSimplyScaled": true,
+        "windowModeSupported": true,
+        "foldPostureSupported": true
+      },
+      "performance": {
+        "synchronousStartupMs": 5,
+        "initializationMs": 300,
+        "frames": [
+          {
+            "id": "scroll-results",
+            "owner": "example-performance-owner",
+            "totalFrames": 100,
+            "droppedFrames": 1,
+            "maxMainThreadWorkMs": 4
+          }
+        ]
+      },
+      "bundle": {
+        "jsBytes": 100000,
+        "jsBaselineBytes": 100000,
+        "appBinaryBytes": 200000,
+        "appBinaryBaselineBytes": 200000,
+        "unusedDependencyBytes": 0
+      }
+    }
+  ]
+}

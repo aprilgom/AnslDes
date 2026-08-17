@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ansldes.dev/schema/runtime-evidence.v1.json",
+  "title": "AnslDes runtime and general quality evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "evidenceKind",
+    "platform",
+    "surfaceId",
+    "runtimePolicyVersion",
+    "captureStatus",
+    "detectorFailure",
+    "routes"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "evidenceKind": {
+      "enum": ["web-rendered", "simulator", "emulator", "physical-device"]
+    },
+    "platform": { "enum": ["web", "ios", "android"] },
+    "surfaceId": { "$ref": "#/$defs/name" },
+    "runtimePolicyVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "captureStatus": { "enum": ["completed", "detector-process-failed"] },
+    "detectorFailure": {
+      "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/detectorFailure" }]
+    },
+    "routes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/route" }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "captureStatus": { "const": "completed" } },
+        "required": ["captureStatus"]
+      },
+      "then": {
+        "properties": {
+          "detectorFailure": { "type": "null" },
+          "routes": { "type": "array", "minItems": 1 }
+        }
+      },
+      "else": {
+        "properties": {
+          "detectorFailure": { "$ref": "#/$defs/detectorFailure" },
+          "routes": { "type": "array", "maxItems": 0 }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[._/-][a-z0-9]+)*$"
+    },
+    "detectorFailure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage", "code"],
+      "properties": {
+        "stage": {
+          "enum": ["launch", "navigation", "injection", "collection"]
+        },
+        "code": { "$ref": "#/$defs/name" }
+      }
+    },
+    "route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "owner", "failures", "content", "text"],
+      "properties": {
+        "id": { "$ref": "#/$defs/name" },
+        "owner": { "$ref": "#/$defs/name" },
+        "failures": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/runtimeFailure" }
+        },
+        "content": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/contentObservation" }
+        },
+        "text": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/textObservation" }
+        }
+      }
+    },
+    "runtimeFailure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind"],
+      "properties": {
+        "id": { "$ref": "#/$defs/name" },
+        "kind": {
+          "enum": [
+            "console-error",
+            "unhandled-rejection",
+            "route-render-failure",
+            "uncaught-error",
+            "parse-failure",
+            "app-crash",
+            "redbox",
+            "render-error-boundary"
+          ]
+        }
+      }
+    },
+    "contentObservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "owner",
+        "importance",
+        "revealStatus",
+        "hiddenAtRest",
+        "defaultVisibleWithoutScript"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/name" },
+        "owner": { "$ref": "#/$defs/name" },
+        "importance": { "enum": ["primary", "supporting", "decorative"] },
+        "revealStatus": { "enum": ["none", "completed", "failed"] },
+        "hiddenAtRest": { "type": "boolean" },
+        "defaultVisibleWithoutScript": { "type": "boolean" }
+      }
+    },
+    "textObservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "owner", "role", "alignment", "context"],
+      "properties": {
+        "id": { "$ref": "#/$defs/name" },
+        "owner": { "$ref": "#/$defs/name" },
+        "role": { "enum": ["body", "caption", "ui", "data", "code"] },
+        "alignment": { "enum": ["start", "center", "end", "justify"] },
+        "context": { "enum": ["screen", "print", "export"] }
+      }
+    }
+  }
+}

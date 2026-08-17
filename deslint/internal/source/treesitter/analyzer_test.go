@@ -34,6 +34,40 @@ export function Example({ disabled }: { disabled: boolean }) {
 	if summary.NodeKindUses["jsx_self_closing_element"] != 1 {
 		t.Fatalf("jsx_self_closing_element count = %d, want 1", summary.NodeKindUses["jsx_self_closing_element"])
 	}
+	kinds := map[string]bool{}
+	for _, node := range summary.SyntaxNodes {
+		kinds[node.Kind] = true
+	}
+	for _, kind := range []string{"import", "export", "declaration", "jsx-element", "attribute", "expression"} {
+		if !kinds[kind] {
+			t.Fatalf("normalized IR is missing %q: %#v", kind, summary.SyntaxNodes)
+		}
+	}
+	if len(summary.Bindings) == 0 || summary.Bindings[0].AliasOf != "Button" {
+		t.Fatalf("bindings = %#v", summary.Bindings)
+	}
+}
+
+func TestAnalyzeResolvesDuplicateAndShadowedBindings(t *testing.T) {
+	t.Parallel()
+	summary, err := treesitter.NewAnalyzer().Analyze("Scope.ts", []byte(`
+const value = 1;
+function outer(value: number) {
+  const local = value;
+  { const local = 2; const local = 3; }
+}
+`), source.LanguageTypeScript)
+	if err != nil {
+		t.Fatal(err)
+	}
+	seenShadow, seenDuplicate := false, false
+	for _, binding := range summary.Bindings {
+		seenShadow = seenShadow || binding.Shadows
+		seenDuplicate = seenDuplicate || binding.Duplicate
+	}
+	if !seenShadow || !seenDuplicate {
+		t.Fatalf("bindings = %#v", summary.Bindings)
+	}
 }
 
 func TestAnalyzeKeepsSyntaxErrorsVisible(t *testing.T) {

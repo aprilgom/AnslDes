@@ -1,12 +1,28 @@
 {
   "schemaVersion": 1,
   "release": {
-    "version": "1.0.0",
-    "tag": "v1.0.0"
+    "version": "1.1.0",
+    "tag": "v1.1.0"
   },
   "compatibility": {
     "definitionSchemaVersion": 2,
     "policySchemaVersion": 1,
+    "reportSchemaVersion": 1,
+    "consumerConformanceSchemaVersion": 1,
+    "designContextSchemaVersion": 1,
+    "visualDetailEvidenceSchemaVersion": 1,
+    "typographyEvidenceSchemaVersion": 1,
+    "colorEvidenceSchemaVersion": 1,
+    "layoutEvidenceSchemaVersion": 1,
+    "motionEvidenceSchemaVersion": 1,
+    "copyEvidenceSchemaVersion": 1,
+    "imageryEvidenceSchemaVersion": 1,
+    "runtimeEvidenceSchemaVersion": 1,
+    "nativeSourceEvidenceSchemaVersion": 1,
+    "nativeRuntimeEvidenceSchemaVersion": 1,
+    "webProviderEvidenceSchemaVersion": 1,
+    "consumerReleaseLockSchemaVersion": 1,
+    "stageExecutionEvidenceSchemaVersion": 1,
     "compiledBundleVersion": 2,
     "node": ">=22",
     "go": ">=1.26.0",
@@ -16,46 +32,77 @@
   "packages": {
     "schema": {
       "name": "@ansldes/schema",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     "compiler": {
       "name": "@ansldes/compiler",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     "core": {
       "name": "@ansldes/core",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     "reactNative": {
       "name": "@ansldes/react-native",
-      "version": "1.0.0"
+      "version": "1.1.0"
     }
   },
   "deslint": {
     "module": "github.com/aprilgom/AnslDes/deslint",
-    "version": "1.0.0",
-    "releaseVersionLinkerFlag": "-X main.version=1.0.0"
+    "version": "1.1.0",
+    "releaseVersionLinkerFlag": "-X main.version=1.1.0"
+  },
+  "dependencies": {
+    "antiSlopCatalog": {
+      "sha256": "5cfab574a961751258d817bd438f9b4fdbe3f810a7eb8428ea0aa4213c4844e2",
+      "pack": {
+        "id": "ansldes-anti-slop",
+        "version": "1.1.0",
+        "fingerprintSha256": "df05187c79c254c8b7f1159b375ae2017e5d55b20af512aabf7f7b522173159f"
+      }
+    },
+    "impeccable": {
+      "name": "impeccable",
+      "version": "3.6.0",
+      "integrity": "sha512-nysc6/2OHTWqLrcSxTxZk4r4QMufhU8NTIuG2ic6p5zzyZe45AWBX3/18OA5S88pCWq+4z8pKsjUxhAM990RKg==",
+      "commit": "7b646bafd60b9dd9828ce5c4c1a25691702c9e92",
+      "sourceTreeSha256": "84d3d3a66be62ea4c361420a6662f42010b123b680e00d8306e6a627ab5f5954",
+      "treeSha256": "a4dfe2060edf918b1241afac131ed9fbdf2d9eecaa448a6f57365e895da1908c",
+      "computedTreeSha256": "a4dfe2060edf918b1241afac131ed9fbdf2d9eecaa448a6f57365e895da1908c"
+    },
+    "hallmark": {
+      "commit": "13ac0ec7e148655948100b6396439e481361d690",
+      "sourceSha256": "83083b5e37b99cb8211268b778aa0cb3f677f8fe53f8d817f54fcad799882e0e"
+    },
+    "migrationNote": {
+      "path": "docs/anti-slop/references/impeccable-detector-2026/MIGRATION.md",
+      "sha256": "f2573b1d0776901b291a7c72e3c74c4259493ba57d4e7058310c63eb5fe10c16"
+    },
+    "antiSlopContract": {
+      "fileCount": 7,
+      "sha256": "ef6314c96587d8f8a8772b022369359e911a4b0756cc75c42f7c70fa8bb9966f"
+    }
   },
   "artifacts": {
     "schema": {
-      "fileCount": 8,
-      "sha256": "ee83ee4d4f84cd5625062afbb4d01a3bec70203376bf5b8106b895626ecad96a"
+      "fileCount": 76,
+      "sha256": "f1fec75b177bbbaa1e4692cc916e2cf4932813ccf5965bec8d72cd54b6ff2804"
     },
     "compiler": {
       "fileCount": 5,
-      "sha256": "926f51834e931303b85d4d8d29215a482351c418205fd03e7f1a7be123b2606b"
+      "sha256": "e17fe3485bd8dd5b589122334139107dc1e2aeb98dfa0a7fbd0d8e548c39e660"
     },
     "core": {
       "fileCount": 5,
-      "sha256": "4763ab5a47d38d14f97c756e47f153d80ba6a5a2e9acb1d1a98e53dafacc19f2"
+      "sha256": "bdf5222ac98fcb4e32e7397b771f072d46641c9b2c21265e0f84b9609540fe33"
     },
     "reactNative": {
       "fileCount": 19,
-      "sha256": "1dbd1f49485d3a8ed776d97db729e3e021e7e6e5937bf03f048753d7e0324291"
+      "sha256": "4bed95092a514279a18618d067a6e08ccd1e426f827076bbc694129f3aa0656b"
     },
     "deslint": {
-      "fileCount": 23,
-      "sha256": "0a1eda4d2a55acdd657b112b9d9648c53a05b872c280f479caa976e96798aaf3"
+      "fileCount": 67,
+      "sha256": "b7856dae32753412bea50ae9d034d8377610f2920181b77b58c4785d5efd31a2"
     }
   }
 }

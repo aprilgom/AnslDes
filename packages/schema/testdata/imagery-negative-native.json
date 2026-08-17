@@ -1,0 +1,30 @@
+{
+  "$schema": "../imagery-evidence.schema.json",
+  "schemaVersion": 1,
+  "evidenceKind": "native-source",
+  "platform": "react-native",
+  "surfaceId": "example-imagery-native",
+  "assetRegistryVersion": "1.0.0",
+  "nodes": [
+    {
+      "id": "owner-drift",
+      "owner": "other-owner",
+      "consumer": "example-hero",
+      "assetId": "hero-art",
+      "medium": "native-image",
+      "role": "hero-illustration",
+      "width": 360,
+      "height": 240,
+      "primitiveShapeCount": 0,
+      "pictorialScene": false,
+      "deliberatelyDrawn": true,
+      "sourceStatus": "loaded",
+      "source": "asset://wrong-source",
+      "fingerprintSha256": "2222222222222222222222222222222222222222222222222222222222222222",
+      "decorative": false,
+      "screenReaderExcluded": false,
+      "accessibleLabel": "",
+      "gradientOrShapePlaceholder": true
+    }
+  ]
+}

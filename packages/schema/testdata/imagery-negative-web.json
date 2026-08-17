@@ -1,0 +1,49 @@
+{
+  "$schema": "../imagery-evidence.schema.json",
+  "schemaVersion": 1,
+  "evidenceKind": "web-rendered",
+  "platform": "web",
+  "surfaceId": "example-imagery-web",
+  "assetRegistryVersion": "1.0.0",
+  "nodes": [
+    {
+      "id": "shape-hero",
+      "owner": "example-asset-owner",
+      "consumer": "example-hero",
+      "assetId": "hero-art",
+      "medium": "inline-svg",
+      "role": "hero-illustration",
+      "width": 640,
+      "height": 480,
+      "primitiveShapeCount": 12,
+      "pictorialScene": true,
+      "deliberatelyDrawn": false,
+      "sourceStatus": "loaded",
+      "source": "asset://example-hero",
+      "fingerprintSha256": "1111111111111111111111111111111111111111111111111111111111111111",
+      "decorative": false,
+      "screenReaderExcluded": false,
+      "accessibleLabel": "Example illustration",
+      "gradientOrShapePlaceholder": false
+    },
+    {
+      "id": "missing-image",
+      "owner": "example-content",
+      "consumer": "example-article",
+      "medium": "img",
+      "role": "photo",
+      "width": 320,
+      "height": 180,
+      "primitiveShapeCount": 0,
+      "pictorialScene": false,
+      "deliberatelyDrawn": false,
+      "sourceStatus": "missing",
+      "source": "",
+      "fingerprintSha256": "",
+      "decorative": false,
+      "screenReaderExcluded": false,
+      "accessibleLabel": "Article image",
+      "gradientOrShapePlaceholder": false
+    }
+  ]
+}

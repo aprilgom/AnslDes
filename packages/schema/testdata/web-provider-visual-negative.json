@@ -1,0 +1,27 @@
+{
+  "$schema": "../web-provider-evidence.schema.json",
+  "schemaVersion": 1,
+  "evidenceKind": "web-rendered",
+  "platform": "web",
+  "provider": "visual-contrast",
+  "surfaceId": "example-web-surface",
+  "webPolicyVersion": "1.0.0",
+  "captureId": "visual-dark-large",
+  "routeId": "example-home",
+  "owner": "example-web-owner",
+  "viewport": { "id": "mobile", "width": 390, "height": 844 },
+  "theme": "dark",
+  "fontScale": 1.6,
+  "reduceMotion": true,
+  "execution": { "status": "completed", "capability": "full", "reason": "" },
+  "findings": [
+    {
+      "id": "contrast-copy",
+      "upstreamRuleId": "low-contrast",
+      "owner": "example-web-owner",
+      "path": "route/example-home#supporting-copy",
+      "message": "pixel contrast is below the configured threshold",
+      "artifact": null
+    }
+  ]
+}

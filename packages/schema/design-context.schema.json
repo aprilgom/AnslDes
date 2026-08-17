@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ansldes.dev/schema/design-context.v1.json",
+  "title": "AnslDes generated design context",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "generator",
+    "source",
+    "typography",
+    "colors",
+    "radii"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "generator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version"],
+      "properties": {
+        "id": { "const": "ansldes-design-context" },
+        "version": { "const": "1.0.0" }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "id", "version", "contractSha256"],
+      "properties": {
+        "schemaVersion": { "type": "integer", "minimum": 1 },
+        "id": { "$ref": "#/$defs/name" },
+        "version": { "$ref": "#/$defs/version" },
+        "contractSha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "typography": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["familyName", "weights", "tokens", "roles"],
+      "properties": {
+        "familyName": { "type": "string", "minLength": 1 },
+        "weights": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/weight" }
+        },
+        "tokens": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/typeToken" }
+        },
+        "roles": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/typeRole" }
+        }
+      }
+    },
+    "colors": { "$ref": "#/$defs/colors" },
+    "radii": { "$ref": "#/$defs/radii" }
+  },
+  "$defs": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
+    },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "stringMap": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "numberMap": {
+      "type": "object",
+      "additionalProperties": { "type": "number", "minimum": 0 }
+    },
+    "weight": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fontFamily", "fontWeight"],
+      "properties": {
+        "fontFamily": { "type": "string", "minLength": 1 },
+        "fontWeight": { "type": "integer", "minimum": 1, "maximum": 1000 }
+      }
+    },
+    "typeToken": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fontSize",
+        "lineHeight",
+        "maxFontSizeMultiplier",
+        "allowedWeights",
+        "category",
+        "functionalTextAllowed"
+      ],
+      "properties": {
+        "fontSize": { "type": "number", "exclusiveMinimum": 0 },
+        "lineHeight": { "type": "number", "exclusiveMinimum": 0 },
+        "maxFontSizeMultiplier": { "type": "number", "minimum": 1 },
+        "allowedWeights": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/name" }
+        },
+        "category": { "$ref": "#/$defs/name" },
+        "functionalTextAllowed": { "type": "boolean" }
+      }
+    },
+    "typeRole": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["visualToken", "weight"],
+      "properties": {
+        "visualToken": { "$ref": "#/$defs/name" },
+        "weight": { "$ref": "#/$defs/name" }
+      }
+    },
+    "colors": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["primitive", "semantic", "component", "asset"],
+      "properties": {
+        "primitive": { "$ref": "#/$defs/stringMap" },
+        "semantic": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/stringMap" }
+        },
+        "component": { "$ref": "#/$defs/stringMap" },
+        "asset": { "$ref": "#/$defs/stringMap" }
+      }
+    },
+    "radii": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["primitive", "semantic", "component"],
+      "properties": {
+        "primitive": { "$ref": "#/$defs/numberMap" },
+        "semantic": { "$ref": "#/$defs/stringMap" },
+        "component": { "$ref": "#/$defs/stringMap" }
+      }
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "$schema": "../native-source-evidence.schema.json",
+  "schemaVersion": 1,
+  "evidenceKind": "native-source",
+  "platform": "react-native",
+  "surfaceId": "example-native-surface",
+  "nativePolicyVersion": "1.0.0",
+  "controls": [
+    {
+      "id": "primary-action",
+      "owner": "example-native-owner",
+      "interactive": true,
+      "label": "Continue",
+      "roleOrTrait": "button",
+      "stateAnnouncement": true,
+      "readingOrder": 1,
+      "focusOrder": 1
+    }
+  ],
+  "lists": [
+    {
+      "id": "results-list",
+      "owner": "example-list-owner",
+      "longList": true,
+      "virtualized": true,
+      "stableKey": true
+    }
+  ],
+  "renderPaths": [
+    {
+      "id": "result-row",
+      "owner": "example-list-owner",
+      "unnecessaryRerender": false,
+      "unstableCallback": false,
+      "unstableKey": false,
+      "memoizationRequired": true,
+      "memoized": true
+    }
+  ],
+  "images": [
+    {
+      "id": "result-thumbnail",
+      "owner": "example-image-owner",
+      "thumbnail": true,
+      "displayPixels": 10000,
+      "decodedPixels": 40000,
+      "cached": true,
+      "repeatedLoad": false
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "used-module",
+      "owner": "example-build-owner",
+      "used": true,
+      "contributionBytes": 4096
+    }
+  ],
+  "appearance": [
+    {
+      "id": "surface-material",
+      "owner": "example-theme-owner",
+      "rawColor": false,
+      "semanticSystemRole": true,
+      "handRolledMaterial": false
+    }
+  ],
+  "patterns": [
+    {
+      "id": "primary-content",
+      "owner": "example-native-owner",
+      "textAlignment": "start",
+      "hiddenAtRest": false,
+      "revealFallbackVisible": true,
+      "rawAnimation": false,
+      "transitionId": "content.reveal"
+    }
+  ],
+  "adaptivity": {
+    "owner": "example-layout-owner",
+    "usesSizeOrWindowClass": true,
+    "simplePhoneScaleOnExpanded": false,
+    "supportsPortrait": true,
+    "supportsLandscape": true,
+    "supportsSplitView": true,
+    "supportsMultiWindow": true,
+    "supportsFoldPosture": true,
+    "compactNavigation": "tabs",
+    "expandedNavigation": "rail"
+  },
+  "navigation": {
+    "owner": "example-navigation-owner",
+    "iosNavigationStackOrSheet": true,
+    "iosEdgeSwipeBack": true,
+    "androidPredictiveBack": true
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ansldes.dev/schema/visual-detail-evidence.v1.json",
+  "title": "AnslDes visual detail provider evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "evidenceKind",
+    "platform",
+    "surfaceId",
+    "nodes"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "evidenceKind": {
+      "enum": ["web-source", "native-source", "design-document-source"]
+    },
+    "platform": {
+      "enum": ["web", "react-native", "ios", "android", "design-document"]
+    },
+    "surfaceId": { "$ref": "#/$defs/name" },
+    "nodes": { "type": "array", "items": { "$ref": "#/$defs/node" } }
+  },
+  "$defs": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[._/-][a-z0-9]+)*$"
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "owner",
+        "kind",
+        "radius",
+        "borderWidth",
+        "shadowBlur",
+        "shadowSpread",
+        "accentEdges",
+        "backgroundPattern",
+        "patternDataMeaning",
+        "accessoryWrapper",
+        "declaresBorder",
+        "declaresElevation"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/name" },
+        "owner": { "$ref": "#/$defs/name" },
+        "kind": {
+          "enum": [
+            "card",
+            "list",
+            "callout",
+            "status",
+            "selection",
+            "list-row",
+            "diagram",
+            "canvas",
+            "map",
+            "measurement",
+            "surface"
+          ]
+        },
+        "radius": { "type": "number", "minimum": 0 },
+        "borderWidth": { "type": "number", "minimum": 0 },
+        "shadowBlur": { "type": "number", "minimum": 0 },
+        "shadowSpread": { "type": "number" },
+        "accentEdges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["side", "thickness", "colorRole"],
+            "properties": {
+              "side": { "enum": ["top", "right", "bottom", "left"] },
+              "thickness": { "type": "number", "minimum": 0 },
+              "colorRole": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        "backgroundPattern": { "enum": ["none", "repeating-stripes", "grid"] },
+        "patternDataMeaning": { "type": "boolean" },
+        "diagramOwner": { "$ref": "#/$defs/name" },
+        "semanticState": { "enum": ["error", "status", "selected"] },
+        "componentOwner": { "$ref": "#/$defs/name" },
+        "accessoryWrapper": { "type": "boolean" },
+        "declaresBorder": { "type": "boolean" },
+        "declaresElevation": { "type": "boolean" }
+      }
+    }
+  }
+}
