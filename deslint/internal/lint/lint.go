@@ -752,6 +752,9 @@ func enforceBudgets(diagnostics []diagnostic.Diagnostic, falsePositives []report
 	}
 	for _, item := range evidence {
 		switch item.Status {
+		case report.EvidenceStatusPass, report.EvidenceStatusFail, report.EvidenceStatusAdvisory,
+			report.EvidenceStatusFalsePositive:
+			continue
 		case report.EvidenceStatusNotRun:
 			counts["not-run"]++
 		case report.EvidenceStatusDeferred:
