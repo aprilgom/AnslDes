@@ -184,8 +184,8 @@ func New(input Input) (Report, error) {
 	if err != nil {
 		return Report{}, err
 	}
-	if err := validateFalsePositiveActivations(falsePositives, ruleSet); err != nil {
-		return Report{}, err
+	if validationErr := validateFalsePositiveActivations(falsePositives, ruleSet); validationErr != nil {
+		return Report{}, validationErr
 	}
 	evidence, err := normalizeEvidence(input.Evidence, diagnostics, falsePositives)
 	if err != nil {

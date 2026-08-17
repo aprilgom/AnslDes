@@ -106,7 +106,7 @@ type ProviderExecutionError struct {
 }
 
 func (e *ProviderExecutionError) Error() string {
-	return fmt.Sprintf("Web provider %q failed for capture %q: %s", e.Provider, e.CaptureID, e.Reason)
+	return fmt.Sprintf("web provider %q failed for capture %q: %s", e.Provider, e.CaptureID, e.Reason)
 }
 
 // Config injects consumer-owned routes, axes, and exact artifact exclusions.
@@ -124,14 +124,14 @@ type Config struct {
 }
 
 // Analyze parses one provider result and returns canonical findings plus exact artifact exclusions.
-func Analyze(path string, contents []byte, config Config) (Evidence, []diagnostic.Diagnostic, []ExcludedFinding, error) {
+func Analyze(_ string, contents []byte, config Config) (Evidence, []diagnostic.Diagnostic, []ExcludedFinding, error) {
 	duplicates, err := jsoncheck.DuplicateKeys(contents)
 	if err != nil {
 		return Evidence{}, nil, nil, err
 	}
 	if len(duplicates) > 0 {
 		sort.Strings(duplicates)
-		return Evidence{}, nil, nil, fmt.Errorf("Web provider evidence has duplicate keys: %s", strings.Join(duplicates, ", "))
+		return Evidence{}, nil, nil, fmt.Errorf("web provider evidence has duplicate keys: %s", strings.Join(duplicates, ", "))
 	}
 	decoder := json.NewDecoder(bytes.NewReader(contents))
 	decoder.DisallowUnknownFields()
@@ -162,15 +162,15 @@ func Analyze(path string, contents []byte, config Config) (Evidence, []diagnosti
 	excluded := []ExcludedFinding{}
 	for _, providerFinding := range providerFindings {
 		if providerFinding.ID == "" || providerFinding.UpstreamRuleID == "" || providerFinding.Owner == "" || providerFinding.Path == "" || providerFinding.Message == "" || seen[providerFinding.ID] {
-			return Evidence{}, nil, nil, fmt.Errorf("Web provider finding identity is incomplete or duplicated")
+			return Evidence{}, nil, nil, fmt.Errorf("web provider finding identity is incomplete or duplicated")
 		}
 		seen[providerFinding.ID] = true
 		catalogRule, found := rules.LookupSourceRule("impeccable/" + providerFinding.UpstreamRuleID)
 		if !found {
-			return Evidence{}, nil, nil, fmt.Errorf("Web provider emitted unknown upstream rule %q", providerFinding.UpstreamRuleID)
+			return Evidence{}, nil, nil, fmt.Errorf("web provider emitted unknown upstream rule %q", providerFinding.UpstreamRuleID)
 		}
 		if !slices.Contains(catalogRule.Providers, evidence.Provider) || !slices.Contains(catalogRule.EvidenceKinds, string(evidence.EvidenceKind)) {
-			return Evidence{}, nil, nil, fmt.Errorf("Web provider %q is incompatible with rule %q", evidence.Provider, providerFinding.UpstreamRuleID)
+			return Evidence{}, nil, nil, fmt.Errorf("web provider %q is incompatible with rule %q", evidence.Provider, providerFinding.UpstreamRuleID)
 		}
 		if !config.Active(catalogRule.ID) {
 			continue
@@ -228,24 +228,24 @@ func CoverageFindings(evidences []Evidence, config Config) []diagnostic.Diagnost
 
 func validateEvidence(evidence Evidence, config Config) error {
 	if evidence.SchemaVersion != 1 || evidence.Platform != "web" || evidence.SurfaceID == "" || evidence.CaptureID == "" || evidence.RouteID == "" || evidence.Owner == "" {
-		return fmt.Errorf("Web provider evidence identity is invalid")
+		return fmt.Errorf("web provider evidence identity is invalid")
 	}
 	if config.RegistryVersion == "" || evidence.WebPolicyVersion != config.RegistryVersion {
-		return fmt.Errorf("Web evidence policy version %q does not match consumer policy %q", evidence.WebPolicyVersion, config.RegistryVersion)
+		return fmt.Errorf("web evidence policy version %q does not match consumer policy %q", evidence.WebPolicyVersion, config.RegistryVersion)
 	}
 	if !providerMatchesKind(evidence.Provider, evidence.EvidenceKind) {
-		return fmt.Errorf("Web provider %q is incompatible with evidence kind %q", evidence.Provider, evidence.EvidenceKind)
+		return fmt.Errorf("web provider %q is incompatible with evidence kind %q", evidence.Provider, evidence.EvidenceKind)
 	}
 	route, found := config.Routes[evidence.RouteID]
 	if !found || route.Owner != evidence.Owner || route.Target == "" {
-		return fmt.Errorf("Web evidence route %q does not exact-match consumer policy", evidence.RouteID)
+		return fmt.Errorf("web evidence route %q does not exact-match consumer policy", evidence.RouteID)
 	}
 	viewport, found := config.Viewports[evidence.Viewport.ID]
 	if !found || viewport != evidence.Viewport || !slices.Contains(config.Themes, evidence.Theme) || !slices.Contains(config.FontScales, evidence.FontScale) || !slices.Contains(config.ReduceMotion, evidence.ReduceMotion) {
-		return fmt.Errorf("Web evidence viewport, theme, font scale, or Reduce Motion axis drifted")
+		return fmt.Errorf("web evidence viewport, theme, font scale, or Reduce Motion axis drifted")
 	}
 	if !slices.Contains([]string{"completed", "not-run", "failed"}, evidence.Execution.Status) || !slices.Contains([]string{"full", "regex-fallback"}, evidence.Execution.Capability) {
-		return fmt.Errorf("Web provider execution status or capability is invalid")
+		return fmt.Errorf("web provider execution status or capability is invalid")
 	}
 	if evidence.Execution.Status == "completed" && (evidence.Execution.Capability != "full" || evidence.Execution.Reason != "") {
 		return fmt.Errorf("completed Web provider evidence requires full capability and no failure reason")
