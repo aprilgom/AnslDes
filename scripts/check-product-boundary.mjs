@@ -8,6 +8,7 @@ const skippedDirectories = new Set(["bin", "dist", "node_modules"]);
 const allowedTopLevelDirectories = new Set([
   ".git",
   ".github",
+  ".husky",
   "deslint",
   "docs",
   "node_modules",
