@@ -14,7 +14,7 @@
 - npm integrity: `sha512-nysc6/2OHTWqLrcSxTxZk4r4QMufhU8NTIuG2ic6p5zzyZe45AWBX3/18OA5S88pCWq+4z8pKsjUxhAM990RKg==`
 - license: [Apache-2.0](./upstream/LICENSE)
 - source snapshot tree SHA-256: `84d3d3a66be62ea4c361420a6662f42010b123b680e00d8306e6a627ab5f5954`
-- repository canonical tree SHA-256: `a4dfe2060edf918b1241afac131ed9fbdf2d9eecaa448a6f57365e895da1908c`
+- repository canonical LF tree SHA-256: `d9d61f4e0239d35c3a00e178fe07e39614508ac041f844be051500fb102732e9`
   (`relative-path + NUL + file-sha256 + LF`, path 정렬)
 
 Upstream 파일은 수정하지 않았다. 생성 산출물인 `detect-antipatterns-browser.js`는 중복된 browser bundle이라

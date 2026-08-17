@@ -1,5 +1,12 @@
 # Impeccable 3.6.0 adoption note
 
+## AnslDes v1.1.0
+
+- Vendored snapshot tree fingerprint는 UTF-8 text의 CRLF와 CR을 LF로 canonicalize한 뒤 계산한다.
+- Git checkout의 line-ending 설정이 달라도 같은 source tree가 같은 SHA-256을 만든다.
+
+## Initial adoption
+
 - Previous catalog: none (initial deterministic adoption)
 - Current catalog: `impeccable@3.6.0`, 59 source rules
 - Canonical pack: `ansldes-anti-slop@1.1.0`, 63 rules after Hallmark deduplication and supplements
