@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ansldes.dev/schema/typography-evidence.v1.json",
+  "title": "AnslDes typography provider evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "evidenceKind",
+    "platform",
+    "profileId",
+    "surfaceId",
+    "fontScale",
+    "policy",
+    "nodes"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "evidenceKind": {
+      "enum": [
+        "web-rendered",
+        "native-source",
+        "design-document-computed",
+        "simulator",
+        "emulator",
+        "physical-device"
+      ]
+    },
+    "platform": {
+      "enum": ["web", "react-native", "ios", "android", "design-document"]
+    },
+    "profileId": { "$ref": "#/$defs/name" },
+    "surfaceId": { "$ref": "#/$defs/name" },
+    "fontScale": { "type": "number", "minimum": 1 },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "minimumHeadingRatio",
+        "minimumBodySize",
+        "minimumFunctionalSize",
+        "platformFunctionalFloor",
+        "minimumLineHeightRatio",
+        "maximumBodyTrackingEm",
+        "maximumDisplayViewportRatio"
+      ],
+      "properties": {
+        "minimumHeadingRatio": { "type": "number", "minimum": 1 },
+        "minimumBodySize": { "type": "number", "exclusiveMinimum": 0 },
+        "minimumFunctionalSize": { "type": "number", "exclusiveMinimum": 0 },
+        "platformFunctionalFloor": { "type": "number", "exclusiveMinimum": 0 },
+        "minimumLineHeightRatio": { "type": "number", "minimum": 1 },
+        "maximumBodyTrackingEm": { "type": "number", "minimum": 0 },
+        "maximumDisplayViewportRatio": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "nodes": { "type": "array", "items": { "$ref": "#/$defs/node" } }
+  },
+  "$defs": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[._/-][a-z0-9]+)*$"
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "owner",
+        "order",
+        "semanticRole",
+        "fontFamily",
+        "physicalVariant",
+        "fontWeight",
+        "fontSize",
+        "lineHeight",
+        "letterSpacingEm",
+        "text",
+        "lines",
+        "italic",
+        "serif",
+        "allCaps",
+        "headingLevel",
+        "accessibilityHeading",
+        "viewportHeight",
+        "renderedHeight",
+        "iconTileBefore",
+        "eyebrowChipBefore",
+        "kickerBefore",
+        "approvedFont",
+        "approvedVariant",
+        "bodyReferenceSize"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/name" },
+        "owner": { "$ref": "#/$defs/name" },
+        "order": { "type": "integer", "minimum": 0 },
+        "semanticRole": {
+          "enum": [
+            "display",
+            "heading",
+            "body",
+            "label",
+            "metadata",
+            "guide",
+            "legal",
+            "ui"
+          ]
+        },
+        "fontFamily": { "type": "string", "minLength": 1 },
+        "physicalVariant": { "type": "string", "minLength": 1 },
+        "fontWeight": { "type": "integer", "minimum": 1, "maximum": 1000 },
+        "fontSize": { "type": "number", "exclusiveMinimum": 0 },
+        "lineHeight": { "type": "number", "exclusiveMinimum": 0 },
+        "letterSpacingEm": { "type": "number" },
+        "text": { "type": "string" },
+        "lines": { "type": "integer", "minimum": 1 },
+        "italic": { "type": "boolean" },
+        "serif": { "type": "boolean" },
+        "allCaps": { "type": "boolean" },
+        "headingLevel": { "type": "integer", "minimum": 0, "maximum": 6 },
+        "accessibilityHeading": { "type": "boolean" },
+        "viewportHeight": { "type": "number", "minimum": 0 },
+        "renderedHeight": { "type": "number", "minimum": 0 },
+        "iconTileBefore": { "type": "boolean" },
+        "eyebrowChipBefore": { "type": "boolean" },
+        "kickerBefore": { "type": "boolean" },
+        "approvedFont": { "type": "boolean" },
+        "approvedVariant": { "type": "boolean" },
+        "bodyReferenceSize": { "type": "number", "exclusiveMinimum": 0 }
+      }
+    }
+  }
+}

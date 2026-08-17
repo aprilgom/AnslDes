@@ -44,10 +44,11 @@ AnslDes가 소유하는 것:
 자세한 경계는 [Architecture](./docs/architecture.md)와
 [Product boundary](./docs/product-boundary.md)를 참고한다.
 
-## Anti-slop roadmap
+## Anti-slop gate
 
-Impeccable 2026 detector와 Hallmark의 eight tells를 제품 중립 `deslint` evidence·rule provider로 수용하는 계획은
-[Anti-slop Gate TODO](./docs/anti-slop/TODO.md)에서 관리한다. AnslDes는 generic registry와 provider
+Impeccable 2026 detector와 Hallmark의 eight tells를 제품 중립 `deslint` evidence·rule provider로 수용한다.
+[Anti-slop Gate](./docs/anti-slop/TODO.md)는 canonical 63-rule registry와 Web/native/design-document stage를
+고정한다. AnslDes는 generic registry와 provider
 계약만 소유하며 실제 제품 화면의 baseline, owner, exception과 통과 report는 소비 저장소에 남긴다.
 
 ## Commands
@@ -65,6 +66,8 @@ go fix/golangci-lint/test/vet을 실행한다. Biome의 안전한 format/lint/im
 릴리스 후보는 `npm run release:check`로
 [`release/ansldes-release.json`](./release/ansldes-release.json)의 package version과 source artifact
 checksum을 검증한다. tag와 제품 lock 절차는 [Release process](./docs/release-process.md)를 따른다.
+Anti-slop detector dependency와 consumer release lock 절차는
+[Anti-slop release migration](./docs/anti-slop/release-migration.md)에 있다.
 
 ## Status
 

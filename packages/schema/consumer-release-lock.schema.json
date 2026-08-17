@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ansldes.dev/schema/consumer-release-lock.schema.json",
+  "title": "AnslDes consumer release lock",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "release",
+    "packages",
+    "deslint",
+    "rulePacks",
+    "definition",
+    "dependencies"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "release": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "tag", "manifestSha256"],
+      "properties": {
+        "version": { "$ref": "#/$defs/version" },
+        "tag": { "type": "string", "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$" },
+        "manifestSha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "packages": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/artifact" }
+    },
+    "deslint": { "$ref": "#/$defs/artifact" },
+    "rulePacks": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "version", "fingerprintSha256"],
+        "properties": {
+          "id": { "$ref": "#/$defs/name" },
+          "version": { "$ref": "#/$defs/version" },
+          "fingerprintSha256": { "$ref": "#/$defs/sha256" }
+        }
+      }
+    },
+    "definition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "productDefinitionVersion"],
+      "properties": {
+        "schemaVersion": { "type": "integer", "minimum": 1 },
+        "productDefinitionVersion": { "type": "string", "minLength": 1 }
+      }
+    },
+    "dependencies": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "antiSlopCatalogSha256",
+        "impeccableTreeSha256",
+        "hallmarkSourceSha256",
+        "antiSlopContractSha256"
+      ],
+      "properties": {
+        "antiSlopCatalogSha256": { "$ref": "#/$defs/sha256" },
+        "impeccableTreeSha256": { "$ref": "#/$defs/sha256" },
+        "hallmarkSourceSha256": { "$ref": "#/$defs/sha256" },
+        "antiSlopContractSha256": { "$ref": "#/$defs/sha256" }
+      }
+    }
+  },
+  "$defs": {
+    "name": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._/-]*$" },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "sha256"],
+      "properties": {
+        "id": { "$ref": "#/$defs/name" },
+        "version": { "$ref": "#/$defs/version" },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    }
+  }
+}

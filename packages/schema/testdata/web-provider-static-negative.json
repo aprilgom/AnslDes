@@ -1,0 +1,27 @@
+{
+  "$schema": "../web-provider-evidence.schema.json",
+  "schemaVersion": 1,
+  "evidenceKind": "web-source",
+  "platform": "web",
+  "provider": "static-html",
+  "surfaceId": "example-web-surface",
+  "webPolicyVersion": "1.0.0",
+  "captureId": "static-html-light",
+  "routeId": "example-home",
+  "owner": "example-web-owner",
+  "viewport": { "id": "desktop", "width": 1280, "height": 800 },
+  "theme": "light",
+  "fontScale": 1,
+  "reduceMotion": false,
+  "execution": { "status": "completed", "capability": "full", "reason": "" },
+  "findings": [
+    {
+      "id": "static-side-tab",
+      "upstreamRuleId": "side-tab",
+      "owner": "example-web-owner",
+      "path": "example/index.html#/main/nav",
+      "message": "Static HTML contains a decorative side-tab treatment",
+      "artifact": null
+    }
+  ]
+}

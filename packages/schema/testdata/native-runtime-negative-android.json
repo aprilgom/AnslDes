@@ -1,0 +1,94 @@
+{
+  "$schema": "../native-runtime-evidence.schema.json",
+  "schemaVersion": 1,
+  "evidenceKind": "emulator",
+  "platform": "android",
+  "surfaceId": "example-native-surface",
+  "nativePolicyVersion": "1.0.0",
+  "captures": [
+    {
+      "id": "android-phone-light",
+      "owner": "example-native-owner",
+      "environment": {
+        "formFactor": "phone",
+        "orientation": "portrait",
+        "windowMode": "fullscreen",
+        "foldPosture": "not-applicable",
+        "theme": "light",
+        "fontScale": 1,
+        "refreshRateHz": 120,
+        "reduceMotion": false
+      },
+      "systemGesture": { "backReachable": true, "conflictFree": true },
+      "safeArea": { "respected": true, "edgeToEdgeInsetsApplied": true },
+      "keyboardIme": {
+        "tested": true,
+        "inputVisible": true,
+        "primaryActionReachable": true
+      },
+      "accessibility": {
+        "readingOrder": ["primary-action"],
+        "focusOrder": ["primary-action"],
+        "controls": [
+          {
+            "id": "primary-action",
+            "owner": "example-native-owner",
+            "interactive": true,
+            "label": "Continue",
+            "roleOrTrait": "button",
+            "stateAnnounced": true,
+            "width": 47,
+            "height": 47,
+            "nearestAdjacentSpacing": 7
+          }
+        ]
+      },
+      "fontScaling": {
+        "clipped": false,
+        "overlap": false,
+        "unreachableControl": false,
+        "text": [
+          {
+            "id": "body-copy",
+            "owner": "example-native-owner",
+            "size": 14,
+            "usesScaledUnits": false,
+            "platformTypeRole": false
+          }
+        ]
+      },
+      "motion": { "fallbackApplied": true },
+      "appearance": {
+        "contrastPass": true,
+        "darkThemeComplete": true,
+        "quickInvertUsed": false
+      },
+      "adaptivity": {
+        "sizeOrWindowClassApplied": true,
+        "notSimplyScaled": true,
+        "windowModeSupported": true,
+        "foldPostureSupported": true
+      },
+      "performance": {
+        "synchronousStartupMs": 5,
+        "initializationMs": 300,
+        "frames": [
+          {
+            "id": "gesture-back",
+            "owner": "example-performance-owner",
+            "totalFrames": 100,
+            "droppedFrames": 0,
+            "maxMainThreadWorkMs": 2
+          }
+        ]
+      },
+      "bundle": {
+        "jsBytes": 100000,
+        "jsBaselineBytes": 100000,
+        "appBinaryBytes": 200000,
+        "appBinaryBaselineBytes": 200000,
+        "unusedDependencyBytes": 0
+      }
+    }
+  ]
+}

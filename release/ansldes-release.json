@@ -7,6 +7,22 @@
   "compatibility": {
     "definitionSchemaVersion": 2,
     "policySchemaVersion": 1,
+    "reportSchemaVersion": 1,
+    "consumerConformanceSchemaVersion": 1,
+    "designContextSchemaVersion": 1,
+    "visualDetailEvidenceSchemaVersion": 1,
+    "typographyEvidenceSchemaVersion": 1,
+    "colorEvidenceSchemaVersion": 1,
+    "layoutEvidenceSchemaVersion": 1,
+    "motionEvidenceSchemaVersion": 1,
+    "copyEvidenceSchemaVersion": 1,
+    "imageryEvidenceSchemaVersion": 1,
+    "runtimeEvidenceSchemaVersion": 1,
+    "nativeSourceEvidenceSchemaVersion": 1,
+    "nativeRuntimeEvidenceSchemaVersion": 1,
+    "webProviderEvidenceSchemaVersion": 1,
+    "consumerReleaseLockSchemaVersion": 1,
+    "stageExecutionEvidenceSchemaVersion": 1,
     "compiledBundleVersion": 2,
     "node": ">=22",
     "go": ">=1.26.0",
@@ -36,26 +52,57 @@
     "version": "1.0.0",
     "releaseVersionLinkerFlag": "-X main.version=1.0.0"
   },
+  "dependencies": {
+    "antiSlopCatalog": {
+      "sha256": "5cfab574a961751258d817bd438f9b4fdbe3f810a7eb8428ea0aa4213c4844e2",
+      "pack": {
+        "id": "ansldes-anti-slop",
+        "version": "1.1.0",
+        "fingerprintSha256": "df05187c79c254c8b7f1159b375ae2017e5d55b20af512aabf7f7b522173159f"
+      }
+    },
+    "impeccable": {
+      "name": "impeccable",
+      "version": "3.6.0",
+      "integrity": "sha512-nysc6/2OHTWqLrcSxTxZk4r4QMufhU8NTIuG2ic6p5zzyZe45AWBX3/18OA5S88pCWq+4z8pKsjUxhAM990RKg==",
+      "commit": "7b646bafd60b9dd9828ce5c4c1a25691702c9e92",
+      "sourceTreeSha256": "84d3d3a66be62ea4c361420a6662f42010b123b680e00d8306e6a627ab5f5954",
+      "treeSha256": "a4dfe2060edf918b1241afac131ed9fbdf2d9eecaa448a6f57365e895da1908c",
+      "computedTreeSha256": "a4dfe2060edf918b1241afac131ed9fbdf2d9eecaa448a6f57365e895da1908c"
+    },
+    "hallmark": {
+      "commit": "13ac0ec7e148655948100b6396439e481361d690",
+      "sourceSha256": "83083b5e37b99cb8211268b778aa0cb3f677f8fe53f8d817f54fcad799882e0e"
+    },
+    "migrationNote": {
+      "path": "docs/anti-slop/references/impeccable-detector-2026/MIGRATION.md",
+      "sha256": "f2573b1d0776901b291a7c72e3c74c4259493ba57d4e7058310c63eb5fe10c16"
+    },
+    "antiSlopContract": {
+      "fileCount": 7,
+      "sha256": "ef6314c96587d8f8a8772b022369359e911a4b0756cc75c42f7c70fa8bb9966f"
+    }
+  },
   "artifacts": {
     "schema": {
-      "fileCount": 8,
-      "sha256": "ee83ee4d4f84cd5625062afbb4d01a3bec70203376bf5b8106b895626ecad96a"
+      "fileCount": 76,
+      "sha256": "e9ec036e708dd411dff2f87002c8eb2900af85d9d5c432161ceb90b81fa9938d"
     },
     "compiler": {
       "fileCount": 5,
-      "sha256": "926f51834e931303b85d4d8d29215a482351c418205fd03e7f1a7be123b2606b"
+      "sha256": "ecf4582102049468839051bd47c75c62d9848a7b9f8c2f3ed0ba643eb13267ae"
     },
     "core": {
       "fileCount": 5,
-      "sha256": "4763ab5a47d38d14f97c756e47f153d80ba6a5a2e9acb1d1a98e53dafacc19f2"
+      "sha256": "9b35aeef0e911da926dd621121c224add8dab05333db5668aef23a4c46ded970"
     },
     "reactNative": {
       "fileCount": 19,
-      "sha256": "1dbd1f49485d3a8ed776d97db729e3e021e7e6e5937bf03f048753d7e0324291"
+      "sha256": "374d032dfd47efad3394420e368e22b0c2adac956e74bfc9788a45d66dc377cb"
     },
     "deslint": {
-      "fileCount": 23,
-      "sha256": "0a1eda4d2a55acdd657b112b9d9648c53a05b872c280f479caa976e96798aaf3"
+      "fileCount": 67,
+      "sha256": "10d6c3ef84893e0b68b2f2a93c7ef24ba62cde59fb2d901ea0267d1836f010d5"
     }
   }
 }

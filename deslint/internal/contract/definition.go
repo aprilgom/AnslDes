@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"regexp"
+	"slices"
 	"sort"
 	"strings"
 
@@ -19,7 +20,20 @@ var referencePattern = regexp.MustCompile(`^\{(color|spacing|radius|size|typogra
 // Analysis is the validated identity and deterministic diagnostics for a definition.
 type Analysis struct {
 	DefinitionID string
+	Themes       []string
+	ColorUsage   *ColorUsageDefinition
+	Motion       map[string]MotionTransition
 	Diagnostics  []diagnostic.Diagnostic
+}
+
+// MotionTransition is a resolved consumer-owned motion registry entry.
+type MotionTransition struct {
+	Owner             string
+	Purpose           string
+	DurationMS        float64
+	ReducedDurationMS float64
+	Easing            []float64
+	ReducedFallback   string
 }
 
 // Analyze checks schema version, structural keys, reference syntax, and reference existence.
@@ -44,7 +58,7 @@ func Analyze(path string, contents []byte, severity func(string) diagnostic.Seve
 	for _, duplicate := range duplicates {
 		diagnostics = append(diagnostics, schemaDiagnostic(path, severity, "duplicate key "+duplicate))
 	}
-	validateExactKeys(root, []string{"$schema", "schemaVersion", "id", "version", "themes", "foundations", "components"}, path, severity, &diagnostics)
+	validateExactKeysWithOptional(root, []string{"schemaVersion", "id", "version", "themes", "foundations", "components"}, []string{"$schema", "colorUsage"}, path, severity, &diagnostics)
 	if typed.SchemaVersion != DefinitionSchemaVersion {
 		diagnostics = append(diagnostics, schemaDiagnostic(
 			path,
@@ -73,10 +87,88 @@ func Analyze(path string, contents []byte, severity func(string) diagnostic.Seve
 	}
 
 	registry := referenceRegistry(foundations)
+	validateThemeMappings(root, typed, path, severity, &diagnostics)
 	validateStrictTokenLayers(foundations, root["components"], path, severity, &diagnostics)
 	walkReferences(root, "$", registry, path, severity, &diagnostics)
 	diagnostic.Sort(diagnostics)
-	return Analysis{DefinitionID: typed.ID, Diagnostics: diagnostics}, nil
+	return Analysis{DefinitionID: typed.ID, Themes: append([]string(nil), typed.Themes.Names...), ColorUsage: typed.ColorUsage, Motion: resolveMotionRegistry(typed.Foundations["motion"]), Diagnostics: diagnostics}, nil
+}
+
+func resolveMotionRegistry(raw json.RawMessage) map[string]MotionTransition {
+	var motion struct {
+		Durations   map[string]float64   `json:"durations"`
+		Easings     map[string][]float64 `json:"easings"`
+		Transitions map[string]struct {
+			Owner         string `json:"owner"`
+			Purpose       string `json:"purpose"`
+			Duration      string `json:"duration"`
+			Easing        string `json:"easing"`
+			ReducedMotion struct {
+				Duration string `json:"duration"`
+				Fallback string `json:"fallback"`
+			} `json:"reducedMotion"`
+		} `json:"transitions"`
+	}
+	if len(raw) == 0 || json.Unmarshal(raw, &motion) != nil {
+		return map[string]MotionTransition{}
+	}
+	result := make(map[string]MotionTransition, len(motion.Transitions))
+	for id, transition := range motion.Transitions {
+		durationID := motionReferenceName(transition.Duration, "duration")
+		reducedDurationID := motionReferenceName(transition.ReducedMotion.Duration, "duration")
+		easingID := motionReferenceName(transition.Easing, "easing")
+		result[id] = MotionTransition{
+			Owner:             transition.Owner,
+			Purpose:           transition.Purpose,
+			DurationMS:        motion.Durations[durationID],
+			ReducedDurationMS: motion.Durations[reducedDurationID],
+			Easing:            append([]float64(nil), motion.Easings[easingID]...),
+			ReducedFallback:   transition.ReducedMotion.Fallback,
+		}
+	}
+	return result
+}
+
+func motionReferenceName(reference, layer string) string {
+	prefix := "{motion." + layer + "."
+	if !strings.HasPrefix(reference, prefix) || !strings.HasSuffix(reference, "}") {
+		return ""
+	}
+	return strings.TrimSuffix(strings.TrimPrefix(reference, prefix), "}")
+}
+
+func validateThemeMappings(root map[string]any, typed Definition, path string, severity func(string) diagnostic.Severity, diagnostics *[]diagnostic.Diagnostic) {
+	expected := append([]string(nil), typed.Themes.Names...)
+	sort.Strings(expected)
+	if !slices.Contains(expected, typed.Themes.Default) {
+		*diagnostics = append(*diagnostics, schemaDiagnostic(path, severity, "themes.default must be present in themes.names"))
+	}
+	foundations, _ := object(root["foundations"])
+	colors, _ := object(foundations["color"])
+	semantic, _ := object(colors["semantic"])
+	for _, name := range sortedKeys(semantic) {
+		mapping, ok := object(semantic[name])
+		if !ok {
+			continue
+		}
+		actual := sortedKeys(mapping)
+		if !slices.Equal(actual, expected) {
+			*diagnostics = append(*diagnostics, schemaDiagnostic(path, severity, fmt.Sprintf("color semantic %s themes must be exact: %s", name, strings.Join(expected, ", "))))
+		}
+	}
+	if typed.ColorUsage == nil {
+		return
+	}
+	if typed.ColorUsage.Contrast.Body < 4.5 || typed.ColorUsage.Contrast.Body > 21 || typed.ColorUsage.Contrast.Large < 3 || typed.ColorUsage.Contrast.Large > 21 {
+		*diagnostics = append(*diagnostics, schemaDiagnostic(path, severity, "colorUsage contrast thresholds must satisfy WCAG AA bounds"))
+	}
+	for id, palette := range typed.ColorUsage.ApprovedPalettes {
+		for _, theme := range palette.Themes {
+			if !slices.Contains(expected, theme) {
+				*diagnostics = append(*diagnostics, schemaDiagnostic(path, severity, fmt.Sprintf("approved palette %s references unknown theme %s", id, theme)))
+			}
+		}
+	}
 }
 
 func validateStrictTokenLayers(foundations map[string]any, componentsValue any, path string, severity func(string) diagnostic.Severity, diagnostics *[]diagnostic.Diagnostic) {
@@ -273,16 +365,6 @@ func referenceRegistry(foundations map[string]any) map[string]struct{} {
 		}
 	}
 	return registry
-}
-
-func validateExactKeys(value map[string]any, allowed []string, path string, severity func(string) diagnostic.Severity, diagnostics *[]diagnostic.Diagnostic) {
-	required := make([]string, 0, len(allowed))
-	for _, key := range allowed {
-		if key != "$schema" {
-			required = append(required, key)
-		}
-	}
-	validateExactKeysWithOptional(value, required, []string{"$schema"}, path, severity, diagnostics)
 }
 
 func validateExactKeysWithOptional(value map[string]any, required []string, optional []string, path string, severity func(string) diagnostic.Severity, diagnostics *[]diagnostic.Diagnostic) {

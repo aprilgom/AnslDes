@@ -1,6 +1,6 @@
 # AnslDes TODO
 
-> [Repository rules](./AGENTS.md)
+> [Repository rules](./AGENTS.md) · [Optional non-deterministic work](./TODO_Optional.md)
 
 ## 1. Product-neutral schema
 
@@ -43,21 +43,25 @@
 - [x] 제품 저장소에서 기존 token 값을 product definition으로 export한다.
 - [x] 기존 TypeScript 계약과 JSON definition의 dual-run parity를 검증한다.
 - [x] release candidate의 package version과 source checksum manifest를 결정론적으로 검증한다.
-- [ ] 제품 adapter가 versioned AnslDes release를 exact pin하게 한다.
-- [ ] 제품 source owner, consumer와 예외는 product policy에 유지한다.
-- [ ] parity와 rollback release 없이 기존 구현을 제거하지 않는다.
+- [x] consumer release lock schema로 제품 adapter가 versioned AnslDes release를 exact pin하게 한다.
+- [x] 제품 source owner, consumer와 예외를 product policy에만 두는 경계를 강제한다.
+- [x] parity 승인과 rollback release 없이 기존 구현을 제거하지 않는 절차를 문서화한다.
 
 ## 6. Anti-slop gate
 
-- [ ] [Impeccable 2026과 Hallmark 기반 제품 중립 Anti-slop Gate](./docs/anti-slop/TODO.md)를 구현한다.
-- [ ] Impeccable 59개와 Hallmark eight tells의 중복 제거 결과인 63개 deterministic rule,
-      5개 LLM-only judgment의 evidence 경계를 고정한다.
-- [ ] Web, React Native와 design-document provider 결과를 서로 다른 evidence kind로 유지한다.
-- [ ] 제품 profile, owner, consumer, exception과 runtime report를 consumer policy에만 둔다.
+- [x] [Impeccable 2026과 Hallmark 기반 제품 중립 Anti-slop Gate](./docs/anti-slop/TODO.md)를 구현한다.
+- [x] Impeccable 59개와 Hallmark eight tells의 중복 제거 결과인 63개 deterministic rule의
+      canonical registry와 evidence 경계를 고정한다.
+- [x] rule 구현을 공통 `RuleSpec` 계약과 versioned rule pack으로 등록해 engine core 수정 없이
+      rule을 추가·교체할 수 있게 한다.
+- [x] consumer policy가 rule pack version·fingerprint와 rule activation을 exact하게 선언하게 한다.
+- [x] Web, React Native와 design-document provider 결과를 서로 다른 evidence kind로 유지한다.
+- [x] 제품 profile, owner, consumer, exception과 runtime report를 consumer policy에만 둔다.
 
 ## Completion
 
-- [ ] AnslDes generic source에 제품 이름·경로·브랜드 값이 없다.
-- [ ] 두 개 이상의 중립 fixture가 같은 schema/compiler를 소비한다.
-- [ ] 제품 값 변경이 AnslDes release 없이 제품 definition version만 변경한다.
-- [ ] schema breaking change만 AnslDes major version을 요구한다.
+- [x] AnslDes generic source에 제품 이름·경로·브랜드 값이 없다.
+- [x] 두 개 이상의 중립 fixture가 같은 schema/compiler를 소비한다.
+- [x] 제품 값 변경이 AnslDes release 없이 제품 definition version만 변경한다.
+- [x] schema breaking change만 AnslDes major version을 요구한다.
+- [x] rule 추가와 pack 구성 변경이 engine core의 조건문 수정 없이 registry·manifest·fixture 변경으로 끝난다.

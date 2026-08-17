@@ -1,0 +1,49 @@
+{
+  "$schema": "../layout-evidence.schema.json",
+  "schemaVersion": 1,
+  "evidenceKind": "native-source",
+  "platform": "react-native",
+  "profileId": "operate",
+  "surfaceId": "example-layout-permissions",
+  "viewport": { "width": 1024, "height": 768 },
+  "capturePath": "evidence/example-layout-permissions.source.json",
+  "computedBoundsPath": "evidence/example-layout-permissions-ir.json",
+  "nodes": [
+    {
+      "id": "data-grid",
+      "owner": "example-grid",
+      "kind": "data-grid",
+      "contentRole": "table",
+      "featureColumnCount": 3,
+      "equalColumns": true,
+      "iconAboveHeading": true,
+      "pageFeatureRegion": true,
+      "lineLengthChars": 120
+    },
+    {
+      "id": "immersive-canvas",
+      "owner": "example-canvas",
+      "kind": "canvas",
+      "contentRole": "data",
+      "minHeightVh": 100,
+      "centerHorizontal": true,
+      "centerVertical": true
+    },
+    {
+      "id": "removed-card-boundary",
+      "owner": "example-boundary",
+      "kind": "section",
+      "contentRole": "prose",
+      "boundaryAlternatives": ["typography", "divider", "spacing"]
+    },
+    {
+      "id": "semantic-card",
+      "owner": "example-semantic-card",
+      "kind": "card",
+      "contentRole": "control",
+      "cardDepth": 2,
+      "repeatedCardSiblings": 3,
+      "semanticBoundary": true
+    }
+  ]
+}

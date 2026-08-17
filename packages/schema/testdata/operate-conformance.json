@@ -1,0 +1,84 @@
+{
+  "$schema": "../consumer-conformance.schema.json",
+  "schemaVersion": 1,
+  "profileId": "operate",
+  "platform": "react-native",
+  "surfaceId": "example-form-flow",
+  "controls": [
+    {
+      "id": "name-input",
+      "actionId": "edit-name",
+      "role": "input",
+      "component": "text-field",
+      "label": "Name",
+      "shapeToken": "radius.component.control",
+      "feedback": "inline-message",
+      "states": [
+        "default",
+        "pressed",
+        "focused",
+        "disabled",
+        "loading",
+        "error"
+      ],
+      "contractStatus": "matched",
+      "affordanceSource": "design-system",
+      "motionPurpose": "decorative",
+      "motionRecipeStatus": "approved",
+      "reduceMotionFallback": true,
+      "rawDurationMs": 1200,
+      "prominence": "standard",
+      "nativePrimitive": true
+    },
+    {
+      "id": "submit-primary",
+      "actionId": "submit",
+      "role": "primary-action",
+      "component": "button",
+      "label": "Submit",
+      "shapeToken": "radius.component.button",
+      "icon": "arrow-right",
+      "feedback": "inline-message",
+      "states": [
+        "default",
+        "pressed",
+        "focused",
+        "disabled",
+        "loading",
+        "error"
+      ],
+      "contractStatus": "matched",
+      "affordanceSource": "design-system",
+      "motionPurpose": "state-transition",
+      "motionRecipeStatus": "approved",
+      "reduceMotionFallback": true,
+      "prominence": "emphasized",
+      "nativePrimitive": true
+    },
+    {
+      "id": "submit-sticky",
+      "actionId": "submit",
+      "role": "primary-action",
+      "component": "button",
+      "label": "Submit",
+      "shapeToken": "radius.component.button",
+      "icon": "arrow-right",
+      "feedback": "inline-message",
+      "states": [
+        "default",
+        "pressed",
+        "focused",
+        "disabled",
+        "loading",
+        "error"
+      ],
+      "contractStatus": "matched",
+      "affordanceSource": "design-system",
+      "motionPurpose": "state-transition",
+      "motionRecipeStatus": "approved",
+      "reduceMotionFallback": true,
+      "prominence": "emphasized",
+      "nativePrimitive": true
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ansldes.dev/schema/layout-evidence.v1.json",
+  "title": "AnslDes provider-neutral layout evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "evidenceKind",
+    "platform",
+    "profileId",
+    "surfaceId",
+    "viewport",
+    "capturePath",
+    "computedBoundsPath",
+    "nodes"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "evidenceKind": {
+      "enum": [
+        "web-rendered",
+        "native-source",
+        "design-document-computed",
+        "simulator",
+        "emulator",
+        "physical-device"
+      ]
+    },
+    "platform": {
+      "enum": ["web", "react-native", "design-document", "ios", "android"]
+    },
+    "profileId": { "$ref": "#/$defs/name" },
+    "surfaceId": { "$ref": "#/$defs/name" },
+    "viewport": { "$ref": "#/$defs/size" },
+    "capturePath": { "type": "string", "minLength": 1 },
+    "computedBoundsPath": { "type": "string", "minLength": 1 },
+    "documentReport": { "$ref": "#/$defs/documentReport" },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/node" }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "evidenceKind": { "const": "design-document-computed" }
+        },
+        "required": ["evidenceKind"]
+      },
+      "then": {
+        "required": ["documentReport"],
+        "properties": {
+          "documentReport": { "$ref": "#/$defs/documentReport" }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[._/-][a-z0-9]+)*$"
+    },
+    "size": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["width", "height"],
+      "properties": {
+        "width": { "type": "number", "exclusiveMinimum": 0 },
+        "height": { "type": "number", "exclusiveMinimum": 0 }
+      }
+    },
+    "spacingRelation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "value", "token"],
+      "properties": {
+        "kind": {
+          "enum": [
+            "intra-component",
+            "inter-component",
+            "section",
+            "heading-before",
+            "heading-after"
+          ]
+        },
+        "value": { "type": "number", "minimum": 0 },
+        "token": { "$ref": "#/$defs/name" }
+      }
+    },
+    "padding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["top", "right", "bottom", "left"],
+      "properties": {
+        "top": { "type": "number", "minimum": 0 },
+        "right": { "type": "number", "minimum": 0 },
+        "bottom": { "type": "number", "minimum": 0 },
+        "left": { "type": "number", "minimum": 0 }
+      }
+    },
+    "documentReport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fingerprintSha256",
+        "visitorOptions",
+        "nodeCount",
+        "issues"
+      ],
+      "properties": {
+        "fingerprintSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "visitorOptions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["resolveInstances", "includeHidden", "computeBounds"],
+          "properties": {
+            "resolveInstances": { "const": true },
+            "includeHidden": { "type": "boolean" },
+            "computeBounds": { "const": true }
+          }
+        },
+        "nodeCount": { "type": "integer", "minimum": 1 },
+        "issues": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "nodeId", "owner", "kind", "message"],
+            "properties": {
+              "id": { "$ref": "#/$defs/name" },
+              "nodeId": { "$ref": "#/$defs/name" },
+              "owner": { "$ref": "#/$defs/name" },
+              "kind": { "enum": ["overflow", "overlap", "clipping"] },
+              "message": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "owner", "kind", "contentRole"],
+      "properties": {
+        "id": { "$ref": "#/$defs/name" },
+        "owner": { "$ref": "#/$defs/name" },
+        "kind": {
+          "enum": [
+            "page",
+            "section",
+            "card",
+            "text",
+            "heading",
+            "scroller",
+            "overlay",
+            "feature-grid",
+            "hero",
+            "data-grid",
+            "canvas",
+            "accessory-tile",
+            "guide"
+          ]
+        },
+        "contentRole": {
+          "enum": ["prose", "data", "table", "control", "decorative"]
+        },
+        "parentId": { "$ref": "#/$defs/name" },
+        "cardDepth": { "type": "integer", "minimum": 0 },
+        "repeatedCardSiblings": { "type": "integer", "minimum": 0 },
+        "accessoryTile": { "type": "boolean" },
+        "semanticBoundary": { "type": "boolean" },
+        "spacingRelations": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/spacingRelation" }
+        },
+        "guideSkeletonRepeated": { "type": "boolean" },
+        "sectionLabelNumbered": { "type": "boolean" },
+        "sectionLabelMeaningful": { "type": "boolean" },
+        "sectionLabelFontSize": { "type": "number", "minimum": 0 },
+        "horizontalScroller": { "type": "boolean" },
+        "leadingGutter": { "type": "number", "minimum": 0 },
+        "trailingGutter": { "type": "number", "minimum": 0 },
+        "opaqueOverlapArea": { "type": "number", "minimum": 0 },
+        "openingViewport": { "type": "boolean" },
+        "columnHeights": {
+          "type": "array",
+          "items": { "type": "number", "minimum": 0 }
+        },
+        "spacingBefore": { "type": "number", "minimum": 0 },
+        "spacingAfter": { "type": "number", "minimum": 0 },
+        "lineLengthChars": { "type": "number", "minimum": 0 },
+        "boundedText": { "type": "boolean" },
+        "padding": { "$ref": "#/$defs/padding" },
+        "viewportHorizontalInset": { "type": "number", "minimum": 0 },
+        "overflowsContainer": { "type": "boolean" },
+        "unintendedHorizontalScroll": { "type": "boolean" },
+        "positionedOverlay": { "type": "boolean" },
+        "clippingAncestor": { "type": "boolean" },
+        "featureColumnCount": { "type": "integer", "minimum": 0 },
+        "equalColumns": { "type": "boolean" },
+        "iconAboveHeading": { "type": "boolean" },
+        "pageFeatureRegion": { "type": "boolean" },
+        "minHeightVh": { "type": "number", "minimum": 0 },
+        "centerHorizontal": { "type": "boolean" },
+        "centerVertical": { "type": "boolean" },
+        "boundaryAlternatives": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "enum": ["typography", "divider", "spacing"] }
+        }
+      }
+    }
+  }
+}

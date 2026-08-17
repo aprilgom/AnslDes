@@ -1,0 +1,281 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ansldes.dev/schema/native-runtime-evidence.v1.json",
+  "title": "AnslDes native runtime conformance evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "evidenceKind",
+    "platform",
+    "surfaceId",
+    "nativePolicyVersion",
+    "captures"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "evidenceKind": { "enum": ["simulator", "emulator", "physical-device"] },
+    "platform": { "enum": ["ios", "android"] },
+    "surfaceId": { "$ref": "#/$defs/name" },
+    "nativePolicyVersion": { "$ref": "#/$defs/version" },
+    "captures": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/capture" }
+    }
+  },
+  "$defs": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[._/-][a-z0-9]+)*$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "capture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "owner",
+        "environment",
+        "systemGesture",
+        "safeArea",
+        "keyboardIme",
+        "accessibility",
+        "fontScaling",
+        "motion",
+        "appearance",
+        "adaptivity",
+        "performance",
+        "bundle"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/name" },
+        "owner": { "$ref": "#/$defs/name" },
+        "environment": { "$ref": "#/$defs/environment" },
+        "systemGesture": { "$ref": "#/$defs/systemGesture" },
+        "safeArea": { "$ref": "#/$defs/safeArea" },
+        "keyboardIme": { "$ref": "#/$defs/keyboardIme" },
+        "accessibility": { "$ref": "#/$defs/accessibility" },
+        "fontScaling": { "$ref": "#/$defs/fontScaling" },
+        "motion": { "$ref": "#/$defs/motion" },
+        "appearance": { "$ref": "#/$defs/runtimeAppearance" },
+        "adaptivity": { "$ref": "#/$defs/runtimeAdaptivity" },
+        "performance": { "$ref": "#/$defs/performance" },
+        "bundle": { "$ref": "#/$defs/bundle" }
+      }
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "formFactor",
+        "orientation",
+        "windowMode",
+        "foldPosture",
+        "theme",
+        "fontScale",
+        "refreshRateHz",
+        "reduceMotion"
+      ],
+      "properties": {
+        "formFactor": { "enum": ["phone", "tablet", "foldable"] },
+        "orientation": { "enum": ["portrait", "landscape"] },
+        "windowMode": { "enum": ["fullscreen", "split", "multi-window"] },
+        "foldPosture": { "enum": ["not-applicable", "flat", "half-open"] },
+        "theme": { "enum": ["light", "dark"] },
+        "fontScale": { "type": "number", "minimum": 1 },
+        "refreshRateHz": { "enum": [60, 120] },
+        "reduceMotion": { "type": "boolean" }
+      }
+    },
+    "systemGesture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["backReachable", "conflictFree"],
+      "properties": {
+        "backReachable": { "type": "boolean" },
+        "conflictFree": { "type": "boolean" }
+      }
+    },
+    "safeArea": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["respected", "edgeToEdgeInsetsApplied"],
+      "properties": {
+        "respected": { "type": "boolean" },
+        "edgeToEdgeInsetsApplied": { "type": "boolean" }
+      }
+    },
+    "keyboardIme": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tested", "inputVisible", "primaryActionReachable"],
+      "properties": {
+        "tested": { "type": "boolean" },
+        "inputVisible": { "type": "boolean" },
+        "primaryActionReachable": { "type": "boolean" }
+      }
+    },
+    "accessibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["readingOrder", "focusOrder", "controls"],
+      "properties": {
+        "readingOrder": { "$ref": "#/$defs/names" },
+        "focusOrder": { "$ref": "#/$defs/names" },
+        "controls": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/accessibilityControl" }
+        }
+      }
+    },
+    "accessibilityControl": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "owner",
+        "interactive",
+        "label",
+        "roleOrTrait",
+        "stateAnnounced",
+        "width",
+        "height",
+        "nearestAdjacentSpacing"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/name" },
+        "owner": { "$ref": "#/$defs/name" },
+        "interactive": { "type": "boolean" },
+        "label": { "type": "string" },
+        "roleOrTrait": { "type": "string" },
+        "stateAnnounced": { "type": "boolean" },
+        "width": { "type": "number", "minimum": 0 },
+        "height": { "type": "number", "minimum": 0 },
+        "nearestAdjacentSpacing": { "type": "number", "minimum": 0 }
+      }
+    },
+    "fontScaling": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["clipped", "overlap", "unreachableControl", "text"],
+      "properties": {
+        "clipped": { "type": "boolean" },
+        "overlap": { "type": "boolean" },
+        "unreachableControl": { "type": "boolean" },
+        "text": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/runtimeText" }
+        }
+      }
+    },
+    "runtimeText": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "owner",
+        "size",
+        "usesScaledUnits",
+        "platformTypeRole"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/name" },
+        "owner": { "$ref": "#/$defs/name" },
+        "size": { "type": "number", "minimum": 0 },
+        "usesScaledUnits": { "type": "boolean" },
+        "platformTypeRole": { "type": "boolean" }
+      }
+    },
+    "motion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fallbackApplied"],
+      "properties": { "fallbackApplied": { "type": "boolean" } }
+    },
+    "runtimeAppearance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contrastPass", "darkThemeComplete", "quickInvertUsed"],
+      "properties": {
+        "contrastPass": { "type": "boolean" },
+        "darkThemeComplete": { "type": "boolean" },
+        "quickInvertUsed": { "type": "boolean" }
+      }
+    },
+    "runtimeAdaptivity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sizeOrWindowClassApplied",
+        "notSimplyScaled",
+        "windowModeSupported",
+        "foldPostureSupported"
+      ],
+      "properties": {
+        "sizeOrWindowClassApplied": { "type": "boolean" },
+        "notSimplyScaled": { "type": "boolean" },
+        "windowModeSupported": { "type": "boolean" },
+        "foldPostureSupported": { "type": "boolean" }
+      }
+    },
+    "performance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["synchronousStartupMs", "initializationMs", "frames"],
+      "properties": {
+        "synchronousStartupMs": { "type": "number", "minimum": 0 },
+        "initializationMs": { "type": "number", "minimum": 0 },
+        "frames": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/framePath" }
+        }
+      }
+    },
+    "framePath": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "owner",
+        "totalFrames",
+        "droppedFrames",
+        "maxMainThreadWorkMs"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/name" },
+        "owner": { "$ref": "#/$defs/name" },
+        "totalFrames": { "type": "integer", "minimum": 1 },
+        "droppedFrames": { "type": "integer", "minimum": 0 },
+        "maxMainThreadWorkMs": { "type": "number", "minimum": 0 }
+      }
+    },
+    "bundle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "jsBytes",
+        "jsBaselineBytes",
+        "appBinaryBytes",
+        "appBinaryBaselineBytes",
+        "unusedDependencyBytes"
+      ],
+      "properties": {
+        "jsBytes": { "type": "integer", "minimum": 0 },
+        "jsBaselineBytes": { "type": "integer", "minimum": 0 },
+        "appBinaryBytes": { "type": "integer", "minimum": 0 },
+        "appBinaryBaselineBytes": { "type": "integer", "minimum": 0 },
+        "unusedDependencyBytes": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "names": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/name" }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "../runtime-evidence.schema.json",
+  "schemaVersion": 1,
+  "evidenceKind": "simulator",
+  "platform": "ios",
+  "surfaceId": "example-native-surface",
+  "runtimePolicyVersion": "1.0.0",
+  "captureStatus": "completed",
+  "detectorFailure": null,
+  "routes": [
+    {
+      "id": "example-native-route",
+      "owner": "example-native-owner",
+      "failures": [
+        { "id": "crash-1", "kind": "app-crash" },
+        { "id": "redbox-1", "kind": "redbox" },
+        { "id": "boundary-1", "kind": "render-error-boundary" }
+      ],
+      "content": [],
+      "text": [
+        {
+          "id": "native-body-copy",
+          "owner": "example-native-owner",
+          "role": "body",
+          "alignment": "justify",
+          "context": "screen"
+        }
+      ]
+    }
+  ]
+}

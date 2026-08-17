@@ -1,0 +1,36 @@
+{
+  "$schema": "../layout-evidence.schema.json",
+  "schemaVersion": 1,
+  "evidenceKind": "design-document-computed",
+  "platform": "design-document",
+  "profileId": "operate",
+  "surfaceId": "example-layout-document",
+  "viewport": { "width": 390, "height": 844 },
+  "capturePath": "evidence/example-layout-document.png",
+  "computedBoundsPath": "evidence/example-layout-document-bounds.json",
+  "documentReport": {
+    "fingerprintSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "visitorOptions": {
+      "resolveInstances": true,
+      "includeHidden": false,
+      "computeBounds": true
+    },
+    "nodeCount": 1,
+    "issues": []
+  },
+  "nodes": [
+    {
+      "id": "readable-copy",
+      "owner": "example-copy",
+      "kind": "text",
+      "contentRole": "prose",
+      "lineLengthChars": 70,
+      "boundedText": true,
+      "padding": { "top": 16, "right": 16, "bottom": 16, "left": 16 },
+      "viewportHorizontalInset": 20,
+      "overflowsContainer": false,
+      "unintendedHorizontalScroll": false,
+      "opaqueOverlapArea": 0
+    }
+  ]
+}

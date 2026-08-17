@@ -1,0 +1,69 @@
+{
+  "$schema": "../consumer-conformance.schema.json",
+  "schemaVersion": 1,
+  "profileId": "operate",
+  "platform": "react-native",
+  "surfaceId": "example-invalid-form-flow",
+  "controls": [
+    {
+      "id": "name-input",
+      "actionId": "edit-name",
+      "role": "input",
+      "component": "text-field",
+      "label": "Name",
+      "shapeToken": "radius.component.control",
+      "feedback": "overlay-message",
+      "states": ["default", "error"],
+      "contractStatus": "mismatched",
+      "affordanceSource": "invented",
+      "motionPurpose": "decorative",
+      "motionRecipeStatus": "unapproved",
+      "reduceMotionFallback": false,
+      "rawDurationMs": 1200,
+      "prominence": "oversized",
+      "nativePrimitive": false
+    },
+    {
+      "id": "submit-primary",
+      "actionId": "submit",
+      "role": "primary-action",
+      "component": "button",
+      "label": "Submit",
+      "shapeToken": "radius.component.button",
+      "icon": "arrow-right",
+      "feedback": "inline-message",
+      "states": [
+        "default",
+        "pressed",
+        "focused",
+        "disabled",
+        "loading",
+        "error"
+      ],
+      "contractStatus": "matched",
+      "affordanceSource": "design-system",
+      "motionPurpose": "state-transition",
+      "motionRecipeStatus": "approved",
+      "reduceMotionFallback": true,
+      "prominence": "emphasized",
+      "nativePrimitive": true
+    },
+    {
+      "id": "submit-sticky",
+      "actionId": "submit",
+      "role": "primary-action",
+      "component": "button",
+      "label": "Continue",
+      "shapeToken": "radius.component.surface",
+      "feedback": "toast-message",
+      "states": ["default", "pressed"],
+      "contractStatus": "matched",
+      "affordanceSource": "design-system",
+      "motionPurpose": "none",
+      "motionRecipeStatus": "none",
+      "reduceMotionFallback": false,
+      "prominence": "oversized",
+      "nativePrimitive": true
+    }
+  ]
+}

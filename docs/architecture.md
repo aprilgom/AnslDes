@@ -29,8 +29,13 @@ Definition은 UI를 렌더링하는 입력이고 policy는 `deslint`가 제품 s
 경로를 definition에 넣지 않는다.
 
 Policy v1은 rule severity, source raw-property 분류, exact exclusion, required evidence, budget과
-owner·rationale·expiry를 가진 exact exception만 허용한다. glob이나 absolute-path exclusion은 schema 이후
-Go validator에서도 다시 거부한다.
+owner·rationale·expiry를 가진 exact exception만 허용한다. Asset, content와 runtime permission registry도
+versioned policy input이며 runtime print/export 예외는 platform·surface·route·node·owner·context exact tuple이다.
+Glob이나 absolute-path exclusion은 schema 이후 Go validator에서도 다시 거부한다.
+
+Native policy는 source와 runtime provider가 공유하는 registry version, performance threshold, iOS adjacent-target
+spacing과 exact runtime capture matrix만 소유한다. 실제 screen, device snapshot과 측정 report는 소비 저장소가
+소유한다.
 
 ## Stable generic vocabulary
 
@@ -57,3 +62,8 @@ runtime behavior가 바뀔 때만 AnslDes release가 필요하다.
 `deslint`는 definition, source, Pencil, computed-layout을 별도 evidence kind로 기록한다. 하나가 없거나 stale인
 경우 다른 evidence의 성공으로 대체하지 않는다. diagnostic은 path·range·rule ID 순으로 정렬되고 text,
 native JSON과 SARIF 2.1.0이 같은 finding fingerprint를 공유한다.
+
+Report의 effective pack·rule exact set과 activation reason은 text, JSON, SARIF에 공통으로 들어간다. Rendered
+finding은 provider engine, platform, viewport와 policy가 주입한 owner를 함께 보존한다. 소비 저장소는
+`consumer-release-lock.schema.json`으로 release manifest, package·binary checksum, rule pack과 detector
+dependency를 exact pin하며 실제 parity·rollback evidence는 자체 저장소에 둔다.

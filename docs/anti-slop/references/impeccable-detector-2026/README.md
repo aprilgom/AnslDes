@@ -10,8 +10,12 @@
 - commit date: `2026-08-14T23:15:40Z`
 - snapshot date: `2026-08-16`
 - deterministic registry: 59 rules
+- npm package: `impeccable@3.6.0`
+- npm integrity: `sha512-nysc6/2OHTWqLrcSxTxZk4r4QMufhU8NTIuG2ic6p5zzyZe45AWBX3/18OA5S88pCWq+4z8pKsjUxhAM990RKg==`
 - license: [Apache-2.0](./upstream/LICENSE)
-- snapshot tree SHA-256: `84d3d3a66be62ea4c361420a6662f42010b123b680e00d8306e6a627ab5f5954`
+- source snapshot tree SHA-256: `84d3d3a66be62ea4c361420a6662f42010b123b680e00d8306e6a627ab5f5954`
+- repository canonical tree SHA-256: `a4dfe2060edf918b1241afac131ed9fbdf2d9eecaa448a6f57365e895da1908c`
+  (`relative-path + NUL + file-sha256 + LF`, path 정렬)
 
 Upstream 파일은 수정하지 않았다. 생성 산출물인 `detect-antipatterns-browser.js`는 중복된 browser bundle이라
 snapshot에서 제외하고, 그 원본 모듈인 `browser/injected/index.mjs`와 각 engine을 보존했다.
@@ -42,3 +46,9 @@ detector로 결정할 수 없는 LLM-only·native conformance 판단에만 보�
 
 업데이트할 때는 upstream commit, rule count, snapshot hash를 함께 변경하고 registry/rule diff와 migration
 note 없이 기존 snapshot을 교체하지 않는다.
+
+Machine registry는 `scripts/anti-slop-registry.mjs`가 vendored 59개 rule과 Hallmark 8개 mapping을 읽어
+`deslint/internal/rules/anti_slop_catalog.json`의 canonical 63개를 생성한다. `npm run
+check:anti-slop-registry`는 package/version/integrity, 두 tree hash, exact member set, mapping과 pack
+fingerprint drift를 모두 실패시킨다. Upstream 갱신은 source snapshot과 generator pin을 함께 바꾸고 생성된
+registry 및 migration note diff를 검토한 뒤에만 허용한다.

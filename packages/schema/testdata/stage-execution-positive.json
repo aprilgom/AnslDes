@@ -1,0 +1,14 @@
+{
+  "$schema": "../stage-execution-evidence.schema.json",
+  "schemaVersion": 1,
+  "stageId": "web-source",
+  "owner": "example-owner",
+  "platform": "web",
+  "command": ["example-provider", "--report", "report.json"],
+  "status": "pass",
+  "exitCode": 0,
+  "stdout": "provider completed",
+  "stderr": "",
+  "dependencySha256": "1111111111111111111111111111111111111111111111111111111111111111",
+  "observedDependencySha256": "1111111111111111111111111111111111111111111111111111111111111111"
+}
