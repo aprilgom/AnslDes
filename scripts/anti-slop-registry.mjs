@@ -19,7 +19,7 @@ const outputPath = path.join(
 );
 const migrationNote = {
   path: "docs/anti-slop/references/impeccable-detector-2026/MIGRATION.md",
-  sha256: "f2573b1d0776901b291a7c72e3c74c4259493ba57d4e7058310c63eb5fe10c16",
+  sha256: "7cbb39281b0909f313ecbcbfae55d0221340eacd4be287fd351b2fe967df60be",
 };
 const check = process.argv.includes("--check");
 const write = process.argv.includes("--write");
@@ -33,7 +33,7 @@ const impeccable = {
   sourceTreeSha256:
     "84d3d3a66be62ea4c361420a6662f42010b123b680e00d8306e6a627ab5f5954",
   treeSha256:
-    "a4dfe2060edf918b1241afac131ed9fbdf2d9eecaa448a6f57365e895da1908c",
+    "d9d61f4e0239d35c3a00e178fe07e39614508ac041f844be051500fb102732e9",
 };
 const hallmark = {
   commit: "13ac0ec7e148655948100b6396439e481361d690",
@@ -329,7 +329,14 @@ async function fingerprintTree(directory) {
   const hash = createHash("sha256");
   for (const relativePath of files.sort()) {
     const contents = await readFile(path.join(directory, relativePath));
-    const fileHash = createHash("sha256").update(contents).digest("hex");
+    const decoded = new TextDecoder("utf-8", { fatal: true }).decode(contents);
+    const canonicalContents = Buffer.from(
+      decoded.replaceAll("\r\n", "\n").replaceAll("\r", "\n"),
+      "utf8",
+    );
+    const fileHash = createHash("sha256")
+      .update(canonicalContents)
+      .digest("hex");
     hash.update(relativePath.replaceAll("\\", "/"));
     hash.update("\0");
     hash.update(fileHash);

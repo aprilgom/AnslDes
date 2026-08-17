@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "migrationNote": {
     "path": "docs/anti-slop/references/impeccable-detector-2026/MIGRATION.md",
-    "sha256": "f2573b1d0776901b291a7c72e3c74c4259493ba57d4e7058310c63eb5fe10c16"
+    "sha256": "7cbb39281b0909f313ecbcbfae55d0221340eacd4be287fd351b2fe967df60be"
   },
   "impeccable": {
     "name": "impeccable",
@@ -10,8 +10,8 @@
     "integrity": "sha512-nysc6/2OHTWqLrcSxTxZk4r4QMufhU8NTIuG2ic6p5zzyZe45AWBX3/18OA5S88pCWq+4z8pKsjUxhAM990RKg==",
     "commit": "7b646bafd60b9dd9828ce5c4c1a25691702c9e92",
     "sourceTreeSha256": "84d3d3a66be62ea4c361420a6662f42010b123b680e00d8306e6a627ab5f5954",
-    "treeSha256": "a4dfe2060edf918b1241afac131ed9fbdf2d9eecaa448a6f57365e895da1908c",
-    "computedTreeSha256": "a4dfe2060edf918b1241afac131ed9fbdf2d9eecaa448a6f57365e895da1908c"
+    "treeSha256": "d9d61f4e0239d35c3a00e178fe07e39614508ac041f844be051500fb102732e9",
+    "computedTreeSha256": "d9d61f4e0239d35c3a00e178fe07e39614508ac041f844be051500fb102732e9"
   },
   "hallmark": {
     "commit": "13ac0ec7e148655948100b6396439e481361d690",

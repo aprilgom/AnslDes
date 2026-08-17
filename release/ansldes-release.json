@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "antiSlopCatalog": {
-      "sha256": "5cfab574a961751258d817bd438f9b4fdbe3f810a7eb8428ea0aa4213c4844e2",
+      "sha256": "c548cb35a01939b6086ef0ed3a83ded44a66da6eeccbbcbc9a47a14b40536e5d",
       "pack": {
         "id": "ansldes-anti-slop",
         "version": "1.1.0",
@@ -67,8 +67,8 @@
       "integrity": "sha512-nysc6/2OHTWqLrcSxTxZk4r4QMufhU8NTIuG2ic6p5zzyZe45AWBX3/18OA5S88pCWq+4z8pKsjUxhAM990RKg==",
       "commit": "7b646bafd60b9dd9828ce5c4c1a25691702c9e92",
       "sourceTreeSha256": "84d3d3a66be62ea4c361420a6662f42010b123b680e00d8306e6a627ab5f5954",
-      "treeSha256": "a4dfe2060edf918b1241afac131ed9fbdf2d9eecaa448a6f57365e895da1908c",
-      "computedTreeSha256": "a4dfe2060edf918b1241afac131ed9fbdf2d9eecaa448a6f57365e895da1908c"
+      "treeSha256": "d9d61f4e0239d35c3a00e178fe07e39614508ac041f844be051500fb102732e9",
+      "computedTreeSha256": "d9d61f4e0239d35c3a00e178fe07e39614508ac041f844be051500fb102732e9"
     },
     "hallmark": {
       "commit": "13ac0ec7e148655948100b6396439e481361d690",
@@ -76,7 +76,7 @@
     },
     "migrationNote": {
       "path": "docs/anti-slop/references/impeccable-detector-2026/MIGRATION.md",
-      "sha256": "f2573b1d0776901b291a7c72e3c74c4259493ba57d4e7058310c63eb5fe10c16"
+      "sha256": "7cbb39281b0909f313ecbcbfae55d0221340eacd4be287fd351b2fe967df60be"
     },
     "antiSlopContract": {
       "fileCount": 7,
@@ -86,7 +86,7 @@
   "artifacts": {
     "schema": {
       "fileCount": 76,
-      "sha256": "f1fec75b177bbbaa1e4692cc916e2cf4932813ccf5965bec8d72cd54b6ff2804"
+      "sha256": "75fb6c8196c3b7b966746b4eeabd7f43a38bdab67ac5d5f725d6514aaa5a0b44"
     },
     "compiler": {
       "fileCount": 5,
@@ -102,7 +102,7 @@
     },
     "deslint": {
       "fileCount": 67,
-      "sha256": "b7856dae32753412bea50ae9d034d8377610f2920181b77b58c4785d5efd31a2"
+      "sha256": "13e1444641efa4a03ea83accc44e7dd464c50061e7fcb1fe186dafa0cdbf877b"
     }
   }
 }
