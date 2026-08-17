@@ -24,6 +24,7 @@
     "generate:anti-slop-registry": "node scripts/anti-slop-registry.mjs --write",
     "lint": "biome lint .",
     "lint:deslint": "cd deslint && go tool -modfile=golangci-lint.mod golangci-lint run",
+    "prepare": "husky",
     "release:manifest": "node scripts/release-manifest.mjs --write",
     "release:check": "node scripts/release-manifest.mjs --check",
     "test:release": "node --test scripts/release-manifest.test.mjs",
@@ -36,6 +37,7 @@
     "@biomejs/biome": "2.5.8",
     "@types/react": "19.2.2",
     "ajv": "8.20.0",
+    "husky": "9.1.7",
     "react": "19.2.3",
     "typescript": "6.0.3"
   }
