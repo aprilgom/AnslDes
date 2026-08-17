@@ -54,7 +54,8 @@ func ValidatePackEvolution(previous, next RulePackSpec, changes []RuleEvolution)
 		if change.Kind == "replaced" {
 			expectedKind = "removed"
 		}
-		if expectedKind == "" || change.Kind != expectedKind && !(change.Kind == "replaced" && expectedKind == "removed") {
+		kindMatches := change.Kind == expectedKind || change.Kind == "replaced" && expectedKind == "removed"
+		if expectedKind == "" || !kindMatches {
 			return fmt.Errorf("rule pack evolution record for %q does not match the exact member diff", change.RuleID)
 		}
 		if change.Kind == "added" {

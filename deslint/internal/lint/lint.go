@@ -392,7 +392,7 @@ func (r Runner) Run(request Request) (report.Report, error) {
 	webEvidence := make([]webcheck.Evidence, 0, len(request.WebProviders))
 	if len(request.WebProviders) > 0 {
 		if request.Policy.Web == nil {
-			return report.Report{}, fmt.Errorf("Web provider evidence requires a versioned Web registry in consumer policy")
+			return report.Report{}, fmt.Errorf("web provider evidence requires a versioned Web registry in consumer policy")
 		}
 		webConfig := webConfigFromPolicy(request)
 		for _, input := range request.WebProviders {
@@ -731,9 +731,10 @@ func enforceBudgets(diagnostics []diagnostic.Diagnostic, falsePositives []report
 		if finding.RuleID != rules.RuleCopyEmDashOveruse {
 			counts[string(finding.Severity)]++
 		}
-		if finding.Status == diagnostic.FindingFail {
+		switch finding.Status {
+		case diagnostic.FindingFail:
 			counts["blocking"]++
-		} else if finding.Status == diagnostic.FindingAdvisory {
+		case diagnostic.FindingAdvisory:
 			counts["advisory"]++
 		}
 		if finding.RuleID == rules.RuleEvidenceMissing || finding.RuleID == rules.RuleEvidenceStale || finding.RuleID == rules.RuleSourceSyntaxError {
@@ -750,9 +751,10 @@ func enforceBudgets(diagnostics []diagnostic.Diagnostic, falsePositives []report
 		}
 	}
 	for _, item := range evidence {
-		if item.Status == report.EvidenceStatusNotRun {
+		switch item.Status {
+		case report.EvidenceStatusNotRun:
 			counts["not-run"]++
-		} else if item.Status == report.EvidenceStatusDeferred {
+		case report.EvidenceStatusDeferred:
 			counts["deferred"]++
 		}
 	}

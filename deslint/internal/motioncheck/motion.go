@@ -173,7 +173,8 @@ func platformMatches(kind diagnostic.EvidenceKind, platform string) bool {
 		return platform == "android"
 	case diagnostic.EvidencePhysicalDevice:
 		return platform == "ios" || platform == "android"
-	case diagnostic.EvidenceDefinition, diagnostic.EvidenceConsumerConformance, diagnostic.EvidenceExecution:
+	case diagnostic.EvidenceDefinition, diagnostic.EvidenceConsumerConformance,
+		diagnostic.EvidenceConsumerContentRegistry, diagnostic.EvidenceExecution:
 		return false
 	}
 	return false
